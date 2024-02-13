@@ -54,7 +54,6 @@ function handleClickSend() {
 
 <style lang="scss" scoped>
 .footer {
-  margin-top: 163px;
   padding-top: 160px;
   background-color: $color-dark;
   
