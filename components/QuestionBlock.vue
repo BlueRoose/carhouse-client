@@ -11,7 +11,7 @@
             src="/icons/phone.svg"
             alt="phone"
           />
-          <a  class="question__buttons__phone-number" href="tel:+37529777777" target="_blank">+375 (29) 777-77-77</a>
+          <a  class="question__buttons__phone-number" href="tel:+37529777777">+375 (29) 777-77-77</a>
         </div>
       </div>
     </div>

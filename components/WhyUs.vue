@@ -74,6 +74,13 @@
     &__card {
       padding: 60px;
       box-shadow: 0px 4px 39.79999923706055px 0px #00000040;
+      cursor: pointer;
+      transition: all 0.5s;
+
+      &:hover {
+        transform: scale(1.2);
+        z-index: 999;
+      }
 
       &-image {
         max-width: 64px;
