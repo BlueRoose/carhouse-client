@@ -1,5 +1,6 @@
 <template>
   <div class="index">
+    <Slider />
     <div class="index__about">
       <div class="index__about__info">
         <p class="index__about__info-name">About us</p>
@@ -8,7 +9,7 @@
           Every day our managers and consultants work to provide you with the
           best service and cars.
         </p>
-        <Button class="index__about__info-button" @click="handleClickView">VIEW MORE</Button>
+        <Button class="index__about__info-button" @click="handleClickView">View more</Button>
       </div>
       <img
         class="index__about-image"

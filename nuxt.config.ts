@@ -2,15 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   
-  modules: ["@pinia/nuxt", "@nuxtjs/google-fonts"],
-
-  runtimeConfig: {
-    googleFonts: {
-      families: {
-        Roboto: true
-      }
-    }
-  },
+  modules: ["@pinia/nuxt"],
 
   vite: {
     css: {

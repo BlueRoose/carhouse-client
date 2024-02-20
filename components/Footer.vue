@@ -30,7 +30,7 @@
             class="footer__block__subscribtion__form-input"
             placeholder="Enter your email"
           />
-          <Button class="footer__block__subscribtion__form-button" @click="handleClickSend">SEND</Button>
+          <Button class="footer__block__subscribtion__form-button" @click="handleClickSend">Send</Button>
         </div>
       </div>
     </div>

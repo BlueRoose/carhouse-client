@@ -4,7 +4,7 @@
       <p class="question-title">Have a question?</p>
       <p class="question-description">Our experts are always happy to help you with any question</p>
       <div class="question__buttons">
-        <Button class="question__buttons-contact" @click="handleClickContact">CONTACT US</Button>
+        <Button class="question__buttons-contact" @click="handleClickContact">Contact us</Button>
         <div class="question__buttons__phone">
           <img
             class="question__buttons__phone-image"
@@ -29,7 +29,7 @@ function handleClickContact() {
 <style lang="scss" scoped>
 .wrapper {
   background-color: $color-dark;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 
   .question {
     width: 60%;
