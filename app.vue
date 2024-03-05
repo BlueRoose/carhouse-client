@@ -2,6 +2,7 @@
   <div>
     <Header />
     <NuxtPage />
+    <QuestionBlock />
     <Footer />
   </div>
 </template>

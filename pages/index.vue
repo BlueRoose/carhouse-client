@@ -31,7 +31,6 @@
         </ul>
       </div>
     <WhyUs />
-    <QuestionBlock />
   </div>
 </template>
 
@@ -55,7 +54,6 @@ function handleClickView() {
     padding: 160px 240px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-column-gap: 100px;
 
     &__info {
       display: flex;
@@ -84,7 +82,7 @@ function handleClickView() {
     }
 
     &-image {
-      max-width: 822px;
+      max-width: 100%;
       box-shadow: 0px 4px 39.79999923706055px 0px #00000040;
     }
   }
