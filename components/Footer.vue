@@ -123,10 +123,11 @@ function handleClickSend() {
 
       &__form {
         display: flex;
+        
         &-input {
           width: 100%;
           border: 1px solid #5E5E5E;
-          padding: 15px 30px;
+          padding: 15px;
           color: $color-white;
           outline: none;
           background-color: transparent;

@@ -15,6 +15,26 @@
         </div>
         <Button class="collections__content__search-button">Find</Button>
       </div>
+      <div class="collections__content__info">
+        <p class="collections__content__info-showed">Showing 9 from 98 result</p>
+        <CustomSelect label="Sort By" />
+      </div>
+      <div class="collections__content__cards">
+        <CollectionCard />
+        <CollectionCard />
+        <CollectionCard />
+        <CollectionCard />
+        <CollectionCard />
+        <CollectionCard />
+        <CollectionCard />
+        <CollectionCard />
+        <CollectionCard />
+      </div>
+      <div class="collections__content__pagination">
+        <Button class="collections__content__pagination-button active-button">1</Button>
+        <Button class="collections__content__pagination-button">2</Button>
+        <Button class="collections__content__pagination-button">3</Button>
+      </div>
     </div>
   </div>
 </template>
@@ -25,9 +45,9 @@
 <style lang="scss" scoped>
 .collections {
   background-color: $color-white;
+  padding-bottom: 220px;
 
   &__content {
-    height: 200px;
     padding: 0 240px;
 
     &__search {
@@ -35,6 +55,7 @@
       height: 140px;
       margin: 0 auto;
       padding: 0 64px;
+      margin-bottom: 150px;
       box-shadow: 0 31px 81px rgba(37, 37, 37, .3);
       display: flex;
       justify-content: space-between;
@@ -51,6 +72,45 @@
         border-radius: 0;
       }
     }
+
+    &__info {
+      margin-bottom: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: bottom;
+
+      &-showed {
+        font-size: 30px;
+        font-weight: 600;
+        color: $color-black;
+      }
+    }
+
+    &__cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      grid-column-gap: 54px;
+      grid-row-gap: 94px;
+      margin-bottom: 90px;
+    }
+
+    &__pagination {
+      width: fit-content;
+      margin: 0 auto;
+      display: flex;
+      gap: 14px;
+
+      &-button {
+        background-color: #E1E1E1;
+        transition: all 0.2s linear;
+      }
+    }
   }
+}
+
+.active-button {
+  background-color: #464646;
+  color: $color-white;
 }
 </style>
