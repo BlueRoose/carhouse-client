@@ -59,6 +59,7 @@ function handleClickView() {
       display: flex;
       flex-direction: column;
       gap: 30px;
+      padding-right: 50px;
 
       &-name {
         font-size: 20px;

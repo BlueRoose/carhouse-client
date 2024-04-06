@@ -2,24 +2,24 @@
   <div class="contact">
     <div class="contact__dark">
       <h2 class="contact__dark-heading">Contact Us</h2>
-      <p class="contact__dark-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem, pariatur eligendi deserunt rerum voluptatibus enim quia esse itaque qui maiores nam nemo! Error excepturi magnam aspernatur ad atque. Voluptatum, iure?</p>
+      <p class="contact__dark-description">We're always here to help you find the perfect car! Whether you have questions about our inventory, services, or you'd like to schedule a test drive, feel free to get in touch with us. Our friendly and experienced staff are ready to answer all your inquiries and provide you with the information you need.</p>
       <form class="contact__dark__form">
         <div class="contact__dark__form__row">
           <div class="contact__dark__form__block">
-            <p class="contact__dark__form__block-title">Full name</p>
+            <p class="contact__dark__form__block-title">Full name*</p>
             <input class="contact__dark__form__block-input" />
           </div>
           <div class="contact__dark__form__block">
-            <p class="contact__dark__form__block-title">Email</p>
+            <p class="contact__dark__form__block-title">Email*</p>
             <input class="contact__dark__form__block-input" />
           </div>
         </div>
         <div class="contact__dark__form__block">
-          <p class="contact__dark__form__block-title">Subject</p>
+          <p class="contact__dark__form__block-title">Subject*</p>
           <input class="contact__dark__form__block-input" />
         </div>
         <div class="contact__dark__form__block">
-          <p class="contact__dark__form__block-title">Message</p>
+          <p class="contact__dark__form__block-title">Message*</p>
           <textarea class="contact__dark__form__block-input textarea" />
         </div>
         <div class="contact__dark__form__rules">
@@ -112,13 +112,13 @@ const dealerLocations = [
     }
 
     &__form {
-      max-width: 750px;
+      max-width: 650px;
       padding: 72px 65px;
       margin: 0 auto;
       background-color: $color-white;
       display: flex;
       flex-direction: column;
-      gap: 40px;
+      gap: 25px;
       position: relative;
       z-index: 1;
 
@@ -141,7 +141,7 @@ const dealerLocations = [
 
         &-input {
           width: 100%;
-          height: 60px;
+          height: 45px;
           padding: 0 20px;
           box-sizing: border-box;
           border: 2px solid #5e5e5e;
@@ -168,8 +168,8 @@ const dealerLocations = [
       }
 
       &-button {
-        padding-top: 25px;
-        padding-bottom: 25px;
+        padding-top: 15px;
+        padding-bottom: 15px;
       }
     }
 
@@ -211,7 +211,7 @@ const dealerLocations = [
 }
 
 .textarea {
-  height: 190px;
+  height: 150px;
   resize: none;
   padding-top: 15px;
 }

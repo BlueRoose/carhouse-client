@@ -57,6 +57,11 @@ function handleClickContact() {
         background-color: $color-black;
         color: $color-white;
         border-radius: 0;
+        transition: 0.2s linear;
+
+        &:hover {
+          border-radius: 15px;
+        }
       }
 
       &__phone {
