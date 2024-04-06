@@ -41,9 +41,6 @@
 </template>
 
 <script setup>
-import Logo from "~/components/Logo.vue";
-import Button from "~/components/Button.vue";
-
 const isAuth = ref(false);
 const email = ref("");
 

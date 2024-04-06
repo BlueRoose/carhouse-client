@@ -33,6 +33,7 @@ defineProps({
     font-size: 24px;
     font-weight: 300;
     margin-bottom: 30px;
+    text-transform: uppercase;
   }
 
   &-street {

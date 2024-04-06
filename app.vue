@@ -1,9 +1,12 @@
 <template>
   <div>
-    <Header />
+    <ClientOnly>
+      <Header />
+    </ClientOnly>
     <NuxtPage />
     <QuestionBlock />
     <Footer />
+    <Modals />
   </div>
 </template>
 
@@ -18,13 +21,5 @@ useHead({
 </script>
 
 <style lang="scss">
-* {
-  margin: 0;
-  padding: 0;
-  font-family: "Roboto";
-}
-
-a {
-  text-decoration: none;
-}
+@import url("~/assets/styles/main.scss");
 </style>

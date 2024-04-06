@@ -68,7 +68,6 @@ const slidesInfo = [
   display: flex;
   background-color: $color-dark;
   padding: 100px 240px;
-  border-top: 1px solid $color-white;
   position: relative;
 
   &__left-side {
