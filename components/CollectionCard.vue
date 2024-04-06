@@ -1,15 +1,15 @@
 <template>
   <div class="collection-card">
-    <img class="collection-card-image" src="/images/cars-about.webp" alt="car" />
+    <img class="collection-card-image" :src="img" :alt="name" />
     <div class="collection-card__info">
-      <p class="collection-card__info-title">BMW M8</p>
+      <p class="collection-card__info-title">{{ brand + ' ' + name }}</p>
       <div class="collection-card__info__items">
-        <CardInfoItem title="Type" value="Coupe" />
-        <CardInfoItem title="Transmition" value="Automatic" />
-        <CardInfoItem title="Passenger" value="2 Person" />
-        <CardInfoItem title="Top Speed" value="412" />
-        <CardInfoItem title="Horse Power" value="560" />
-        <CardInfoItem title="0-100 km/h" value="3.3" />
+        <CardInfoItem title="Type" :value="type" />
+        <CardInfoItem title="Transmission" :value="transmission" />
+        <CardInfoItem title="Passenger" :value="`${passenger} Person`" />
+        <CardInfoItem title="Top Speed" :value="topSpeed" />
+        <CardInfoItem title="Horse Power" :value="horsePower" />
+        <CardInfoItem title="0-100 km/h" :value="time" />
       </div>
     </div>
     <Button class="collection-card-button">$ 550.000</Button>
@@ -17,6 +17,17 @@
 </template>
 
 <script setup>
+defineProps({
+  brand: String,
+  name: String,
+  type: String,
+  transmission: String,
+  passenger: Number,
+  topSpeed: Number,
+  horsePower: Number,
+  time: Number,
+  img: String
+})
 </script>
 
 <style lang="scss" scoped>
@@ -32,6 +43,8 @@
     width: 100%;
     height: 50%;
     object-fit: cover;
+    border-radius: 25px 25px 0 0;
+    cursor: pointer;
   }
 
   &__info {

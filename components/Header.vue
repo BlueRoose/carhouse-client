@@ -76,7 +76,6 @@ function openPage(page) {
 
 function logout() {
   authStore.logout();
-  v
 }
 </script>
 
@@ -155,10 +154,10 @@ function logout() {
       }
 
       &__row {
-        padding: 5px 20px;
+        padding: 5px 10px;
         display: flex;
         align-items: center;
-        gap: 20px;
+        gap: 15px;
         cursor: pointer;
         transition: border-width 0.2s linear;
 

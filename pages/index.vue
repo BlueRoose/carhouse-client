@@ -53,7 +53,7 @@ function handleClickView() {
   &__about {
     padding: 160px 240px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
 
     &__info {
       display: flex;

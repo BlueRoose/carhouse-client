@@ -243,7 +243,7 @@ async function submitForm(action) {
 
     &-button {
       margin: 0 auto;
-      margin-top: 50px;
+      margin-top: 25px;
       margin-bottom: 20px;
     }
 
