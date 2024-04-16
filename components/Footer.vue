@@ -53,30 +53,99 @@ function handleClickSend() {
 .footer {
   padding-top: 160px;
   background-color: $color-dark;
+
+  @include mq($until: desktop-xl) {
+    padding-top: 100px;
+  }
+
+  @include mq($until: desktop-l) {
+    padding-top: 70px;
+  }
   
   &__block {
     padding: 0 240px;
     padding-bottom: 100px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    @include mq($until: desktop-xl) {
+      padding: 0 180px;
+      padding-bottom: 80px;
+    }
+
+    @include mq($until: desktop-l) {
+      padding: 0 120px;
+      padding-bottom: 60px;
+    }
+
+    @include mq($until: desktop) {
+      padding: 0 90px;
+      padding-bottom: 40px;
+    }
+
+    @include mq($until: mobile-xxl) {
+      padding: 0 50px;
+      padding-bottom: 40px;
+    }
+
+    @include mq($until: mobile-l) {
+      padding: 0 24px;
+      padding-bottom: 40px;
+    }
+
+    @include mq($until: tablet) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
 
     &__info {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 32px;
+
+      @include mq($until: desktop-l) {
+        gap: 16px;
+      }
+
+      @include mq($until: desktop) {
+        gap: 12px;
+      }
+
+      @include mq($until: tablet) {
+        align-items: center;
+      }
 
       &-text {
         font-size: 18px;
         color: $color-white;
         opacity: 60%;
+
+        @include mq($until: tablet) {
+          display: none;
+        }
       }
     }
 
     &__links {
       display: flex;
       flex-direction: column;
+      align-items: center;
       gap: 32px;
+      text-align: center;
+
+      @include mq($until: desktop-l) {
+        gap: 16px;
+      }
+
+      @include mq($until: desktop) {
+        gap: 12px;
+      }
+
+      @include mq($until: tablet) {
+        display: none;
+      }
 
       &-title {
         font-size: 20px;
@@ -107,6 +176,18 @@ function handleClickSend() {
       flex-direction: column;
       gap: 32px;
 
+      @include mq($until: desktop-l) {
+        gap: 16px;
+      }
+
+      @include mq($until: desktop) {
+        gap: 12px;
+      }
+
+      @include mq($until: tablet) {
+        align-items: center;
+      }
+
       &-title {
         font-size: 20px;
         font-weight: 800;
@@ -116,6 +197,10 @@ function handleClickSend() {
       &-description {
         font-size: 16px;
         color: $color-white;
+
+        @include mq($until: mobile-xxl) {
+          text-align: center;
+        }
       }
 
       &__form {
@@ -144,6 +229,10 @@ function handleClickSend() {
   &__rights {
     background-color: #1d1d1d;
     padding: 32px 0;
+
+    @include mq($until: desktop) {
+      padding-bottom: 64px;
+    }
 
     &-text {
       color: $color-white;

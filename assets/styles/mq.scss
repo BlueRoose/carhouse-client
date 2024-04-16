@@ -1,0 +1,13 @@
+$mq-breakpoints: (
+  mobile: 320px,
+  mobile-l: 480px,
+  mobile-xl: 576px,
+  mobile-xxl: 768px,
+  tablet: 992px,
+  desktop: 1200px,
+  desktop-l: 1441px,
+  desktop-xl: 1600px,
+  desktop-xxl: 1920px,
+);
+
+@import "sass-mq";

@@ -50,19 +50,47 @@
   margin: 0 auto;
   padding: 65px 0;
 
+  @include mq($until: desktop-xl) {
+    padding: 65px 180px;
+  }
+
+  @include mq($until: desktop-l) {
+    padding: 65px 120px;
+  }
+
+  @include mq($until: desktop) {
+    padding: 65px 90px;
+  }
+
+  @include mq($until: mobile-xxl) {
+    padding: 45px 50px;
+  }
+
+  @include mq($until: mobile-l) {
+    padding: 45px 24px;
+  }
+
   &-small {
     text-align: center;
     color: $color-yellow;
     font-size: 20px;
     font-weight: 600;
-    margin-bottom: 20px;
+
+    @include mq($until: desktop) {
+      font-size: 16px;
+    }
   }
 
   &-title {
     color: black;
-    font-size: 60px;
+    font-size: 50px;
     text-align: center;
     margin-bottom: 56px;
+
+    @include mq($until: desktop) {
+      font-size: 32px;
+      margin-bottom: 28px;
+    }
   }
 
   &__cards {
@@ -71,15 +99,35 @@
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 22px;
 
+    @include mq($until: tablet) {
+      display: flex;
+      flex-direction: column;
+    }
+
     &__card {
       padding: 60px;
       box-shadow: 0px 4px 39.79999923706055px 0px #00000040;
       cursor: pointer;
       transition: all 0.5s;
+      box-sizing: border-box;
 
-      &:hover {
-        transform: scale(1.2);
-        z-index: 999;
+      @include mq($until: desktop-xl) {
+        padding: 45px;
+      }
+
+      @include mq($until: desktop-l) {
+        padding: 30px;
+      }
+
+      @include mq($until: desktop) {
+        padding: 20px;
+      }
+
+      @include mq($from: tablet) {
+        &:hover {
+          transform: scale(1.2);
+          z-index: 999;
+        }
       }
 
       &-image {

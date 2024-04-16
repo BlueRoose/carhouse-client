@@ -32,26 +32,87 @@ function handleClickContact() {
   margin-bottom: 2px;
 
   .question {
-    width: 60%;
-    height: 280px;
+    width: 70%;
+    height: fit-content;
     padding-top: 60px;
+    padding-bottom: 60px;
     padding-left: 240px;
+    padding-right: 24px;
     background-color: $color-yellow;
+    box-sizing: border-box;
+
+    @include mq($until: desktop-xl) {
+      padding-left: 180px;
+    }
+
+    @include mq($until: desktop-l) {
+      padding-left: 120px;
+    }
+
+    @include mq($until: desktop) {
+      padding-left: 90px;
+    }
+
+    @include mq($until: tablet) {
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+
+    @include mq($until: mobile-xxl) {
+      width: 80%;
+      padding-left: 50px;
+    }
+
+    @include mq($until: mobile-l) {
+      width: 100%;
+      padding-left: 24px;
+    }
 
     &-title {
       font-size: 60px;
       font-weight: 700;
       margin-bottom: 15px;
+
+      @include mq($until: desktop-xl) {
+        font-size: 48px;
+        margin-bottom: 10px;
+      }
+
+      @include mq($until: desktop-l) {
+        font-size: 36px;
+      }
+
+      @include mq($until: mobile-xxl) {
+        font-size: 28px;
+        margin-bottom: 5px;
+      }
     }
 
     &-description {
       font-size: 18px;
       margin-bottom: 60px;
+
+      @include mq($until: tablet) {
+        font-size: 16px;
+      }
+
+      @include mq($until: mobile-xxl) {
+        font-size: 14px;
+      }
     }
 
     &__buttons {
       display: flex;
       gap: 30px;
+
+      @include mq($until: tablet) {
+        gap: 20px;
+      }
+
+      @include mq($until: mobile-xxl) {
+        flex-direction: column;
+        gap: 12px;
+      }
 
       &-contact {
         background-color: $color-black;
@@ -65,6 +126,7 @@ function handleClickContact() {
       }
 
       &__phone {
+        width: fit-content;
         background-color: $color-white;
         color: $color-black;
         display: flex;
@@ -78,7 +140,7 @@ function handleClickContact() {
 
         &-number {
           color: $color-black;
-          font-weight: 900;
+          font-weight: 700;
         }
       }
     }

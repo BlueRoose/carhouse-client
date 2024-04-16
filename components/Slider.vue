@@ -70,13 +70,39 @@ const slidesInfo = [
   padding: 100px 240px;
   position: relative;
 
+  @include mq($until: desktop-xl) {
+    height: 550px;
+    padding: 90px 180px;
+  }
+
+  @include mq($until: desktop-l) {
+    height: 500px;
+    padding: 75px 120px;
+  }
+
+  @include mq($until: desktop) {
+    height: 450px;
+    padding: 30px 90px;
+  }
+
+  @include mq($until: mobile-xxl) {
+    height: 400px;
+    padding: 30px 50px;
+  }
+
+  @include mq($until: mobile-l) {
+    height: 350px;
+    padding: 30px 24px;
+  }
+
   &__left-side {
-    max-width: 800px;
-    padding: 15px;
+    width: 100%;
     border-radius: 28px;
     display: flex;
     flex-direction: column;
-    gap: 55px;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
 
     &__info {
       opacity: 100%;
@@ -89,18 +115,42 @@ const slidesInfo = [
         font-weight: 600;
         color: $color-yellow;
         margin-bottom: 10px;
+
+        @include mq($until: tablet) {
+          margin-bottom: 0;
+        }
       }
 
       &-name {
+        width: 60%;
         font-size: 70px;
         font-weight: 600;
         color: $color-white;
         margin-bottom: 20px;
+
+        @include mq($until: tablet) {
+          font-size: 48px;
+          margin-bottom: 10px;
+        }
+
+        @include mq($until: mobile-xxl) {
+          font-size: 36px;
+          margin-bottom: 10px;
+        }
       }
 
       &-description {
+        width: 60%;
         color: $color-white;
-        line-height: 28px;
+        line-height: 140%;
+
+        @include mq($until: tablet) {
+          font-size: 14px;
+        }
+
+        @include mq($until: mobile-xxl) {
+          width: 100%;
+        }
       }
     }
 
@@ -116,14 +166,51 @@ const slidesInfo = [
         font-weight: 700;
         line-height: 36px;
         color: $color-white;
+
+        @include mq($until: tablet) {
+          font-size: 30px;
+          margin-bottom: 10px;
+        }
+
+        @include mq($until: mobile-xxl) {
+          font-size: 24px;
+          margin-bottom: 10px;
+        }
       }
     }
   }
 
   &-image {
-    width: auto;
+    width: 60%;
+    position: absolute;
     right: 240px;
-    margin-left: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 50%;
+
+    @include mq($until: desktop-xl) {
+      right: 180px;
+    }
+
+    @include mq($until: desktop-l) {
+      right: 120px;
+    }
+
+    @include mq($until: desktop) {
+      right: 90px;
+    }
+
+    @include mq($until: tablet) {
+      width: 70%;
+    }
+
+    @include mq($until: mobile-xxl) {
+      right: 50px;
+    }
+
+    @include mq($until: mobile-l) {
+      right: 24px;
+    }
   }
 }
 

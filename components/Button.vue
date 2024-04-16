@@ -20,6 +20,10 @@
   transition: 0.2s linear;
   cursor: pointer;
 
+  @include mq($until: desktop-l) {
+    font-size: 16px;
+  }
+
   &:hover {
     border-radius: 15px;
   }

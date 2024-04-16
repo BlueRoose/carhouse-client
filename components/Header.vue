@@ -89,10 +89,38 @@ function logout() {
   align-items: center;
   border-bottom: 1px solid $color-white;
 
+  @include mq($until: desktop-xl) {
+    padding: 0 180px;
+  }
+
+  @include mq($until: desktop-l) {
+    padding: 0 120px;
+  }
+
+  @include mq($until: desktop) {
+    padding: 0 90px;
+  }
+
+  @include mq($until: tablet) {
+    justify-content: center;
+  }
+
   &__list {
     display: flex;
     gap: 50px;
     list-style-type: none;
+
+    @include mq($until: desktop-xl) {
+      gap: 25px;
+    }
+
+    @include mq($until: desktop-l) {
+      gap: 15px;
+    }
+
+    @include mq($until: tablet) {
+      display: none;
+    }
 
     &-item {
       font-size: 20px;
@@ -111,6 +139,10 @@ function logout() {
     gap: 12px;
     cursor: pointer;
     position: relative;
+
+    @include mq($until: tablet) {
+      display: none;
+    }
 
     &:hover &-icon {
       color: $color-yellow;
