@@ -58,25 +58,25 @@ const dealerLocations = [
     city: "Los Angeles",
     country: "United States",
     address: "123 Main Street, Los Angeles, CA 90001",
-    phone: "+1 (555) 123-4567"
+    phone: "+ 1 (555) 123-4567"
   },
   {
     city: "London",
     country: "United Kingdom",
     address: "456 High Street, London, SW1A 1AA",
-    phone: "+44 20 1234 5678"
+    phone: "+ 44 20 1234 5678"
   },
   {
     city: "Tokyo",
     country: "Japan",
     address: "789 Sakura Avenue, Tokyo, 100-0001",
-    phone: "+81 3 9876 5432"
+    phone: "+ 81 3 9876 5432"
   },
   {
     city: "Sydney",
     country: "Australia",
     address: "321 Beach Road, Sydney, NSW 2000",
-    phone: "+61 2 8765 4321"
+    phone: "+ 61 2 8765 4321"
   },
 ]
 </script>

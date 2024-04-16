@@ -130,6 +130,7 @@ function logout() {
       padding: 20px 0;
       background-color: $color-white;
       border-radius: 15px;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
       position: absolute;
       top: 110%;
       right: 0;
@@ -179,15 +180,5 @@ function logout() {
 
 .router-link-active {
   color: $color-yellow !important;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>
