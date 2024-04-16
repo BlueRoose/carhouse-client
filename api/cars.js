@@ -9,5 +9,15 @@ export default {
     } catch (error) {
       throw error.response.data.errors[0];
     }
+  },
+
+  async getCar(carId) {
+    try {
+      const { data } = await axios.get(`http://localhost:5000/api/car/get-car?id=${carId}`);
+
+      return data;
+    } catch (error) {
+      throw error.response.data.errors[0];
+    }
   }
 };

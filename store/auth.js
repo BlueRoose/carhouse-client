@@ -3,14 +3,10 @@ import api from "@/api";
 export const useAuthStore = defineStore("authStore", () => {
   const isAuth = ref(false);
   const user = ref(null);
-  
-  if (process.client) {
-    const userData = JSON.parse(localStorage.getItem("user"));
 
-    if (userData) {
-      isAuth.value = true;
-      user.value = userData;
-    }
+  function setIsAuth(userData) {
+    isAuth.value = true;
+    user.value = userData;
   }
 
   async function preSignUp(data) {
@@ -30,6 +26,7 @@ export const useAuthStore = defineStore("authStore", () => {
       isAuth.value = true;
       user.value = response.user;
       localStorage.setItem("user", JSON.stringify(response.user));
+      localStorage.setItem("token", response.token);
 
       return response;
     } catch (error) {
@@ -54,6 +51,7 @@ export const useAuthStore = defineStore("authStore", () => {
       isAuth.value = true;
       user.value = response.user;
       localStorage.setItem("user", JSON.stringify(response.user));
+      localStorage.setItem("token", response.token);
 
       return response;
     } catch (error) {
@@ -70,6 +68,7 @@ export const useAuthStore = defineStore("authStore", () => {
   return {
     isAuth,
     user,
+    setIsAuth,
     preSignUp,
     signUp,
     preSignIn,

@@ -5,6 +5,8 @@ export const useCarsStore = defineStore("carsStore", () => {
   const totalCars = ref(0);
   const totalPages = ref(1);
 
+  const selectedCar = ref(null);
+
   async function getCars(page) {
     try {
       const response = await api.getCars(page, 9);
@@ -17,10 +19,22 @@ export const useCarsStore = defineStore("carsStore", () => {
     }
   }
 
+  async function getCar(carId) {
+    try {
+      const response = await api.getCar(carId);
+
+      selectedCar.value = response.car;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   return {
     cars,
     totalCars,
     totalPages,
-    getCars
+    selectedCar,
+    getCars,
+    getCar,
   };
 });

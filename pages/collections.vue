@@ -8,36 +8,29 @@
     <div class="collections__content">
       <div class="collections__content__search">
         <div class="collections__content__search__selects">
-          <CustomSelect label="Brand" />
-          <CustomSelect label="Model" />
-          <CustomSelect label="Year" />
-          <CustomSelect label="Type" />
+          <CustomSelect label="Brand" :options="brands" />
+          <CustomSelect label="Type" :options="types" />
+          <CustomSelect label="Model" :options="[1, 2, 3]" />
+          <CustomSelect label="Year" :options="[1, 2, 3]" />
         </div>
         <Button class="collections__content__search-button">Find</Button>
       </div>
       <div class="collections__content__info">
-        <p v-if="!isLoading" class="collections__content__info-showed">Showing {{ cars.length }} from {{ totalCars }} results</p>
-        <CustomSelect class="collections__content__info-sort" label="Sort By" />
+        <p v-if="!isLoading" class="collections__content__info-showed">
+          Showing {{ cars.length }} from {{ totalCars }} results
+        </p>
+        <CustomSelect
+          class="collections__content__info-sort"
+          label="Sort By"
+          :options="sortOptions"
+        />
       </div>
-      <img
-        v-if="isLoading"
-        class="loader"
-        src="/images/wheel.png"
-        alt="wheel-loader"
-      />
+      <Loader v-if="isLoading" />
       <div v-else class="collections__content__cards">
         <CollectionCard
           v-for="car, index in cars"
           :key="index"
-          :brand="car.brand"
-          :name="car.name"
-          :type="car.type"
-          :transmission="car.transmission"
-          :passenger="car.passenger"
-          :topSpeed="car.topSpeed"
-          :horsePower="car.horsePower"
-          :time="car.time"
-          :img="car.imgs[0]"
+          :car="car"
         />
       </div>
       <div v-if="totalPages > 1" class="collections__content__pagination">
@@ -57,10 +50,31 @@
 
 <script setup>
 import { useCarsStore } from "@/store/cars.js";
+import { useBrandsStore } from "@/store/brands.js";
+import { useTypesStore } from "@/store/types.js";
 
 const carsStore = useCarsStore();
+const brandsStore = useBrandsStore();
+const typesStore = useTypesStore();
 
 const { cars, totalCars, totalPages } = storeToRefs(carsStore);
+const { brands } = storeToRefs(brandsStore);
+const { types } = storeToRefs(typesStore);
+
+const sortOptions = [
+  {
+    name: "Name ASC"
+  },
+  {
+    name: "Name DESC"
+  },
+  {
+    name: "Price ASC"
+  },
+  {
+    name: "Price DESC"
+  },
+]
 
 const page = ref(1);
 const isLoading = ref(true);
@@ -69,6 +83,8 @@ const error = ref("");
 onMounted(async () => {
   try {
     await carsStore.getCars(page.value);
+    await brandsStore.getBrands();
+    await typesStore.getTypes();
   } catch (e) {
     error.value = e;
     setTimeout(() => {
@@ -107,7 +123,7 @@ async function changePage(newPage) {
       
       &__selects {
         display: flex;
-        gap: 91px;
+        gap: 40px;
       }
 
       &-button {
@@ -161,23 +177,5 @@ async function changePage(newPage) {
 .active-button {
   background-color: #464646;
   color: $color-white;
-}
-
-.loader {
-  color: $color-yellow;
-  font-size: 200px;
-  text-indent: -9999em;
-  overflow: hidden;
-  width: 1em;
-  height: 1em;
-  display: block;
-  margin: 150px auto 50px;
-  border-radius: 50%;
-  animation: round 1.7s infinite linear;
-}
-
-@keyframes round {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
 }
 </style>

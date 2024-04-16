@@ -1,32 +1,31 @@
 <template>
   <div class="collection-card">
-    <img class="collection-card-image" :src="img" :alt="name" />
+    <NuxtLink :to="`/car/${car.id}`">
+      <img class="collection-card-image" :src="car.imgs[0]" :alt="car.name" />
+    </NuxtLink>
     <div class="collection-card__info">
-      <p class="collection-card__info-title">{{ brand + ' ' + name }}</p>
+      <p class="collection-card__info-title">{{ car.brand + ' ' + car.name }}</p>
       <div class="collection-card__info__items">
-        <CardInfoItem title="Type" :value="type" />
-        <CardInfoItem title="Transmission" :value="transmission" />
-        <CardInfoItem title="Passenger" :value="`${passenger} Person`" />
-        <CardInfoItem title="Top Speed" :value="topSpeed" />
-        <CardInfoItem title="Horse Power" :value="horsePower" />
-        <CardInfoItem title="0-100 km/h" :value="time" />
+        <CardInfoItem title="Type" :value="car.type" />
+        <CardInfoItem title="Transmission" :value="car.transmission" />
+        <CardInfoItem title="Passenger" :value="`${car.passenger} Person`" />
+        <CardInfoItem title="Top Speed" :value="car.topSpeed" />
+        <CardInfoItem title="Horse Power" :value="car.horsePower" />
+        <CardInfoItem title="0-100 km/h" :value="car.time" />
       </div>
     </div>
-    <Button class="collection-card-button">$ 550.000</Button>
+    <NuxtLink :to="`/car/${car.id}`">
+      <Button class="collection-card-button">$ 550.000</Button>
+    </NuxtLink>
   </div>
 </template>
 
 <script setup>
 defineProps({
-  brand: String,
-  name: String,
-  type: String,
-  transmission: String,
-  passenger: Number,
-  topSpeed: Number,
-  horsePower: Number,
-  time: Number,
-  img: String
+  car: Object,
+  default() {
+    return {};
+  }
 })
 </script>
 
@@ -68,7 +67,7 @@ defineProps({
   &-button {
     font-size: 24px;
     font-weight: 600;
-    padding: 20px 30px;
+    padding: 15px 20px;
     position: absolute;
     top: 50%;
     right: 12px;

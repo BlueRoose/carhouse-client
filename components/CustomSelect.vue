@@ -1,16 +1,18 @@
 <template>
   <div class="select">
     <p class="select-label">{{ label }}</p>
-    <select
+    <el-select
       :value="modelValue"
-      class="select-input"
       placeholder="Select"
       @change="handleChangeSelect"
     >
-      <option>Lambo</option>
-      <option>BMW</option>
-      <option>Audi</option>
-    </select>
+      <el-option
+        v-for="option, index in options"
+        :key="index"
+        :label="option.name"
+        :value="option.name"
+      />
+    </el-select>
   </div>
 </template>
 
@@ -26,21 +28,20 @@ function handleChangeSelect() {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .select {
-
   &-label {
     font-size: 14px;
     color: #848484;
     margin-bottom: 16px;
   }
 
-  &-input {
-    border: none;
-    outline: none;
-    border-bottom: 1px solid $color-yellow;
-    font-size: 20px;
-    font-weight: 600;
+  .el-select {
+    min-width: 150px;
   }
+}
+
+.el-select__wrapper.is-focused {
+  box-shadow: 0 0 0 1px #ffd600 inset !important;
 }
 </style>

@@ -17,10 +17,15 @@
     "@vueuse/nuxt": "^10.9.0",
     "axios": "^1.6.8",
     "nuxt": "^3.10.1",
+    "nuxt-swiper": "^1.2.2",
     "pinia": "^2.1.7",
     "sass": "^1.70.0",
     "swiper": "^11.0.6",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"
+  },
+  "devDependencies": {
+    "@element-plus/nuxt": "^1.0.8",
+    "element-plus": "^2.6.3"
   }
 }
