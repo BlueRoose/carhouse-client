@@ -32,7 +32,7 @@ defineProps({
 <style lang="scss" scoped>
 .collection-card {
   width: 100%;
-  height: 698px;
+  height: 658px;
   position: relative;
   background-color: #FBFBFB;
   border-radius: 25px;
@@ -47,13 +47,13 @@ defineProps({
   }
 
   &__info {
-    padding: 70px 0 0 46px;
+    padding: 50px 0 0 46px;
 
     &-title {
       font-size: 30px;
       line-height: 32px;
       font-weight: 600;
-      margin-bottom: 55px;
+      margin-bottom: 35px;
     }
 
     &__items {

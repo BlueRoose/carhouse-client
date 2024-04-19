@@ -1,17 +1,19 @@
 <template>
   <div class="wrapper">
-    <div class="question">
-      <p class="question-title">Have a question?</p>
-      <p class="question-description">Our experts are always happy to help you with any question</p>
-      <div class="question__buttons">
-        <Button class="question__buttons-contact" @click="handleClickContact">Contact us</Button>
-        <div class="question__buttons__phone">
-          <img
-            class="question__buttons__phone-image"
-            src="/icons/phone.svg"
-            alt="phone"
-          />
-          <a  class="question__buttons__phone-number" href="tel:+37529777777">+375 (29) 777-77-77</a>
+    <div class="container">
+      <div class="question">
+        <p class="question-title">Have a question?</p>
+        <p class="question-description">Our experts are always happy to help you with any question</p>
+        <div class="question__buttons">
+          <Button class="question__buttons-contact" @click="handleClickContact">Contact us</Button>
+          <div class="question__buttons__phone">
+            <img
+              class="question__buttons__phone-image"
+              src="/icons/phone.svg"
+              alt="phone"
+            />
+            <a  class="question__buttons__phone-number" href="tel:+37529777777">+375 (29) 777-77-77</a>
+          </div>
         </div>
       </div>
     </div>
@@ -28,7 +30,7 @@ function handleClickContact() {
 
 <style lang="scss" scoped>
 .wrapper {
-  background-color: $color-dark;
+  background-color: $color-yellow;
   margin-bottom: 2px;
 
   .question {
@@ -36,22 +38,8 @@ function handleClickContact() {
     height: fit-content;
     padding-top: 60px;
     padding-bottom: 60px;
-    padding-left: 240px;
-    padding-right: 24px;
     background-color: $color-yellow;
     box-sizing: border-box;
-
-    @include mq($until: desktop-xl) {
-      padding-left: 180px;
-    }
-
-    @include mq($until: desktop-l) {
-      padding-left: 120px;
-    }
-
-    @include mq($until: desktop) {
-      padding-left: 90px;
-    }
 
     @include mq($until: tablet) {
       padding-top: 30px;
@@ -60,12 +48,10 @@ function handleClickContact() {
 
     @include mq($until: mobile-xxl) {
       width: 80%;
-      padding-left: 50px;
     }
 
     @include mq($until: mobile-l) {
       width: 100%;
-      padding-left: 24px;
     }
 
     &-title {

@@ -1,7 +1,7 @@
 <template>
   <div class="index">
     <Slider class="index-slider" />
-    <div class="index__about">
+    <div class="index__about container">
       <div class="index__about__info">
         <p class="index__about__info-name">About us</p>
         <p class="index__about__info-title">Carhouse is the best place to get your dream car</p>
@@ -17,7 +17,8 @@
         alt="office"
       />
     </div>
-    <div class="index__brands">
+    <div class="brands-wrapper">
+      <div class="index__brands container">
         <h2 class="index__brands-title">Our brands</h2>
         <ul class="index__brands__items">
           <li class="index__brands__items-item">BMW</li>
@@ -30,6 +31,7 @@
           <li class="index__brands__items-item">Rolls Royce</li>
         </ul>
       </div>
+    </div>
     <WhyUs />
   </div>
 </template>
@@ -57,28 +59,24 @@ function handleClickView() {
   }
 
   &__about {
-    padding: 160px 240px;
+    padding-top: 160px;
+    padding-bottom: 160px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 
     @include mq($until: desktop-xl) {
-      padding: 120px 180px;
+      padding-top: 120px;
+      padding-bottom: 120px;
     }
 
     @include mq($until: desktop-l) {
-      padding: 80px 120px;
-    }
-
-    @include mq($until: desktop) {
-      padding: 80px 90px;
+      padding-top: 80px;
+      padding-bottom: 80px;
     }
 
     @include mq($until: mobile-xxl) {
-      padding: 40px 50px;
-    }
-
-    @include mq($until: mobile-l) {
-      padding: 40px 24px;
+      padding-top: 40px;
+      padding-bottom: 40px;
     }
 
     @include mq($until: tablet) {
@@ -149,28 +147,32 @@ function handleClickView() {
     }
   }
 
-  &__brands {
-    padding: 100px 240px;
+  .brands-wrapper {
     background-color: #F9F9F9;
+  }
+
+  &__brands {
+    padding-top: 100px;
+    padding-bottom: 100px;
 
     @include mq($until: desktop-xl) {
-      padding: 80px 180px;
+      padding-top: 80px;
+      padding-bottom: 80px;
     }
 
     @include mq($until: desktop-l) {
-      padding: 60px 120px;
+      padding-top: 60px;
+      padding-bottom: 60px;
     }
 
     @include mq($until: desktop) {
-      padding: 50px 90px;
+      padding-top: 50px;
+      padding-bottom: 50px;
     }
 
     @include mq($until: mobile-xxl) {
-      padding: 40px 50px;
-    }
-
-    @include mq($until: mobile-l) {
-      padding: 40px 24px;
+      padding-top: 40px;
+      padding-bottom: 40px;
     }
 
     &-title {

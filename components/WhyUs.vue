@@ -1,5 +1,5 @@
 <template>
-  <div class="why-us">
+  <div class="why-us container">
     <p class="why-us-small">C A R H O U S E</p>
     <h2 class="why-us-title">Why choose us</h2>
     <div class="why-us__cards">
@@ -46,28 +46,12 @@
 
 <style lang="scss" scoped>
 .why-us {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 65px 0;
-
-  @include mq($until: desktop-xl) {
-    padding: 65px 180px;
-  }
-
-  @include mq($until: desktop-l) {
-    padding: 65px 120px;
-  }
-
-  @include mq($until: desktop) {
-    padding: 65px 90px;
-  }
+  padding-top: 65px;
+  padding-bottom: 65px;
 
   @include mq($until: mobile-xxl) {
-    padding: 45px 50px;
-  }
-
-  @include mq($until: mobile-l) {
-    padding: 45px 24px;
+    padding-top: 45px;
+    padding-bottom: 45px;
   }
 
   &-small {
@@ -107,7 +91,6 @@
     &__card {
       padding: 60px;
       box-shadow: 0px 4px 39.79999923706055px 0px #00000040;
-      cursor: pointer;
       transition: all 0.5s;
       box-sizing: border-box;
 

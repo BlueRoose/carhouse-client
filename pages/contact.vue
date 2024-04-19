@@ -1,6 +1,6 @@
 <template>
   <div class="contact">
-    <div class="contact__dark">
+    <div class="contact__dark container">
       <h2 class="contact__dark-heading">Contact Us</h2>
       <p class="contact__dark-description">We're always here to help you find the perfect car! Whether you have questions about our inventory, services, or you'd like to schedule a test drive, feel free to get in touch with us. Our friendly and experienced staff are ready to answer all your inquiries and provide you with the information you need.</p>
       <form class="contact__dark__form">
@@ -34,19 +34,21 @@
         alt="map"
       />
     </div>
-    <div class="contact__white">
-      <div class="contact__white__info">
-        <h3 class="contact__white__info-title">Our dealer locations</h3>
-        <p class="contact__white__info-description">
-          Visit any of our dealer locations nationwide to receive expert assistance with all your automotive needs. Our knowledgeable staff is ready to guide you through our extensive inventory and provide personalized recommendations. Whether you're looking for sales, service, or support, our dealerships are here to ensure your satisfaction.
-        </p>
-      </div>
-      <div class="contact__white__cards">
-        <DealerCard
-          v-for="location, index in dealerLocations"
-          :key="index"
-          :location="location"
-        />
+    <div class="wrapper">
+      <div class="contact__white container">
+        <div class="contact__white__info">
+          <h3 class="contact__white__info-title">Our dealer locations</h3>
+          <p class="contact__white__info-description">
+            Visit any of our dealer locations nationwide to receive expert assistance with all your automotive needs. Our knowledgeable staff is ready to guide you through our extensive inventory and provide personalized recommendations. Whether you're looking for sales, service, or support, our dealerships are here to ensure your satisfaction.
+          </p>
+        </div>
+        <div class="contact__white__cards">
+          <DealerCard
+            v-for="location, index in dealerLocations"
+            :key="index"
+            :location="location"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -174,22 +176,31 @@ const dealerLocations = [
     }
 
     &-image {
-      width: 100%;
-      padding: 0 160px;
+      max-width: 100%;
       box-sizing: border-box;
       position: absolute;
       top: 150px;
+      left: 0;
     }
   }
 
-  &__white {
+  .wrapper {
     background-color: $color-white;
-    padding: 190px 240px;
+  }
+
+  &__white {
+    padding-top: 190px;
+    padding-bottom: 190px;
 
     &__info {
       margin-bottom: 100px;
       display: flex;
       justify-content: space-between;
+
+      @include mq($until: tablet) {
+        flex-direction: column;
+        gap: 50px;
+      }
 
       &-title {
         font-size: 48px;
