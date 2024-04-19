@@ -2,30 +2,37 @@
   <div class="select">
     <p class="select-label">{{ label }}</p>
     <el-select
-      :value="modelValue"
+      v-model="selectValue"
       placeholder="Select"
-      @change="handleChangeSelect"
+      clearable
     >
       <el-option
         v-for="option, index in options"
         :key="index"
         :label="option.name"
-        :value="option.name"
+        :value="option.value"
       />
     </el-select>
   </div>
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   label: String,
   options: Array,
-  modelValue: String
+  modelValue: String,
 });
 
-function handleChangeSelect() {
-  console.log(1);
-}
+const emit = defineEmits(["update:modelValue"]);
+
+const selectValue = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(value) {
+    emit("update:modelValue", value);
+  },
+});
 </script>
 
 <style lang="scss">
@@ -43,5 +50,9 @@ function handleChangeSelect() {
 
 .el-select__wrapper.is-focused {
   box-shadow: 0 0 0 1px #ffd600 inset !important;
+}
+
+.el-select-dropdown__item.is-selected {
+  color: $color-yellow !important;
 }
 </style>

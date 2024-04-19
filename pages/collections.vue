@@ -5,7 +5,7 @@
       title="Find your dream car here"
       description="Carhouse is the best place to find your dream car. Choose it!"
     />
-    <div class="collections__content">
+    <div class="collections__content container">
       <div class="collections__content__search">
         <div class="collections__content__search__selects">
           <CustomSelect label="Brand" :options="brands" />
@@ -15,11 +15,12 @@
         </div>
         <Button class="collections__content__search-button">Find</Button>
       </div>
-      <div class="collections__content__info">
-        <p v-if="!isLoading" class="collections__content__info-showed">
+      <div v-if="!isLoading" class="collections__content__info">
+        <p class="collections__content__info-showed">
           Showing {{ cars.length }} from {{ totalCars }} results
         </p>
         <CustomSelect
+          v-model="sortValueChanged"
           class="collections__content__info-sort"
           label="Sort By"
           :options="sortOptions"
@@ -53,6 +54,28 @@ import { useCarsStore } from "@/store/cars.js";
 import { useBrandsStore } from "@/store/brands.js";
 import { useTypesStore } from "@/store/types.js";
 
+const sortOptions = [
+  {
+    name: "Name ASC",
+    value: "name,asc",
+  },
+  {
+    name: "Name DESC",
+    value: "name,desc",
+  },
+  {
+    name: "Price ASC",
+    value: "price,asc",
+  },
+  {
+    name: "Price DESC",
+    value: "price,desc",
+  },
+];
+
+const router = useRouter();
+const route = useRoute();
+
 const carsStore = useCarsStore();
 const brandsStore = useBrandsStore();
 const typesStore = useTypesStore();
@@ -61,28 +84,24 @@ const { cars, totalCars, totalPages } = storeToRefs(carsStore);
 const { brands } = storeToRefs(brandsStore);
 const { types } = storeToRefs(typesStore);
 
-const sortOptions = [
-  {
-    name: "Name ASC"
-  },
-  {
-    name: "Name DESC"
-  },
-  {
-    name: "Price ASC"
-  },
-  {
-    name: "Price DESC"
-  },
-]
-
-const page = ref(1);
+const page = ref(Number(route.query.page) || 1);
+const sortValue = ref(null);
 const isLoading = ref(true);
 const error = ref("");
 
+const sortValueChanged = computed({
+  get() {
+    return sortValue.value;
+  },
+  async set(value) {
+    sortValue.value = value;
+    await getCars();
+  },
+});
+
 onMounted(async () => {
   try {
-    await carsStore.getCars(page.value);
+    await getCars();
     await brandsStore.getBrands();
     await typesStore.getTypes();
   } catch (e) {
@@ -97,7 +116,24 @@ onMounted(async () => {
 
 async function changePage(newPage) {
   page.value = newPage;
+  router.push({ query: { page: newPage }});
   await carsStore.getCars(page.value);
+  const cardsBlock = document.getElementsByClassName("collections__content__cards")[0];
+  window.scrollTo({ top: cardsBlock.offsetTop, behavior: "smooth" });
+}
+
+async function getCars() {
+  try {
+    isLoading.value = true;
+    await carsStore.getCars(page.value, sortValue.value);
+  } catch (e) {
+    error.value = e;
+    setTimeout(() => {
+      error.value = "";
+    }, 1000);
+  } finally {
+    isLoading.value = false;
+  }
 }
 </script>
 
@@ -107,7 +143,6 @@ async function changePage(newPage) {
   padding-bottom: 220px;
 
   &__content {
-    padding: 0 240px;
     position: relative;
 
     &__search {

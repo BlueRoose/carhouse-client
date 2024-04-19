@@ -5,7 +5,7 @@
       <div class="car__content__info">
         <div class="car__content__info__images">
           <Swiper
-            :slidesPerView="1.49"
+            :slidesPerView="1.5"
             :space-between="20"
             :modules="[Navigation]"
             centeredSlides
@@ -63,6 +63,18 @@
           <p>{{ selectedCar.rating }}</p>
         </div>
       </div>
+      <div class="car__content__another">
+        <p class="car__content__another-title">Other cars you may like</p>
+        <div class="car__content__another__cards">
+          <div
+            v-for="car, index in anotherCars"
+            :key="index"
+            class="car__content__another__cards__card"
+          >
+            <img :src="car.imgs[0]" alt="another-car" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -84,30 +96,17 @@ const { selectedCar, cars } = storeToRefs(carsStore);
 const isLoading = ref(true);
 const error = ref("");
 const selectedImage = ref(null);
+const anotherCars = ref([]);
 
 const carName = computed(() => `${selectedCar.value.brand}  ${selectedCar.value.name}`);
 
 const carImages = computed(() => [...selectedCar.value.imgs, ...selectedCar.value.imgs]);
 
-const anotherCars = computed(() => {
-  const filteredCars = cars.value.filter(car => car.id !== selectedCar.value.id);
-  const result = [];
-
-  while (result.length < 5) {
-    const randomIndex = Math.floor(Math.random() * (filteredCars.length - 0 + 1)) + 0;
-    const randomCar = filteredCars[randomIndex];
-    if (!result.includes(randomCar)) {
-      result.push(randomCar);
-    }
-  }
-
-  return result;
-});
-
 onMounted(async () => {
   try {
     await carsStore.getCar(route.params.id);
     await carsStore.getCars();
+    getAnotherCars();
     selectedImage.value = selectedCar.value.imgs[0];
   } catch (e) {
     error.value = e;
@@ -118,6 +117,21 @@ onMounted(async () => {
     isLoading.value = false;
   }
 });
+
+function getAnotherCars() {
+  const filteredCars = cars.value.filter(car => car.id !== selectedCar.value.id);
+  const result = [];
+
+  while (result.length < 5) {
+    const randomIndex = Math.floor(Math.random() * (filteredCars.length - 1 - 0 + 1)) + 0;
+    const randomCar = filteredCars[randomIndex];
+    if (!result.includes(randomCar)) {
+      result.push(randomCar);
+    }
+  }
+
+  anotherCars.value = result;
+}
 </script>
 
 <style lang="scss">
