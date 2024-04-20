@@ -32,6 +32,13 @@
 
 a {
   text-decoration: none;
+
+  &:active,
+  &:hover,
+  & {
+    text-decoration: none;
+    color: $color-dark;
+  }
 }
 
 .user-icon {

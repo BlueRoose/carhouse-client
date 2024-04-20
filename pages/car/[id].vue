@@ -2,6 +2,7 @@
   <div class="car">
     <Loader v-if="isLoading" />
     <div v-else class="car__content">
+      <p class="car__content-back"><NuxtLink to="/collections">Collections > </NuxtLink>{{ selectedCar.brand }}  {{ selectedCar.name }}</p>
       <div class="car__content__info">
         <div class="car__content__info__images">
           <Swiper
@@ -33,10 +34,18 @@
           <div class="car__content__info__order__controls">
             <Button>Order</Button>
             <img
-              v-if="isAuth"
+              v-if="isAuth && !isFavourited"
               class="icon"
               src="/icons/bookmark.svg"
               alt="support"
+              @click="addToFavouritedCars"
+            />
+            <img
+              v-if="isAuth && isFavourited"
+              class="icon"
+              src="/icons/bookmark-filled.svg"
+              alt="support"
+              @click="removeFromFavouritedCars"
             />
           </div>
         </div>
@@ -64,14 +73,22 @@
         </div>
       </div>
       <div class="car__content__another">
-        <p class="car__content__another-title">Other cars you may like</p>
+        <p class="car__content__another-title">You may also like:</p>
         <div class="car__content__another__cards">
           <div
             v-for="car, index in anotherCars"
             :key="index"
             class="car__content__another__cards__card"
           >
-            <img :src="car.imgs[0]" alt="another-car" />
+            <NuxtLink :to="`/car/${car.id}`">
+              <img
+                class="car__content__another__cards__card-image"
+                :src="car.imgs[0]"
+                :alt="car.name"
+              />
+              <p class="car__content__another__cards__card-type">{{ car.type }}</p>
+              <p class="car__content__another__cards__card-name">{{ car.brand }}  {{ car.name }}</p>
+            </NuxtLink>
           </div>
         </div>
       </div>
@@ -91,7 +108,7 @@ const carsStore = useCarsStore();
 const route = useRoute();
 
 const { isAuth } = storeToRefs(authStore);
-const { selectedCar, cars } = storeToRefs(carsStore);
+const { cars, favouritedCars, selectedCar } = storeToRefs(carsStore);
 
 const isLoading = ref(true);
 const error = ref("");
@@ -99,6 +116,8 @@ const selectedImage = ref(null);
 const anotherCars = ref([]);
 
 const carName = computed(() => `${selectedCar.value.brand}  ${selectedCar.value.name}`);
+
+const isFavourited = computed(() => favouritedCars.value.some(car => car.id === selectedCar.value.id));
 
 const carImages = computed(() => [...selectedCar.value.imgs, ...selectedCar.value.imgs]);
 
@@ -122,7 +141,7 @@ function getAnotherCars() {
   const filteredCars = cars.value.filter(car => car.id !== selectedCar.value.id);
   const result = [];
 
-  while (result.length < 5) {
+  while (result.length < 4) {
     const randomIndex = Math.floor(Math.random() * (filteredCars.length - 1 - 0 + 1)) + 0;
     const randomCar = filteredCars[randomIndex];
     if (!result.includes(randomCar)) {
@@ -132,17 +151,45 @@ function getAnotherCars() {
 
   anotherCars.value = result;
 }
+
+async function addToFavouritedCars() {
+  try {
+    await carsStore.addToFavouritedCars(selectedCar.value.id);
+  } catch (e) {
+    error.value = e;
+    setTimeout(() => {
+      error.value = "";
+    }, 1000);
+  }
+}
+
+async function removeFromFavouritedCars() {
+  try {
+    await carsStore.removeFromFavouritedCars(selectedCar.value.id);
+  } catch (e) {
+    error.value = e;
+    setTimeout(() => {
+      error.value = "";
+    }, 1000);
+  }
+}
 </script>
 
 <style lang="scss">
 .car {
   background-color: $color-white;
   padding-top: 100px;
-  padding-bottom: 220px;
+  padding-bottom: 120px;
 
   &__content {
     padding: 0 240px;
     position: relative;
+
+    &-back {
+      font-weight: 500;
+      color: $color-yellow;
+      margin-bottom: 25px;
+    }
 
     &__info {
       display: flex;
@@ -275,6 +322,51 @@ function getAnotherCars() {
         p {
           font-size: 28px;
           text-align: center;
+        }
+      }
+    }
+
+    &__another {
+
+      &-title {
+        font-size: 36px;
+        font-weight: 500;
+        margin-bottom: 50px;
+      }
+
+      &__cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+
+        &__card {
+          width: 100%;
+          border: 2px solid $color-yellow;
+          border-radius: 25px;
+          cursor: pointer;
+          transition: transform 0.2s linear;
+
+          &:hover {
+            transform: translateY(-25px);
+          }
+
+          &-image {
+            width: 100%;
+            border-radius: 25px 25px 0 0;
+            margin-bottom: 20px;
+          }
+
+          &-type {
+            font-size: 14px;
+            opacity: 80%;
+            padding-left: 20px;
+          }
+
+          &-name {
+            font-size: 20px;
+            font-weight: 500;
+            padding: 0 0 20px 20px
+          }
         }
       }
     }

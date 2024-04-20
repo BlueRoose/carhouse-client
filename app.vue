@@ -15,6 +15,7 @@
 
 <script setup>
 import { useAuthStore } from "@/store/auth.js";
+import { useCarsStore } from "@/store/cars.js";
 
 useHead({
   link: [
@@ -25,11 +26,20 @@ useHead({
 });
 
 const authStore = useAuthStore();
+const carsStore = useCarsStore();
+
+const { isAuth } = storeToRefs(authStore);
 
 const isLoading = ref(false);
 setTimeout(() => isLoading.value = false, 4000);
 
-onMounted(() => {
+watch(isAuth, async () => {
+  if (isAuth.value) {
+    await carsStore.getFavouritedCars();
+  }
+})
+
+onMounted(async () => {
   if (process.client) {
     const userData = JSON.parse(localStorage.getItem("user"));
 

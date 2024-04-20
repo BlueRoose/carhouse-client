@@ -2,6 +2,7 @@ import api from "@/api";
 
 export const useCarsStore = defineStore("carsStore", () => {
   const cars = ref([]);
+  const favouritedCars = ref([]);
   const totalCars = ref(0);
   const totalPages = ref(1);
 
@@ -29,12 +30,50 @@ export const useCarsStore = defineStore("carsStore", () => {
     }
   }
 
+  async function getFavouritedCars() {
+    try {
+      const response = await api.getFavouritedCars();
+
+      favouritedCars.value = response.favouritedCars;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async function addToFavouritedCars(carId) {
+    try {
+      const response = await api.addToFavouritedCars(carId);
+      
+      await getFavouritedCars();
+
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async function removeFromFavouritedCars(carId) {
+    try {
+      const response = await api.removeFromFavouritedCars(carId);
+      
+      await getFavouritedCars();
+
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   return {
     cars,
+    favouritedCars,
     totalCars,
     totalPages,
     selectedCar,
     getCars,
     getCar,
+    getFavouritedCars,
+    addToFavouritedCars,
+    removeFromFavouritedCars,
   };
 });
