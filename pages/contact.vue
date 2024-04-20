@@ -7,26 +7,43 @@
         <div class="contact__dark__form__row">
           <div class="contact__dark__form__block">
             <p class="contact__dark__form__block-title">Full name*</p>
-            <input class="contact__dark__form__block-input" />
+            <input v-model="formData.name" class="contact__dark__form__block-input" />
+            <span v-if="v$.name.$error" class="input-incorrect">
+              {{ v$.name.$errors[0]?.$message }}
+            </span>
           </div>
           <div class="contact__dark__form__block">
             <p class="contact__dark__form__block-title">Email*</p>
-            <input class="contact__dark__form__block-input" />
+            <input v-model="formData.email" class="contact__dark__form__block-input" />
+            <span v-if="v$.email.$error" class="input-incorrect">
+              {{ v$.email.$errors[0]?.$message }}
+            </span>
           </div>
         </div>
         <div class="contact__dark__form__block">
           <p class="contact__dark__form__block-title">Subject*</p>
-          <input class="contact__dark__form__block-input" />
+          <input v-model="formData.subject" class="contact__dark__form__block-input" />
+          <span v-if="v$.subject.$error" class="input-incorrect">
+              {{ v$.subject.$errors[0]?.$message }}
+          </span>
         </div>
         <div class="contact__dark__form__block">
           <p class="contact__dark__form__block-title">Message*</p>
-          <textarea class="contact__dark__form__block-input textarea" />
+          <textarea v-model="formData.message" class="contact__dark__form__block-input textarea" />
+          <span v-if="v$.message.$error" class="input-incorrect">
+              {{ v$.message.$errors[0]?.$message }}
+          </span>
         </div>
-        <div class="contact__dark__form__rules">
-          <input type="checkbox" />
-          <p class="contact__dark__form__rules-text">Accept <a href="#">terms & conditions</a></p>
+        <div>
+          <div class="contact__dark__form__rules">
+            <input type="checkbox" v-model="formData.checkbox" />
+            <p class="contact__dark__form__rules-text">Accept <a href="#">terms & conditions</a></p>
+          </div>
+          <span v-if="v$.checkbox.$error" class="input-incorrect">
+            {{ v$.checkbox.$errors[0]?.$message }}
+          </span>
         </div>
-        <Button class="contact__dark__form-button">Send message</Button>
+        <Button class="contact__dark__form-button" @click="submitForm">Send message</Button>
       </form>
       <img
         class="contact__dark-image"
@@ -55,6 +72,16 @@
 </template>
 
 <script setup>
+import { useVuelidate } from "@vuelidate/core";
+import {
+  required,
+  email,
+  minLength,
+  maxLength,
+  helpers,
+} from "@vuelidate/validators";
+import api from "@/api";
+
 const dealerLocations = [
   {
     city: "Los Angeles",
@@ -80,7 +107,75 @@ const dealerLocations = [
     address: "321 Beach Road, Sydney, NSW 2000",
     phone: "+ 61 2 8765 4321"
   },
-]
+];
+
+const error = ref("");
+const formData = reactive({
+  name: "",
+  email: "",
+  subject: "",
+  message: "",
+});
+
+const rules = computed(() => {
+  return {
+    name: {
+      required: helpers.withMessage("Это поле обязательное", required),
+    },
+    email: {
+      required: helpers.withMessage("Это поле обязательное", required),
+      email: helpers.withMessage("E-mail введён некорректно", email),
+    },
+    subject: {
+      required: helpers.withMessage("Это поле обязательное", required),
+    },
+    message: {
+      required: helpers.withMessage("Это поле обязательное", required),
+      minLength: helpers.withMessage(
+        "Сообщение должно быть длиннее тридцати символов",
+        minLength(30)
+      ),
+      maxLength: helpers.withMessage(
+        "Сообщение не должно быть длиннее пятисот символов",
+        maxLength(255)
+      ),
+    },
+    checkbox: {
+      required: helpers.withMessage("Для отправки подтвердите согласие с политикой обработки персональных данных", required),
+    },
+  };
+});
+
+const v$ = useVuelidate(rules, formData);
+
+async function submitForm(event) {
+  event.preventDefault();
+  if (await v$.value.$validate()) {
+    try {
+      const body = {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        text: formData.message,
+      }
+      const response = await api.addRequest(body);
+
+      Object.assign(formData, {
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+        checkbox: false,
+      });
+      v$.value.$reset()
+    } catch (e) {
+      error.value = e;
+      setTimeout(() => {
+        error.value = "";
+      }, 1000);
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -133,12 +228,12 @@ const dealerLocations = [
         width: 100%;
         display: flex;
         flex-direction: column;
-        gap: 16px;
 
         &-title {
           font-size: 18px;
           line-height: 32px;
           color: #575757;
+          margin-bottom: 16px;
         }
 
         &-input {
@@ -148,7 +243,7 @@ const dealerLocations = [
           box-sizing: border-box;
           border: 2px solid #5e5e5e;
           outline: none;
-          font-size: 20px;
+          font-size: 18px;
         }
       }
 
@@ -219,6 +314,10 @@ const dealerLocations = [
       flex-wrap: wrap;
     }
   }
+}
+
+.input-incorrect {
+  color: red;
 }
 
 .textarea {

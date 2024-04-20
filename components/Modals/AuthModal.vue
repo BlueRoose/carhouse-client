@@ -82,7 +82,6 @@ const modalsStore = useModalsStore();
 
 const input = ref(null);
 const error = ref("");
-const isAlertShowed = ref(false);
 const isSignIn = ref(true)
 const isConfirmationStep = ref(false);
 const formData = reactive({
@@ -116,7 +115,7 @@ const rules = computed(() => {
   }
 });
 
-let v$ = useVuelidate(rules, formData)
+let v$ = useVuelidate(rules, formData);
 
 watch(rules, () => v$ = useVuelidate(rules, formData));
 
@@ -157,10 +156,8 @@ function resetData() {
 
 function handleError(e) {
   error.value = e;
-  isAlertShowed.value = true;
   setTimeout(() => {
     error.value = "";
-    isAlertShowed.value = false;
   }, 1000);
 }
 

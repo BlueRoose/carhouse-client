@@ -56,19 +56,19 @@ import { useTypesStore } from "@/store/types.js";
 
 const sortOptions = [
   {
-    name: "Name ASC",
+    name: "Name ↑",
     value: "name,asc",
   },
   {
-    name: "Name DESC",
+    name: "Name ↓",
     value: "name,desc",
   },
   {
-    name: "Price ASC",
+    name: "Price ↑",
     value: "price,asc",
   },
   {
-    name: "Price DESC",
+    name: "Price ↓",
     value: "price,desc",
   },
 ];
