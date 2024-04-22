@@ -250,7 +250,12 @@ async function submitForm(event) {
       &__rules {
         display: flex;
         align-items: center;
-        gap: 24px;
+        gap: 12px;
+
+        input {
+          width: 16px;
+          height: 16px;
+        }
 
         &-text {
           font-size: 18px;
