@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default {
-  async preSignUp ({ email }) {
+  async preSignUp({ email }) {
     try {
       const { data } = await axios.post(
         "http://localhost:5000/api/auth/pre-signup",
@@ -16,7 +16,7 @@ export default {
     }
   },
 
-  async signUp ({ name, surname, email, activationMessage }) {
+  async signUp({ name, surname, email, activationMessage }) {
     try {
       const { data } = await axios.post(
         "http://localhost:5000/api/auth/signup",
@@ -34,7 +34,7 @@ export default {
     }
   },
 
-  async preSignIn ({ email }) {
+  async preSignIn({ email }) {
     try {
       const { data } = await axios.post(
         "http://localhost:5000/api/auth/pre-signin",
@@ -49,7 +49,7 @@ export default {
     }
   },
   
-  async signIn ({ email, activationMessage }) {
+  async signIn({ email, activationMessage }) {
     try {
       const { data } = await axios.post(
         "http://localhost:5000/api/auth/signin",

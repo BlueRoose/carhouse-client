@@ -67,8 +67,8 @@ const isUserClicked = ref(false);
 onClickOutside(userBlock, () => isUserClicked.value = false);
 
 function openAuthModal() {
-  modalsStore.toggleAuthModal();
-  modalsStore.toggleModal();
+  modalsStore.showAuthModal();
+  modalsStore.toggleIsModal();
 }
 
 function openPage(page) {

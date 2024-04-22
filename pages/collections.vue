@@ -265,9 +265,7 @@ onMounted(async () => {
     await getCars();
   } catch (e) {
     error.value = e;
-    setTimeout(() => {
-      error.value = "";
-    }, 1000);
+    setTimeout(() => error.value = "", 1000);
   } finally {
     isLoading.value = false;
   }
@@ -287,9 +285,7 @@ async function getCars() {
     await carsStore.getCars(page.value, sortValue.value, brandId.value, typeId.value, model.value, year.value);
   } catch (e) {
     error.value = e;
-    setTimeout(() => {
-      error.value = "";
-    }, 1000);
+    setTimeout(() => error.value = "", 1000);
   } finally {
     isLoading.value = false;
   }
@@ -299,7 +295,7 @@ async function getCars() {
 <style lang="scss" scoped>
 .collections {
   background-color: $color-white;
-  padding-bottom: 220px;
+  padding-bottom: 80px;
 
   &__content {
     position: relative;
@@ -309,7 +305,7 @@ async function getCars() {
       height: 140px;
       margin: 0 auto;
       padding: 0 64px;
-      margin-bottom: 150px;
+      margin-bottom: 80px;
       box-shadow: 0 31px 81px rgba(37, 37, 37, .3);
       display: flex;
       justify-content: space-between;

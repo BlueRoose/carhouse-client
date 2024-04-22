@@ -1,6 +1,9 @@
 <template>
   <div class="auth-modal">
-    <IconsXMarkIcon class="auth-modal-close" @click="closeModal" />
+    <div class="auth-modal__top-bar">
+      <p class="auth-modal__top-bar-title">{{ modalTitle }}</p>
+      <IconsXMarkIcon class="auth-modal__top-bar-close" @click="closeModal" />
+    </div>
     <div v-if="isSignIn && !isConfirmationStep" class="auth-modal__form">
       <div class="auth-modal__form__block">
         <p>Email</p>
@@ -15,7 +18,7 @@
       </div>
       <Button class="auth-modal__form-button" @click="submitForm('pre-signin')">Continue</Button>
       <p class="auth-modal__message">Don't have an account? 
-        <span class="auth-modal__message-span" @click="toggleModalType">Sign up</span>
+        <span class="auth-modal__message-span" @click="toggleIsModalType">Sign up</span>
       </p>
     </div>
 
@@ -43,7 +46,7 @@
       </div>
       <Button class="auth-modal__form-button" @click="submitForm('pre-signup')">Continue</Button>
       <p class="auth-modal__message">Already have an account? 
-        <span class="auth-modal__message-span" @click="toggleModalType">Sign in</span>
+        <span class="auth-modal__message-span" @click="toggleIsModalType">Sign in</span>
       </p>
     </div>
 
@@ -91,6 +94,8 @@ const formData = reactive({
   activationMessage: ["", "", "", "", ""]
 });
 
+const modalTitle = computed(() => isSignIn.value ? "Sign in" : "Sign up")
+
 const rules = computed(() => {
   if (isSignIn.value) {
     return {
@@ -136,11 +141,11 @@ async function moveFocus(next) {
 }
 
 function closeModal() {
-  modalsStore.toggleAuthModal();
-  modalsStore.toggleModal();
+  modalsStore.hideAuthModal();
+  modalsStore.toggleIsModal();
 }
 
-function toggleModalType() {
+function toggleIsModalType() {
   isSignIn.value = !isSignIn.value;
   v$.value.$reset()
 }
@@ -156,9 +161,7 @@ function resetData() {
 
 function handleError(e) {
   error.value = e;
-  setTimeout(() => {
-    error.value = "";
-  }, 1000);
+  setTimeout(() => error.value = "", 1000);
 }
 
 async function submitForm(action) {
@@ -208,15 +211,29 @@ async function submitForm(action) {
 <style lang="scss" scoped>
 .auth-modal {
   width: 350px;
-  padding: 50px;
+  padding: 75px 50px 25px 50px;
   background-color: $color-white;
+  border-radius: 25px;
   position: relative;
 
-  &-close {
+  &__top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
     position: absolute;
     top: 10px;
-    right: 10px;
-    cursor: pointer;
+    left: 0;
+    padding: 0 15px;
+    box-sizing: border-box;
+
+    &-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    &-close {
+      cursor: pointer;
+    }
   }
 
   &__form {
@@ -232,6 +249,8 @@ async function submitForm(action) {
       &-input {
         height: 30px;
         font-size: 16px;
+        padding-left: 10px;
+        box-sizing: border-box;
         border: none;
         outline: none;
         border-bottom: 1px solid $color-yellow;

@@ -170,9 +170,7 @@ async function submitForm(event) {
       v$.value.$reset()
     } catch (e) {
       error.value = e;
-      setTimeout(() => {
-        error.value = "";
-      }, 1000);
+      setTimeout(() => error.value = "", 1000);
     }
   }
 }
