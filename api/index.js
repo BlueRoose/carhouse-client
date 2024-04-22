@@ -4,6 +4,7 @@ import brands from "@/api/brands.js";
 import types from "@/api/types.js";
 import request from "@/api/request.js";
 import search from "@/api/search.js";
+import buyRequest from "@/api/buyRequest.js";
 
 export default {
   ...auth,
@@ -12,4 +13,5 @@ export default {
   ...types,
   ...request,
   ...search,
+  ...buyRequest,
 };

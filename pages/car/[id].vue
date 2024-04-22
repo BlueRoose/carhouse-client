@@ -32,7 +32,7 @@
           <p class="car__content__info__order-description">{{ selectedCar.description }}</p>
           <p class="car__content__info__order-price">$ {{ selectedCar.price }}</p>
           <div class="car__content__info__order__controls">
-            <Button>Order</Button>
+            <Button @click="orderCar">Order</Button>
             <img
               v-if="isAuth && !isFavourited"
               class="icon"
@@ -102,10 +102,13 @@ import { Navigation } from "swiper/modules";
 import "swiper/swiper-bundle.css";
 import { useAuthStore } from "@/store/auth.js";
 import { useCarsStore } from "@/store/cars.js";
+import { useModalsStore } from "@/store/modals.js";
+
+const route = useRoute();
 
 const authStore = useAuthStore();
 const carsStore = useCarsStore();
-const route = useRoute();
+const modalsStore = useModalsStore();
 
 const { isAuth } = storeToRefs(authStore);
 const { cars, favouritedCars, selectedCar } = storeToRefs(carsStore);
@@ -129,9 +132,7 @@ onMounted(async () => {
     selectedImage.value = selectedCar.value.imgs[0];
   } catch (e) {
     error.value = e;
-    setTimeout(() => {
-      error.value = "";
-    }, 1000);
+    setTimeout(() => error.value = "", 1000);
   } finally {
     isLoading.value = false;
   }
@@ -152,14 +153,21 @@ function getAnotherCars() {
   anotherCars.value = result;
 }
 
+function orderCar() {
+  modalsStore.toggleIsModal();
+  if (isAuth.value) {
+    modalsStore.showOrderModal();
+  } else {
+    modalsStore.showAuthModal();
+  }
+}
+
 async function addToFavouritedCars() {
   try {
     await carsStore.addToFavouritedCars(selectedCar.value.id);
   } catch (e) {
     error.value = e;
-    setTimeout(() => {
-      error.value = "";
-    }, 1000);
+    setTimeout(() => error.value = "", 1000);
   }
 }
 
@@ -168,9 +176,7 @@ async function removeFromFavouritedCars() {
     await carsStore.removeFromFavouritedCars(selectedCar.value.id);
   } catch (e) {
     error.value = e;
-    setTimeout(() => {
-      error.value = "";
-    }, 1000);
+    setTimeout(() => error.value = "", 1000);
   }
 }
 </script>

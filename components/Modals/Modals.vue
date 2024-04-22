@@ -2,6 +2,7 @@
   <div v-if="isModal" class="modals">
     <div class="modals-wrapper">
       <ModalsAuthModal v-if="isAuthModal" />
+      <ModalsOrderModal v-if="isOrderModal" />
     </div>
     <div class="modals-dark" @click="closeModal"></div>
   </div>
@@ -12,11 +13,12 @@ import { useModalsStore } from "@/store/modals.js";
 
 const modalsStore = useModalsStore();
 
-const { isModal, isAuthModal } = storeToRefs(modalsStore);
+const { isModal, isAuthModal, isOrderModal } = storeToRefs(modalsStore);
 
 function closeModal() {
-  modalsStore.toggleModal();
-  modalsStore.toggleAuthModal();
+  modalsStore.toggleIsModal();
+  modalsStore.hideAuthModal();
+  modalsStore.hideOrderModal();
 }
 </script>
 
