@@ -10,8 +10,17 @@ export default {
       if (sort) {
         url += `&sort=${sort}`;
       }
-      if (brandId && typeId && model && year) {
-        url += `&brandId=${brandId}&typeId=${typeId}&model=${model}&year=${year}`;
+      if (brandId) {
+        url += `&brandId=${brandId}`;
+      }
+      if (typeId) {
+        url += `&typeId=${typeId}`;
+      }
+      if (model) {
+        url += `&model=${model}`;
+      }
+      if (year) {
+        url += `&year=${year}`;
       }
       
       const { data } = await axios.get(url);

@@ -35,7 +35,7 @@
         </div>
         <Button
           class="collections__content__search-button"
-          :disabled="!year"
+          :disabled="!brandId"
           @click="getCars"
         >
           Find
@@ -140,6 +140,7 @@ const brandChanged = computed({
       brandId.value = null;
       delete currentQueryParams.brandId;
       router.push({ query: currentQueryParams });
+      await getCars();
     } else {
       const id = brands.value.find(brand => brand.name === value).id;
       brandId.value = id;
