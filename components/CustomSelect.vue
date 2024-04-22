@@ -4,13 +4,14 @@
     <el-select
       v-model="selectValue"
       placeholder="Select"
+      :disabled="disabled"
       clearable
     >
       <el-option
         v-for="option, index in options"
         :key="index"
         :label="option.name"
-        :value="option.value"
+        :value="option.value || option.name"
       />
     </el-select>
   </div>
@@ -20,7 +21,8 @@
 const props = defineProps({
   label: String,
   options: Array,
-  modelValue: String,
+  modelValue: String | Number,
+  disabled: Boolean,
 });
 
 const emit = defineEmits(["update:modelValue"]);

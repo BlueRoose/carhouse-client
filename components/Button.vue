@@ -1,10 +1,13 @@
 <template>
-  <button class="button">
+  <button class="button" :disabled="disabled">
     <slot></slot>
   </button>
 </template>
 
 <script setup>
+defineProps({
+  disabled: Boolean,
+});
 </script>
 
 <style lang="scss" scoped>
@@ -24,8 +27,13 @@
     font-size: 16px;
   }
 
-  &:hover {
+  &:not(:disabled):hover {
     border-radius: 15px;
+  }
+
+  &:disabled {
+    background-color: #f1f1f1;
+    cursor: not-allowed;
   }
 }
 </style>

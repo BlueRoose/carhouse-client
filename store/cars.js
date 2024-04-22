@@ -8,9 +8,9 @@ export const useCarsStore = defineStore("carsStore", () => {
 
   const selectedCar = ref(null);
 
-  async function getCars(page, sort) {
+  async function getCars(page, sort, brandId = null, typeId = null, model = null, year = null) {
     try {
-      const response = await api.getCars(page, 9, sort);
+      const response = await api.getCars(brandId, typeId, model, year, page, 9, sort);
 
       cars.value = response.cars;
       totalCars.value = response.meta.totalCars;

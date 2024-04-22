@@ -3,6 +3,7 @@ import cars from "@/api/cars.js";
 import brands from "@/api/brands.js";
 import types from "@/api/types.js";
 import request from "@/api/request.js";
+import search from "@/api/search.js";
 
 export default {
   ...auth,
@@ -10,4 +11,5 @@ export default {
   ...brands,
   ...types,
   ...request,
+  ...search,
 };

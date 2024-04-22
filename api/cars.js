@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default {
-  async getCars(page, pageSize, sort) {
+  async getCars(brandId, typeId, model, year, page, pageSize, sort) {
     try {
       let url = `http://localhost:5000/api/car/get-cars?pageSize=${pageSize}`;
       if (page) {
@@ -9,6 +9,9 @@ export default {
       }
       if (sort) {
         url += `&sort=${sort}`;
+      }
+      if (brandId && typeId && model && year) {
+        url += `&brandId=${brandId}&typeId=${typeId}&model=${model}&year=${year}`;
       }
       
       const { data } = await axios.get(url);
