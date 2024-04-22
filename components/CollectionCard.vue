@@ -15,7 +15,7 @@
       </div>
     </div>
     <NuxtLink :to="`/car/${car.id}`">
-      <Button class="collection-card-button">$ 550.000</Button>
+      <Button class="collection-card-button">$ {{ car.price }}</Button>
     </NuxtLink>
   </div>
 </template>
