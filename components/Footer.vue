@@ -215,7 +215,7 @@ function handleClickSend() {
           border-radius: 0;
 
           &:hover {
-            border-radius: 0;
+            border-radius: 0 !important;
           }
         }
       }
