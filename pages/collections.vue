@@ -120,7 +120,7 @@ const error = ref("");
 
 const brandChanged = computed({
   get() {
-    return brandId.value;
+    return brands.value.find(brand => brand.id === brandId.value)?.name;
   },
   async set(value) {
     const currentQueryParams = Object.assign({}, route.query);
@@ -152,7 +152,7 @@ const brandChanged = computed({
 
 const typeChanged = computed({
   get() {
-    return typeId.value;
+    return types.value.find(type => type.id === typeId.value)?.name;
   },
   async set(value) {
     const currentQueryParams = Object.assign({}, route.query);
