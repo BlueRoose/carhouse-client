@@ -312,9 +312,9 @@ async function submitForm(event) {
     }
 
     &__cards {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
     }
   }
 }
