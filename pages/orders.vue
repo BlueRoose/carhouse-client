@@ -1,22 +1,22 @@
 <template>
-  <div class="collections">
+  <div class="orders">
     <PageInfo
-      subtitle="F a v o u r i t e s"
-      title="Your favourited cars on one page"
-      description="Track the price of the cars you like and order when you're ready!"
+      subtitle="O R D E R S"
+      title="All your orders on one page"
+      description="Check statuses of your orders and keep abreast of changes"
     />
-    <div class="collections__content container">
-      <div v-if="!isLoading" class="collections__content__info">
-        <p class="collections__content__info-showed">
-          {{ favouritedCars.length }} favourited cars
+    <div class="orders__content container">
+      <div v-if="!isLoading" class="orders__content__info">
+        <p class="orders__content__info-showed">
+          Orders: {{ userBuyRequests.length }}
         </p>
       </div>
       <Loader v-if="isLoading" />
-      <div v-else class="collections__content__cards">
-        <CollectionCard
-          v-for="car, index in favouritedCars"
+      <div v-else class="orders__content__cards">
+        <OrderCard
+          v-for="userBuyRequest, index in userBuyRequests"
           :key="index"
-          :car="car"
+          :userBuyRequest="userBuyRequest"
         />
       </div>
     </div>
@@ -24,18 +24,18 @@
 </template>
 
 <script setup>
-import { useCarsStore } from "@/store/cars.js";
+import { useBuyRequestsStore } from "@/store/buyRequests.js";
 
-const carsStore = useCarsStore();
+const buyRequestsStore = useBuyRequestsStore();
 
-const { favouritedCars } = storeToRefs(carsStore);
+const { userBuyRequests } = storeToRefs(buyRequestsStore);
 
 const isLoading = ref(true);
 const error = ref("");
 
 onMounted(async () => {
   try {
-    await getFavouritedCars();
+    await getUserBuyRequests();
   } catch (e) {
     error.value = e;
     setTimeout(() => error.value = "", 1000);
@@ -44,10 +44,10 @@ onMounted(async () => {
   }
 });
 
-async function getFavouritedCars() {
+async function getUserBuyRequests() {
   try {
     isLoading.value = true;
-    await carsStore.getFavouritedCars();
+    await buyRequestsStore.getUserBuyRequests();
   } catch (e) {
     error.value = e;
     setTimeout(() => error.value = "", 1000);
@@ -58,7 +58,7 @@ async function getFavouritedCars() {
 </script>
 
 <style lang="scss" scoped>
-.collections {
+.orders {
   background-color: $color-white;
   padding-bottom: 80px;
 
@@ -81,10 +81,9 @@ async function getFavouritedCars() {
     }
 
     &__cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-column-gap: 54px;
-      grid-row-gap: 94px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
   }
 }

@@ -20,5 +20,42 @@ export default {
     } catch (error) {
       throw error.response.data.errors[0];
     }
-  }
+  },
+
+  async getUserBuyRequests() {
+    try {
+      const { data } = await axios.get(
+        "http://localhost:5000/api/buy-request/get-user-buy-requests",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+
+      return data;
+    } catch (error) {
+      throw error.response.data.errors[0];
+    }
+  },
+
+  async cancelUserBuyRequest(buyRequestId) {
+    try {
+      const { data } = await axios.post(
+        "http://localhost:5000/api/buy-request/cancel-user-buy-request",
+        {
+          buyRequestId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+
+      return data;
+    } catch (error) {
+      throw error.response.data.errors[0];
+    }
+  },
 };
