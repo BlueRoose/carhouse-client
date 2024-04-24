@@ -46,7 +46,7 @@ export default {
       const { data } = await axios.get(`http://localhost:5000/api/car/check-car?carId=${carId}`,
       {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${useCookie("token").value}`,
         },
       }
     );
@@ -61,7 +61,7 @@ export default {
     try {
       const { data } = await axios.get(`http://localhost:5000/api/car/get-favourites`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${useCookie("token").value}`,
         },
       });
 
@@ -79,7 +79,7 @@ export default {
         },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${useCookie("token").value}`,
           },
         }
       );
@@ -98,7 +98,7 @@ export default {
         },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${useCookie("token").value}`,
           },
         }
       );

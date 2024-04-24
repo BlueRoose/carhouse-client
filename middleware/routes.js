@@ -1,11 +1,8 @@
-import { useAuthStore } from "@/store/auth";
-
 export default defineNuxtRouteMiddleware((to, from) => {
-  const authStore = useAuthStore();
+  const token = useCookie("token").value;
 
-  const { isAuth } = storeToRefs(authStore);
 
-  if ((to.path === "/favourites" || to.path === "/orders") && !isAuth.value) {
+  if ((to.path === "/favourites" || to.path === "/orders") && !token) {
     abortNavigation();
     return navigateTo("/?isAborted=true");
   }

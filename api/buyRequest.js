@@ -11,7 +11,7 @@ export default {
         },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${useCookie("token").value}`,
           },
         },
       );
@@ -28,7 +28,7 @@ export default {
         "http://localhost:5000/api/buy-request/get-user-buy-requests",
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${useCookie("token").value}`,
           },
         },
       );
@@ -48,7 +48,7 @@ export default {
         },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${useCookie("token").value}`,
           },
         },
       );

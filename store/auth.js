@@ -26,7 +26,8 @@ export const useAuthStore = defineStore("authStore", () => {
       isAuth.value = true;
       user.value = response.user;
       localStorage.setItem("user", JSON.stringify(response.user));
-      localStorage.setItem("token", response.token);
+      const token = useCookie("token");
+      token.value = response.token;
 
       return response;
     } catch (error) {
@@ -51,7 +52,7 @@ export const useAuthStore = defineStore("authStore", () => {
       isAuth.value = true;
       user.value = response.user;
       localStorage.setItem("user", JSON.stringify(response.user));
-      localStorage.setItem("token", response.token);
+      document.cookie = `token=${response.token}`;
 
       return response;
     } catch (error) {
@@ -61,7 +62,8 @@ export const useAuthStore = defineStore("authStore", () => {
 
   function logout() {
     localStorage.removeItem("user");
-    localStorage.removeItem("token");
+    const token = useCookie("token");
+    token.value = null;
     isAuth.value = false;
     user.value = null;
   }
