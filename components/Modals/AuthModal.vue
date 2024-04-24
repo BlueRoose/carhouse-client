@@ -66,7 +66,6 @@
         />
       </div>
     </div>
-
   </div>
 </template>
 
@@ -79,12 +78,15 @@ import {
 } from "@vuelidate/validators";
 import { useAuthStore } from "@/store/auth.js";
 import { useModalsStore } from "@/store/modals.js";
+import { useNotificationsStore } from "@/store/notifications.js";
 
 const authStore = useAuthStore();
 const modalsStore = useModalsStore();
+const notificationsStore = useNotificationsStore();
+
+const { successMessage, errorMessage } = storeToRefs(notificationsStore);
 
 const input = ref(null);
-const error = ref("");
 const isSignIn = ref(true)
 const isConfirmationStep = ref(false);
 const formData = reactive({
@@ -160,8 +162,8 @@ function resetData() {
 }
 
 function handleError(e) {
-  error.value = e;
-  setTimeout(() => error.value = "", 1000);
+  errorMessage.value = e;
+  setTimeout(() => errorMessage.value = "", 2000);
 }
 
 async function submitForm(action) {
@@ -180,6 +182,8 @@ async function submitForm(action) {
           const response = await authStore.signUp(formData);
           resetData();
           closeModal();
+          successMessage.value = "You have successfully signed up";
+          setTimeout(() => successMessage.value = "", 2000);
         } catch (e) {
           handleError(e);
         }
@@ -197,6 +201,8 @@ async function submitForm(action) {
           const response = await authStore.signIn(formData);
           resetData();
           closeModal();
+          successMessage.value = "You have successfully signed in";
+          setTimeout(() => successMessage.value = "", 2000);
         } catch (e) {
           handleError(e);
         }

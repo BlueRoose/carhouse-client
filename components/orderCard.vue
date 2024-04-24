@@ -28,9 +28,13 @@
 
 <script setup>
 import { useBuyRequestsStore } from "@/store/buyRequests.js";
+import { useNotificationsStore } from "@/store/notifications.js";
 import api from "@/api";
 
 const buyRequestsStore = useBuyRequestsStore();
+const notificationsStore = useNotificationsStore();
+
+const { successMessage, errorMessage } = storeToRefs(notificationsStore);
 
 const props = defineProps({
   userBuyRequest: {
@@ -40,8 +44,6 @@ const props = defineProps({
     },
   },
 });
-
-const error = ref("");
 
 const carName = computed(() => `${props.userBuyRequest.id}. ${props.userBuyRequest.car.brand} ${props.userBuyRequest.car.name}`);
 
@@ -53,9 +55,11 @@ async function cancelRequest() {
   try {
     await api.cancelUserBuyRequest(props.userBuyRequest.id);
     await buyRequestsStore.getUserBuyRequests();
+    successMessage.value = "Request cancelled successfully";
+    setTimeout(() => successMessage.value = "", 2000);
   } catch (e) {
-    error.value = e;
-    setTimeout(() => error.value = "", 1000);
+    errorMessage.value = e;
+    setTimeout(() => errorMessage.value = "", 2000);
   }
 }
 </script>

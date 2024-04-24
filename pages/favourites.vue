@@ -28,27 +28,22 @@
 
 <script setup>
 import { useCarsStore } from "@/store/cars.js";
+import { useNotificationsStore } from "@/store/notifications.js";
 
 definePageMeta({
   middleware: "routes",
 });
 
 const carsStore = useCarsStore();
+const notificationsStore = useNotificationsStore();
 
 const { favouritedCars } = storeToRefs(carsStore);
+const { successMessage, errorMessage } = storeToRefs(notificationsStore);
 
 const isLoading = ref(true);
-const error = ref("");
 
 onMounted(async () => {
-  try {
-    await getFavouritedCars();
-  } catch (e) {
-    error.value = e;
-    setTimeout(() => error.value = "", 1000);
-  } finally {
-    isLoading.value = false;
-  }
+  await getFavouritedCars();
 });
 
 async function getFavouritedCars() {
@@ -56,8 +51,8 @@ async function getFavouritedCars() {
     isLoading.value = true;
     await carsStore.getFavouritedCars();
   } catch (e) {
-    error.value = e;
-    setTimeout(() => error.value = "", 1000);
+    errorMessage.value = e;
+    setTimeout(() => errorMessage.value = "", 2000);
   } finally {
     isLoading.value = false;
   }

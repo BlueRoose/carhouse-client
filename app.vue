@@ -9,6 +9,22 @@
       <QuestionBlock />
       <Footer />
       <Modals />
+      <Transition name="fade">
+        <el-alert
+          v-if="successMessage"
+          :title="successMessage"
+          type="success"
+          show-icon
+        />
+      </Transition>
+      <Transition name="fade">
+        <el-alert
+          v-if="errorMessage"
+          :title="errorMessage"
+          type="error"
+          show-icon
+        />
+      </Transition>
     </div>
   </Transition>
 </template>
@@ -16,6 +32,7 @@
 <script setup>
 import { useAuthStore } from "@/store/auth.js";
 import { useModalsStore } from "@/store/modals.js";
+import { useNotificationsStore } from "@/store/notifications.js";
 
 useHead({
   link: [
@@ -30,6 +47,9 @@ const route = useRoute();
 
 const authStore = useAuthStore();
 const modalsStore = useModalsStore();
+const notificationsStore = useNotificationsStore();
+
+const { successMessage, errorMessage } = storeToRefs(notificationsStore);
 
 const isLoading = ref(false);
 setTimeout(() => isLoading.value = false, 4000);
@@ -60,6 +80,15 @@ onMounted(async () => {
   background-size: 100%;
   background-image: url('/images/bmw.gif');
   background-repeat: no-repeat;
+}
+
+.el-alert {
+  width: 40%;
+  position: fixed;
+  z-index: 9999;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .fade-enter-active,

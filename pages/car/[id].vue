@@ -104,6 +104,7 @@ import "swiper/swiper-bundle.css";
 import { useAuthStore } from "@/store/auth.js";
 import { useCarsStore } from "@/store/cars.js";
 import { useModalsStore } from "@/store/modals.js";
+import { useNotificationsStore } from "@/store/notifications.js";
 import api from "@/api";
 
 const route = useRoute();
@@ -111,12 +112,13 @@ const route = useRoute();
 const authStore = useAuthStore();
 const carsStore = useCarsStore();
 const modalsStore = useModalsStore();
+const notificationsStore = useNotificationsStore();
 
 const { isAuth } = storeToRefs(authStore);
 const { cars, favouritedCars, selectedCar } = storeToRefs(carsStore);
+const { successMessage, errorMessage } = storeToRefs(notificationsStore);
 
 const isLoading = ref(true);
-const error = ref("");
 const isOrdered = ref(false);
 const selectedImage = ref(null);
 const anotherCars = ref([]);
@@ -132,6 +134,7 @@ const carImages = computed(() => [...selectedCar.value.imgs, ...selectedCar.valu
 onMounted(async () => {
   try {
     await carsStore.getCar(route.params.id);
+    await carsStore.getFavouritedCars();
     if (isAuth.value) {
       const response = await api.checkCar(route.params.id);
       isOrdered.value = response.success;
@@ -140,8 +143,8 @@ onMounted(async () => {
     getAnotherCars();
     selectedImage.value = selectedCar.value.imgs[0];
   } catch (e) {
-    error.value = e;
-    setTimeout(() => error.value = "", 1000);
+    errorMessage.value = e;
+    setTimeout(() => errorMessage.value = "", 2000);
   } finally {
     isLoading.value = false;
   }
@@ -175,18 +178,22 @@ function orderCar() {
 async function addToFavouritedCars() {
   try {
     await carsStore.addToFavouritedCars(selectedCar.value.id);
+    successMessage.value = "You have successfully added this car to your favourites";
+    setTimeout(() => successMessage.value = "", 2000);
   } catch (e) {
-    error.value = e;
-    setTimeout(() => error.value = "", 1000);
+    errorMessage.value = e;
+    setTimeout(() => errorMessage.value = "", 2000);
   }
 }
 
 async function removeFromFavouritedCars() {
   try {
     await carsStore.removeFromFavouritedCars(selectedCar.value.id);
+    successMessage.value = "You have successfully removed this car from your favourites";
+    setTimeout(() => successMessage.value = "", 2000);
   } catch (e) {
-    error.value = e;
-    setTimeout(() => error.value = "", 1000);
+    errorMessage.value = e;
+    setTimeout(() => errorMessage.value = "", 2000);
   }
 }
 </script>

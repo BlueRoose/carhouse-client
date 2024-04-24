@@ -80,6 +80,7 @@ import {
   maxLength,
   helpers,
 } from "@vuelidate/validators";
+import { useNotificationsStore } from "@/store/notifications.js";
 import api from "@/api";
 
 const dealerLocations = [
@@ -109,7 +110,10 @@ const dealerLocations = [
   },
 ];
 
-const error = ref("");
+const notificationsStore = useNotificationsStore();
+
+const { successMessage, errorMessage } = storeToRefs(notificationsStore);
+
 const formData = reactive({
   name: "",
   email: "",
@@ -159,6 +163,8 @@ async function submitForm(event) {
         text: formData.message,
       }
       const response = await api.addRequest(body);
+      successMessage.value = "You have successfully sent your request";
+      setTimeout(() => successMessage.value = "", 2000);
 
       Object.assign(formData, {
         name: "",
@@ -169,8 +175,8 @@ async function submitForm(event) {
       });
       v$.value.$reset()
     } catch (e) {
-      error.value = e;
-      setTimeout(() => error.value = "", 1000);
+      errorMessage.value = e;
+      setTimeout(() => errorMessage.value = "", 2000);
     }
   }
 }

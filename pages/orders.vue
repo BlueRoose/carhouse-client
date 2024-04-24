@@ -28,24 +28,26 @@
 
 <script setup>
 import { useBuyRequestsStore } from "@/store/buyRequests.js";
+import { useNotificationsStore } from "@/store/notifications.js";
 
 definePageMeta({
   middleware: "routes",
 });
 
 const buyRequestsStore = useBuyRequestsStore();
+const notificationsStore = useNotificationsStore();
 
 const { userBuyRequests } = storeToRefs(buyRequestsStore);
+const { successMessage, errorMessage } = storeToRefs(notificationsStore);
 
 const isLoading = ref(true);
-const error = ref("");
 
 onMounted(async () => {
   try {
     await getUserBuyRequests();
   } catch (e) {
-    error.value = e;
-    setTimeout(() => error.value = "", 1000);
+    errorMessage.value = e;
+    setTimeout(() => errorMessage.value = "", 2000);
   } finally {
     isLoading.value = false;
   }
@@ -56,8 +58,8 @@ async function getUserBuyRequests() {
     isLoading.value = true;
     await buyRequestsStore.getUserBuyRequests();
   } catch (e) {
-    error.value = e;
-    setTimeout(() => error.value = "", 1000);
+    errorMessage.value = e;
+    setTimeout(() => errorMessage.value = "", 2000);
   } finally {
     isLoading.value = false;
   }

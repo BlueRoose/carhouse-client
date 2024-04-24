@@ -83,6 +83,7 @@ import { useCarsStore } from "@/store/cars.js";
 import { useBrandsStore } from "@/store/brands.js";
 import { useTypesStore } from "@/store/types.js";
 import { useSearchStore } from "@/store/search.js";
+import { useNotificationsStore } from "@/store/notifications.js";
 
 const sortOptions = [
   {
@@ -110,16 +111,17 @@ const carsStore = useCarsStore();
 const brandsStore = useBrandsStore();
 const typesStore = useTypesStore();
 const searchStore = useSearchStore();
+const notificationsStore = useNotificationsStore();
 
 const { cars, totalCars, totalPages } = storeToRefs(carsStore);
 const { brands } = storeToRefs(brandsStore);
 const { types } = storeToRefs(typesStore);
 const { brandId, searchedTypes, typeId, searchedModels, model, searchedYears, year } = storeToRefs(searchStore);
+const { successMessage, errorMessage } = storeToRefs(notificationsStore);
 
 const page = ref(Number(route.query.page) || 1);
 const sortValue = ref(route.query.sort || null);
 const isLoading = ref(true);
-const error = ref("");
 
 const brandChanged = computed({
   get() {
@@ -267,8 +269,8 @@ onMounted(async () => {
     }
     await getCars();
   } catch (e) {
-    error.value = e;
-    setTimeout(() => error.value = "", 1000);
+    errorMessage.value = e;
+    setTimeout(() => errorMessage.value = "", 2000);
   } finally {
     isLoading.value = false;
   }
@@ -287,8 +289,8 @@ async function getCars() {
     isLoading.value = true;
     await carsStore.getCars(page.value, sortValue.value, brandId.value, typeId.value, model.value, year.value);
   } catch (e) {
-    error.value = e;
-    setTimeout(() => error.value = "", 1000);
+    errorMessage.value = e;
+    setTimeout(() => errorMessage.value = "", 2000);
   } finally {
     isLoading.value = false;
   }

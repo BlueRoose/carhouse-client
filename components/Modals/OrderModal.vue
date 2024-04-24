@@ -36,18 +36,18 @@ import {
 import { useAuthStore } from "@/store/auth.js";
 import { useModalsStore } from "@/store/modals.js";
 import { useCarsStore } from "@/store/cars.js";
+import { useNotificationsStore } from "@/store/notifications.js";
 import api from "@/api";
-
-const route = useRoute();
 
 const authStore = useAuthStore();
 const modalsStore = useModalsStore();
 const carsStore = useCarsStore();
+const notificationsStore = useNotificationsStore();
 
 const { user } = storeToRefs(authStore);
 const { selectedCar } = storeToRefs(carsStore);
+const { successMessage, errorMessage } = storeToRefs(notificationsStore);
 
-const error = ref("");
 const formData = reactive({
   phone: "",
 });
@@ -83,9 +83,11 @@ async function submitForm() {
       formData.phone = "";
       modalsStore.hideOrderModal();
       modalsStore.toggleIsModal();
+      successMessage.value = "You have successfully ordered car";
+      setTimeout(() => successMessage.value = "", 2000);
     } catch (e) {
-      error.value = e;
-      setTimeout(() => error.value = "", 1000);
+      errorMessage.value = e;
+      setTimeout(() => errorMessage.value = "", 2000);
     }
   }
 }
