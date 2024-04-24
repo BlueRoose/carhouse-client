@@ -30,11 +30,11 @@
           <div v-if="isUserClicked" ref="userBlock" class="header__user__modal">
             <p class="header__user__modal-data">{{ `${user.name} ${user.surname}` }}</p>
             <p class="header__user__modal-email">{{ user.email }}</p>
-            <div class="header__user__modal__row" @click="openPage('favourites')">
+            <div class="header__user__modal__row" @click="event => openPage('favourites', event)">
               <IconsHeartIcon />
               <p class="header__user__modal__row-title">Favourites</p>
             </div>
-            <div class="header__user__modal__row" @click="openPage('orders')">
+            <div class="header__user__modal__row" @click="event => openPage('orders', event)">
               <IconsCartIcon />
               <p class="header__user__modal__row-title">Orders</p>
             </div>
@@ -71,7 +71,8 @@ function openAuthModal() {
   modalsStore.toggleIsModal();
 }
 
-function openPage(page) {
+function openPage(page, event) {
+  event.stopPropagation();
   router.push(`/${page}`);
   isUserClicked.value = false;
 }
