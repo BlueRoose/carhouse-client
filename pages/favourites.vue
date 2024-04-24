@@ -8,7 +8,7 @@
     <div class="collections__content container">
       <div v-if="!isLoading" class="collections__content__info">
         <p class="collections__content__info-showed">
-          {{ favouritedCars.length }} favourited cars
+          Favourited cars: {{ favouritedCars.length }}
         </p>
       </div>
       <Loader v-if="isLoading" />

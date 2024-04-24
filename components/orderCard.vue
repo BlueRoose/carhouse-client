@@ -8,12 +8,18 @@
     <div class="order-card__info">
       <p class="order-card__info-name">{{ carName }}</p>
       <p class="order-card__info-price">Price: ${{ userBuyRequest.car.price }}</p>
-      <p class="order-card__info-status">Order's status: {{ userBuyRequest.status }}</p>
+      <p class="order-card__info-status">Order's status: <span :class="`${userBuyRequest.status.toLowerCase()}`">{{ userBuyRequest.status }}</span></p>
       <div class="order-card__info__controls">
         <NuxtLink :to="{ name: 'car-id', params: { id: userBuyRequest.car.id } }">
           <Button class="order-card__info__controls-cancel">Visit car page</Button>
         </NuxtLink>
-        <Button class="order-card__info__controls-cancel" @click="cancelRequest">Cancel order</Button>
+        <Button
+          v-if="canBeCancelled"
+          class="order-card__info__controls-cancel"
+          @click="cancelRequest"
+        >
+          Cancel order
+        </Button>
       </div>
     </div>
     <p class="order-card-date">Ordered {{ orderDate }}</p>
@@ -40,6 +46,8 @@ const error = ref("");
 const carName = computed(() => `${props.userBuyRequest.id}. ${props.userBuyRequest.car.brand} ${props.userBuyRequest.car.name}`);
 
 const orderDate = computed(() => props.userBuyRequest.createdAt.split("T")[0].split("-").reverse().join("."));
+
+const canBeCancelled = computed(() => props.userBuyRequest.status === "PENDING");
 
 async function cancelRequest() {
   try {
@@ -86,6 +94,25 @@ async function cancelRequest() {
     &-status {
       font-size: 24px;
       font-weight: 500;
+
+      span {
+
+        &.pending {
+          border-bottom: 2px solid rgb(151, 150, 150);
+        }
+
+        &.canceled {
+          border-bottom: 2px solid red;
+        }
+
+        &.completed {
+          border-bottom: 2px solid greenyellow;
+        }
+
+        &.in-progress {
+          border-bottom: 2px solid orange;
+        }
+      }
     }
 
     &__controls {

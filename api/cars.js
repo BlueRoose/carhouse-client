@@ -41,6 +41,22 @@ export default {
     }
   },
 
+  async checkCar(carId) {
+    try {
+      const { data } = await axios.get(`http://localhost:5000/api/car/check-car?carId=${carId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+
+      return data;
+    } catch (error) {
+      throw error.response.data.errors[0];
+    }
+  },
+
   async getFavouritedCars() {
     try {
       const { data } = await axios.get(`http://localhost:5000/api/car/get-favourites`, {

@@ -32,7 +32,8 @@
           <p class="car__content__info__order-description">{{ selectedCar.description }}</p>
           <p class="car__content__info__order-price">$ {{ selectedCar.price }}</p>
           <div class="car__content__info__order__controls">
-            <Button @click="orderCar">Order</Button>
+            <Button v-if="isAuth" @click="orderCar" :disabled="isOrdered">{{ buttonLabel }}</Button>
+            <Button v-else @click="orderCar">Order</Button>
             <img
               v-if="isAuth && !isFavourited"
               class="icon"
@@ -103,6 +104,7 @@ import "swiper/swiper-bundle.css";
 import { useAuthStore } from "@/store/auth.js";
 import { useCarsStore } from "@/store/cars.js";
 import { useModalsStore } from "@/store/modals.js";
+import api from "@/api";
 
 const route = useRoute();
 
@@ -115,6 +117,7 @@ const { cars, favouritedCars, selectedCar } = storeToRefs(carsStore);
 
 const isLoading = ref(true);
 const error = ref("");
+const isOrdered = ref(false);
 const selectedImage = ref(null);
 const anotherCars = ref([]);
 
@@ -122,11 +125,17 @@ const carName = computed(() => `${selectedCar.value.brand}  ${selectedCar.value.
 
 const isFavourited = computed(() => favouritedCars.value.some(car => car.id === selectedCar.value.id));
 
+const buttonLabel = computed(() => isOrdered.value ? "Ordered" : "Order");
+
 const carImages = computed(() => [...selectedCar.value.imgs, ...selectedCar.value.imgs]);
 
 onMounted(async () => {
   try {
     await carsStore.getCar(route.params.id);
+    if (isAuth.value) {
+      const response = await api.checkCar(route.params.id);
+      isOrdered.value = response.success;
+    }
     await carsStore.getCars();
     getAnotherCars();
     selectedImage.value = selectedCar.value.imgs[0];
