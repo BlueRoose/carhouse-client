@@ -12,13 +12,16 @@
         </p>
       </div>
       <Loader v-if="isLoading" />
-      <div v-else class="collections__content__cards">
-        <CollectionCard
-          v-for="car, index in favouritedCars"
-          :key="index"
-          :car="car"
-        />
-      </div>
+      <template v-else>
+        <div v-if="favouritedCars.length" class="collections__content__cards">
+          <CollectionCard
+            v-for="car, index in favouritedCars"
+            :key="index"
+            :car="car"
+          />
+        </div>
+        <h1 class="collections__content-no-cars" v-else>You don't have any favourited cars</h1>
+      </template>
     </div>
   </div>
 </template>
@@ -85,6 +88,11 @@ async function getFavouritedCars() {
       grid-template-columns: repeat(3, 1fr);
       grid-column-gap: 54px;
       grid-row-gap: 94px;
+    }
+
+    &-no-cars {
+      text-align: center;
+      margin: 200px 0 100px;
     }
   }
 }

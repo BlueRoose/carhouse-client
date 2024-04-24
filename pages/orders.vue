@@ -12,13 +12,16 @@
         </p>
       </div>
       <Loader v-if="isLoading" />
-      <div v-else class="orders__content__cards">
-        <OrderCard
-          v-for="userBuyRequest, index in userBuyRequests"
-          :key="index"
-          :userBuyRequest="userBuyRequest"
-        />
-      </div>
+      <template v-else>
+        <div v-if="userBuyRequests.length" class="orders__content__cards">
+          <OrderCard
+            v-for="userBuyRequest, index in userBuyRequests"
+            :key="index"
+            :userBuyRequest="userBuyRequest"
+          />
+        </div>
+        <h1 v-else class="orders__content-no-orders">You don't have any orders, but it can be fixed!</h1>
+      </template>
     </div>
   </div>
 </template>
@@ -84,6 +87,11 @@ async function getUserBuyRequests() {
       display: flex;
       flex-direction: column;
       gap: 20px;
+    }
+
+    &-no-orders {
+      text-align: center;
+      margin: 200px 0 100px;
     }
   }
 }

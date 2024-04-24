@@ -72,7 +72,7 @@
           <p>{{ selectedCar.rating }}</p>
         </div>
       </div>
-      <div class="car__content__another">
+      <div v-if="anotherCars.length" class="car__content__another">
         <p class="car__content__another-title">You may also like:</p>
         <div class="car__content__another__cards">
           <div
@@ -141,8 +141,9 @@ onMounted(async () => {
 function getAnotherCars() {
   const filteredCars = cars.value.filter(car => car.id !== selectedCar.value.id);
   const result = [];
+  const count = filteredCars.length > 4 ? 4 : filteredCars.length;
 
-  while (result.length < 4) {
+  while (result.length < count) {
     const randomIndex = Math.floor(Math.random() * (filteredCars.length - 1 - 0 + 1)) + 0;
     const randomCar = filteredCars[randomIndex];
     if (!result.includes(randomCar)) {

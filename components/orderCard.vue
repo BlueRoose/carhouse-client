@@ -8,7 +8,7 @@
     <div class="order-card__info">
       <p class="order-card__info-name">{{ carName }}</p>
       <p class="order-card__info-price">Price: ${{ userBuyRequest.car.price }}</p>
-      <p class="order-card__info-status">Order's status: WAITING</p>
+      <p class="order-card__info-status">Order's status: {{ userBuyRequest.status }}</p>
       <div class="order-card__info__controls">
         <NuxtLink :to="{ name: 'car-id', params: { id: userBuyRequest.car.id } }">
           <Button class="order-card__info__controls-cancel">Visit car page</Button>

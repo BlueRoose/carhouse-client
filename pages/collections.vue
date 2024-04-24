@@ -12,7 +12,7 @@
             v-model="brandChanged"
             label="Brand"
             :options="brands"
-            :disabled="!brands.length"
+            :disabled="!brands.length || !cars.length"
           />
           <CustomSelect
             v-model="typeChanged"
@@ -41,7 +41,7 @@
           Find
         </Button>
       </div>
-      <div v-if="!isLoading" class="collections__content__info">
+      <div v-if="!isLoading && cars.length" class="collections__content__info">
         <p class="collections__content__info-showed">
           Showing {{ cars.length }} from {{ totalCars }} results
         </p>
@@ -53,13 +53,16 @@
         />
       </div>
       <Loader v-if="isLoading" />
-      <div v-else class="collections__content__cards">
-        <CollectionCard
-          v-for="car, index in cars"
-          :key="index"
-          :car="car"
-        />
-      </div>
+      <template v-else>
+        <div v-if="cars.length" class="collections__content__cards">
+          <CollectionCard
+            v-for="car, index in cars"
+            :key="index"
+            :car="car"
+          />
+        </div>
+        <h1 v-else class="collections__content-no-cars">We are sorry, but we don't have any cars at the moment</h1>
+      </template>
       <div v-if="totalPages > 1" class="collections__content__pagination">
         <Button
           v-for="_, index in totalPages"
@@ -348,6 +351,11 @@ async function getCars() {
       grid-column-gap: 54px;
       grid-row-gap: 94px;
       margin-bottom: 90px;
+    }
+
+    &-no-cars {
+      text-align: center;
+      margin: 200px 0 100px;
     }
 
     &__pagination {
