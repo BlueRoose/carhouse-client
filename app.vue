@@ -15,6 +15,7 @@
 
 <script setup>
 import { useAuthStore } from "@/store/auth.js";
+import { useModalsStore } from "@/store/modals.js";
 
 useHead({
   link: [
@@ -24,7 +25,11 @@ useHead({
   ]
 });
 
+const router = useRouter();
+const route = useRoute();
+
 const authStore = useAuthStore();
+const modalsStore = useModalsStore();
 
 const isLoading = ref(false);
 setTimeout(() => isLoading.value = false, 4000);
@@ -36,6 +41,12 @@ onMounted(async () => {
     if (userData) {
       authStore.setIsAuth(userData);
     }
+  }
+
+  if (route.query.isAborted) {
+    router.push({ query: {} });
+    modalsStore.toggleIsModal();
+    modalsStore.showAuthModal();
   }
 });
 </script>

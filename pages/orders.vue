@@ -29,6 +29,10 @@
 <script setup>
 import { useBuyRequestsStore } from "@/store/buyRequests.js";
 
+definePageMeta({
+  middleware: "routes",
+});
+
 const buyRequestsStore = useBuyRequestsStore();
 
 const { userBuyRequests } = storeToRefs(buyRequestsStore);

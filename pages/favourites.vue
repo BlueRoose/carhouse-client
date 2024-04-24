@@ -29,6 +29,10 @@
 <script setup>
 import { useCarsStore } from "@/store/cars.js";
 
+definePageMeta({
+  middleware: "routes",
+});
+
 const carsStore = useCarsStore();
 
 const { favouritedCars } = storeToRefs(carsStore);
