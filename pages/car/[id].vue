@@ -134,8 +134,8 @@ const carImages = computed(() => [...selectedCar.value.imgs, ...selectedCar.valu
 onMounted(async () => {
   try {
     await carsStore.getCar(route.params.id);
-    await carsStore.getFavouritedCars();
     if (isAuth.value) {
+      await carsStore.getFavouritedCars();
       const response = await api.checkCar(route.params.id);
       isOrdered.value = response.success;
     }
