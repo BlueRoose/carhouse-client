@@ -20,7 +20,7 @@
             :userBuyRequest="userBuyRequest"
           />
         </div>
-        <h1 v-else class="orders__content-no-orders">You don't have any orders, but it can be fixed!</h1>
+        <h1 v-else class="orders__content-no-orders">You don't have any orders, but it you can fix it!</h1>
       </template>
     </div>
   </div>
