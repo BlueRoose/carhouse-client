@@ -20,7 +20,13 @@
               class="brands-types__side__main__operations__operation-input"
               placeholder="Enter brand name"
             />
-            <Button :disabled="!brandsData.brandForAdding" @click="createBrand">Create</Button>
+            <Button
+              :disabled="!brandsData.brandForAdding"
+              :isLoading="isLoading.brand.add"
+              @click="createBrand"
+            >
+              Create
+            </Button>
           </div>
           <div class="brands-types__side__main__operations__operation">
             <p class="brands-types__side__main__operations__operation-name">Delete existing brand</p>
@@ -29,7 +35,13 @@
               class="select"
               :options="brands"
             />
-            <Button :disabled="!brandsData.brandForDeleting" @click="deleteBrand">Delete</Button>
+            <Button
+              :disabled="!brandsData.brandForDeleting"
+              :isLoading="isLoading.brand.delete"
+              @click="deleteBrand"
+            >
+              Delete
+            </Button>
           </div>
           <div class="brands-types__side__main__operations__operation update">
             <p class="brands-types__side__main__operations__operation-name">Update existing brand</p>
@@ -41,7 +53,13 @@
                 placeholder="Enter new brand's name"
               />
             </div>
-            <Button :disabled="!brandsData.brandForUpdating.oldBrand" @click="updateBrand">Update</Button>
+            <Button
+              :disabled="!brandsData.brandForUpdating.oldBrand"
+              :isLoading="isLoading.brand.update"
+              @click="updateBrand"
+            >
+              Update
+            </Button>
           </div>
         </div>
       </div>
@@ -66,7 +84,13 @@
               class="brands-types__side__main__operations__operation-input"
               placeholder="Enter type name"
             />
-            <Button :disabled="!typesData.typeForAdding" @click="createType">Create</Button>
+            <Button
+              :disabled="!typesData.typeForAdding"
+              :isLoading="isLoading.type.add"
+              @click="createType"
+            >
+              Create
+            </Button>
           </div>
           <div class="brands-types__side__main__operations__operation">
             <p class="brands-types__side__main__operations__operation-name">Delete existing type</p>
@@ -75,7 +99,13 @@
               class="select"
               :options="types"
             />
-            <Button :disabled="!typesData.typeForDeleting" @click="deleteType">Delete</Button>
+            <Button
+              :disabled="!typesData.typeForDeleting"
+              :isLoading="isLoading.type.delete"
+              @click="deleteType"
+            >
+              Delete
+            </Button>
           </div>
           <div class="brands-types__side__main__operations__operation update">
             <p class="brands-types__side__main__operations__operation-name">Update existing type</p>
@@ -87,7 +117,13 @@
                 placeholder="Enter new type's name"
               />
             </div>
-            <Button :disabled="!typesData.typeForUpdating.oldType" @click="updateType">Update</Button>
+            <Button
+              :disabled="!typesData.typeForUpdating.oldType"
+              :isLoading="isLoading.type.update"
+              @click="updateType"
+            >
+              Update
+            </Button>
           </div>
         </div>
       </div>
@@ -109,7 +145,18 @@ const { brands } = storeToRefs(brandsStore);
 const { types } = storeToRefs(typesStore);
 const { successMessage, errorMessage } = storeToRefs(notificationsStore);
 
-const isLoading = ref(true);
+const isLoading = reactive({
+  brand: {
+    add: false,
+    delete: false,
+    update: false,
+  },
+  type: {
+    add: false,
+    delete: false,
+    update: false,
+  },
+});
 const brandsData = reactive({
   brandForAdding: "",
   brandForDeleting: "",
@@ -140,6 +187,7 @@ onMounted(async () => {
 });
 
 async function createBrand() {
+  isLoading.brand.add = true;
   try {
     const result = await api.createBrand(brandsData.brandForAdding);
     brands.value.push(result.brand);
@@ -147,10 +195,13 @@ async function createBrand() {
   } catch (e) {
     errorMessage.value = e;
     setTimeout(() => errorMessage.value = "", 2000);
+  } finally {
+    isLoading.brand.add = false;
   }
 }
 
 async function deleteBrand() {
+  isLoading.brand.delete = true;
   try {
     const selectedBrandId = brands.value.find(brand => brand.name === brandsData.brandForDeleting).id;
 
@@ -160,10 +211,13 @@ async function deleteBrand() {
   } catch (e) {
     errorMessage.value = e;
     setTimeout(() => errorMessage.value = "", 2000);
+  } finally {
+    isLoading.brand.delete = false;
   }
 }
 
 async function updateBrand() {
+  isLoading.brand.update = true;
   try {
     const selectedBrandId = brands.value.find(brand => brand.name === brandsData.brandForUpdating.oldBrand).id;
 
@@ -176,10 +230,13 @@ async function updateBrand() {
   } catch (e) {
     errorMessage.value = e;
     setTimeout(() => errorMessage.value = "", 2000);
+  } finally {
+    isLoading.brand.update = false;
   }
 }
 
 async function createType() {
+  isLoading.type.add = true;
   try {
     const result = await api.createType(typesData.typeForAdding);
     types.value.push(result.type);
@@ -187,10 +244,13 @@ async function createType() {
   } catch (e) {
     errorMessage.value = e;
     setTimeout(() => errorMessage.value = "", 2000);
+  } finally {
+    isLoading.type.add = false;
   }
 }
 
 async function deleteType() {
+  isLoading.type.delete = true;
   try {
     const selectedTypeId = types.value.find(type => type.name === typesData.typeForDeleting).id;
 
@@ -200,10 +260,13 @@ async function deleteType() {
   } catch (e) {
     errorMessage.value = e;
     setTimeout(() => errorMessage.value = "", 2000);
+  } finally {
+    isLoading.type.delete = false;
   }
 }
 
 async function updateType() {
+  isLoading.type.update = true;
   try {
     const selectedTypeId = types.value.find(type => type.name === typesData.typeForUpdating.oldType).id;
 
@@ -216,6 +279,8 @@ async function updateType() {
   } catch (e) {
     errorMessage.value = e;
     setTimeout(() => errorMessage.value = "", 2000);
+  } finally {
+    isLoading.type.update = false;
   }
 }
 

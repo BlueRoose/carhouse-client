@@ -32,7 +32,13 @@
           <p class="car__content__info__order-description">{{ selectedCar.description }}</p>
           <p class="car__content__info__order-price">$ {{ selectedCar.price }}</p>
           <div class="car__content__info__order__controls">
-            <Button v-if="isAuth" @click="orderCar" :disabled="isOrdered">{{ buttonLabel }}</Button>
+            <Button
+              v-if="isAuth"
+              :disabled="isOrdered"
+              @click="orderCar"
+            >
+              {{ buttonLabel }}
+            </Button>
             <Button v-else @click="orderCar">Order</Button>
             <img
               v-if="isAuth && !isFavourited"

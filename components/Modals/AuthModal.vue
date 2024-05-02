@@ -16,7 +16,13 @@
           {{ v$.email.$errors[0]?.$message }}
         </span>
       </div>
-      <Button class="auth-modal__form-button" @click="submitForm('pre-signin')">Continue</Button>
+      <Button
+        class="auth-modal__form-button"
+        :isLoading="isLoading"
+        @click="submitForm('pre-signin')"
+      >
+        Continue
+      </Button>
       <p class="auth-modal__message">Don't have an account? 
         <span class="auth-modal__message-span" @click="toggleIsModalType">Sign up</span>
       </p>
@@ -44,7 +50,13 @@
           {{ v$.email.$errors[0]?.$message }}
         </span>
       </div>
-      <Button class="auth-modal__form-button" @click="submitForm('pre-signup')">Continue</Button>
+      <Button
+        class="auth-modal__form-button"
+        :isLoading="isLoading"
+        @click="submitForm('pre-signup')"
+      >
+        Continue
+      </Button>
       <p class="auth-modal__message">Already have an account? 
         <span class="auth-modal__message-span" @click="toggleIsModalType">Sign in</span>
       </p>
@@ -86,6 +98,7 @@ const notificationsStore = useNotificationsStore();
 
 const { successMessage, errorMessage } = storeToRefs(notificationsStore);
 
+const isLoading = ref(false);
 const input = ref(null);
 const isSignIn = ref(true)
 const isConfirmationStep = ref(false);
@@ -167,6 +180,7 @@ function handleError(e) {
 }
 
 async function submitForm(action) {
+  isLoading.value = true;
   if (await v$.value.$validate()) {
     switch (action) {
       case "pre-signup":
@@ -211,6 +225,7 @@ async function submitForm(action) {
         break;
     }
   }
+  isLoading.value = false;
 }
 </script>
 

@@ -21,7 +21,13 @@
         </span>
       </div>
     </div>
-    <Button class="order-modal-button" @click="submitForm">Order</Button>
+    <Button
+      class="order-modal-button"
+      :isLoading="isLoading"
+      @click="submitForm"
+    >
+      Order
+    </Button>
   </div>
 </template>
 
@@ -48,6 +54,7 @@ const { user } = storeToRefs(authStore);
 const { selectedCar } = storeToRefs(carsStore);
 const { successMessage, errorMessage } = storeToRefs(notificationsStore);
 
+const isLoading = ref(false);
 const formData = reactive({
   phone: "",
 });
@@ -77,6 +84,7 @@ function closeModal() {
 }
 
 async function submitForm() {
+  isLoading.value = true;
   if (await v$.value.$validate()) {
     try {
       await api.createBuyRequest(selectedCar.value.id, formData.phone);
@@ -90,6 +98,7 @@ async function submitForm() {
       setTimeout(() => errorMessage.value = "", 2000);
     }
   }
+  isLoading.value = false;
 }
 </script>
 

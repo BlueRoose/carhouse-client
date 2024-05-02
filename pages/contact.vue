@@ -43,7 +43,13 @@
             {{ v$.checkbox.$errors[0]?.$message }}
           </span>
         </div>
-        <Button class="contact__dark__form-button" @click="submitForm">Send message</Button>
+        <Button
+          class="contact__dark__form-button"
+          :isLoading="isLoading"
+          @click="submitForm"
+        >
+          Send message
+        </Button>
       </form>
       <img
         class="contact__dark-image"
@@ -114,6 +120,7 @@ const notificationsStore = useNotificationsStore();
 
 const { successMessage, errorMessage } = storeToRefs(notificationsStore);
 
+const isLoading = ref(false);
 const formData = reactive({
   name: "",
   email: "",
@@ -154,6 +161,7 @@ const v$ = useVuelidate(rules, formData);
 
 async function submitForm(event) {
   event.preventDefault();
+  isLoading.value = true;
   if (await v$.value.$validate()) {
     try {
       const body = {
@@ -179,6 +187,7 @@ async function submitForm(event) {
       setTimeout(() => errorMessage.value = "", 2000);
     }
   }
+  isLoading.value = false;
 }
 </script>
 

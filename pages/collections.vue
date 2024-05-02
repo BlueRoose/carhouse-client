@@ -36,6 +36,7 @@
         <Button
           class="collections__content__search-button"
           :disabled="!brandId"
+          :isLoading="isLoading"
           @click="getCars"
         >
           Find

@@ -16,6 +16,7 @@
         <Button
           v-if="canBeCancelled"
           class="order-card__info__controls-cancel"
+          :isLoading="isLoading"
           @click="cancelRequest"
         >
           Cancel order
@@ -45,6 +46,8 @@ const props = defineProps({
   },
 });
 
+const isLoading = ref(false);
+
 const carName = computed(() => `${props.userBuyRequest.id}. ${props.userBuyRequest.car.brand} ${props.userBuyRequest.car.name}`);
 
 const orderDate = computed(() => props.userBuyRequest.createdAt.split("T")[0].split("-").reverse().join("."));
@@ -52,6 +55,7 @@ const orderDate = computed(() => props.userBuyRequest.createdAt.split("T")[0].sp
 const canBeCancelled = computed(() => props.userBuyRequest.status === "PENDING");
 
 async function cancelRequest() {
+  isLoading.value = true;
   try {
     await api.cancelUserBuyRequest(props.userBuyRequest.id);
     await buyRequestsStore.getUserBuyRequests();
@@ -60,6 +64,8 @@ async function cancelRequest() {
   } catch (e) {
     errorMessage.value = e;
     setTimeout(() => errorMessage.value = "", 2000);
+  } finally {
+    isLoading.value = false;
   }
 }
 </script>
