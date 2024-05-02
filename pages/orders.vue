@@ -30,10 +30,6 @@
 import { useBuyRequestsStore } from "@/store/buyRequests.js";
 import { useNotificationsStore } from "@/store/notifications.js";
 
-definePageMeta({
-  middleware: "routes",
-});
-
 const buyRequestsStore = useBuyRequestsStore();
 const notificationsStore = useNotificationsStore();
 
@@ -64,6 +60,10 @@ async function getUserBuyRequests() {
     isLoading.value = false;
   }
 }
+
+definePageMeta({
+  middleware: "routes",
+});
 </script>
 
 <style lang="scss" scoped>

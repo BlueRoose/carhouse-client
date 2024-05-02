@@ -1,6 +1,6 @@
 <template>
   <div class="select">
-    <p class="select-label">{{ label }}</p>
+    <p v-if="label" class="select-label">{{ label }}</p>
     <el-select
       v-model="selectValue"
       placeholder="Select"

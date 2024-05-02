@@ -1,31 +1,23 @@
 <template>
+  <NuxtLayout class="layouts">
+    <NuxtPage />
+  </NuxtLayout>
+  <Modals />
   <Transition name="fade">
-    <div v-if="isLoading" class="nuxt-loader"></div>
-    <div v-else>
-      <ClientOnly>
-        <Header />
-      </ClientOnly>
-      <NuxtPage />
-      <QuestionBlock />
-      <Footer />
-      <Modals />
-      <Transition name="fade">
-        <el-alert
-          v-if="successMessage"
-          :title="successMessage"
-          type="success"
-          show-icon
-        />
-      </Transition>
-      <Transition name="fade">
-        <el-alert
-          v-if="errorMessage"
-          :title="errorMessage"
-          type="error"
-          show-icon
-        />
-      </Transition>
-    </div>
+    <el-alert
+      v-if="successMessage"
+      :title="successMessage"
+      type="success"
+      show-icon
+    />
+  </Transition>
+  <Transition name="fade">
+    <el-alert
+      v-if="errorMessage"
+      :title="errorMessage"
+      type="error"
+      show-icon
+    />
   </Transition>
 </template>
 
@@ -50,9 +42,6 @@ const modalsStore = useModalsStore();
 const notificationsStore = useNotificationsStore();
 
 const { successMessage, errorMessage } = storeToRefs(notificationsStore);
-
-const isLoading = ref(false);
-setTimeout(() => isLoading.value = false, 4000);
 
 onMounted(async () => {
   if (process.client) {

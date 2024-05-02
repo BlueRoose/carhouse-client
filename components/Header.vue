@@ -38,6 +38,14 @@
               <IconsCartIcon />
               <p class="header__user__modal__row-title">Orders</p>
             </div>
+            <div
+              v-if="user.role === 'ADMIN'"
+              class="header__user__modal__row"
+              @click="event => openPage('admin/brands-types', event)"
+            >
+              <IconsLockIcon />
+              <p class="header__user__modal__row-title">Admin panel</p>
+            </div>
             <div class="header__user__modal__row" @click="logout">
               <IconsLogoutIcon />
               <p class="header__user__modal__row-title">Logout</p>

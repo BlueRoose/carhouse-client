@@ -30,10 +30,6 @@
 import { useCarsStore } from "@/store/cars.js";
 import { useNotificationsStore } from "@/store/notifications.js";
 
-definePageMeta({
-  middleware: "routes",
-});
-
 const carsStore = useCarsStore();
 const notificationsStore = useNotificationsStore();
 
@@ -57,6 +53,10 @@ async function getFavouritedCars() {
     isLoading.value = false;
   }
 }
+
+definePageMeta({
+  middleware: "routes",
+});
 </script>
 
 <style lang="scss" scoped>
