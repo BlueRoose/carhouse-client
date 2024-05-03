@@ -1,7 +1,18 @@
 import api from "@/api";
 
 export const useBuyRequestsStore = defineStore("buyRequestsStore", () => {
+  const allBuyRequests = ref([]);
   const userBuyRequests = ref([]);
+
+  async function getAllBuyRequests() {
+    try {
+      const response = await api.getAllBuyRequests();
+
+      allBuyRequests.value = [...response.buyRequests, ...response.buyRequests, ...response.buyRequests, ...response.buyRequests, ...response.buyRequests, ...response.buyRequests,];
+    } catch (error) {
+      throw error;
+    }
+  }
 
   async function getUserBuyRequests() {
     try {
@@ -14,7 +25,9 @@ export const useBuyRequestsStore = defineStore("buyRequestsStore", () => {
   }
 
   return {
+    allBuyRequests,
     userBuyRequests,
+    getAllBuyRequests,
     getUserBuyRequests,
   };
 });

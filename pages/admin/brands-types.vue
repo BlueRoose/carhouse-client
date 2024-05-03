@@ -362,11 +362,11 @@ definePageMeta({
 
           &-input {
             width: 100%;
-            height: 40px;
+            height: 36px;
             padding: 10px 15px;
             border: 2px solid $color-yellow;
             outline: none;
-            border-radius: 25px;
+            border-radius: 5px;
             margin-bottom: 30px;
             box-sizing: border-box;
           }
