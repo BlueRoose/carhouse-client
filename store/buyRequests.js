@@ -8,7 +8,7 @@ export const useBuyRequestsStore = defineStore("buyRequestsStore", () => {
     try {
       const response = await api.getAllBuyRequests();
 
-      allBuyRequests.value = [...response.buyRequests, ...response.buyRequests, ...response.buyRequests, ...response.buyRequests, ...response.buyRequests, ...response.buyRequests,];
+      allBuyRequests.value = response.buyRequests;
     } catch (error) {
       throw error;
     }

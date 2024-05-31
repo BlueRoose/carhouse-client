@@ -59,7 +59,7 @@ defineProps({
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-column-gap: 15px;
-      grid-row-gap: 35px;
+      grid-row-gap: 15px;
     }
   }
 
