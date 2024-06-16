@@ -20,7 +20,7 @@
             :userBuyRequest="userBuyRequest"
           />
         </div>
-        <h1 v-else class="text-4xl font-bold text-center mt-48 mb-24">You don't have any orders, but it you can fix it!</h1>
+        <h1 v-else class="text-4xl font-bold text-center mt-48 mb-24">You don't have any orders, but you can fix it!</h1>
       </template>
     </div>
   </div>
