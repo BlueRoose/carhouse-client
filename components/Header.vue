@@ -125,7 +125,7 @@
             :key="index"
             class="text-main-gray text-xl transition-colors ease-linear hover:text-white"
             :to="link.url"
-            @click="isBurgerOpened = false"
+            @click="handleClickLink"
           >
             {{ link.label }}
           </NuxtLink>
@@ -192,6 +192,11 @@ function openPage(page, event) {
   event.stopPropagation();
   router.push(`/${page}`);
   isUserClicked.value = false;
+  isBurgerOpened.value = false;
+  document.body.style.overflow = "auto";
+}
+
+function handleClickLink() {
   isBurgerOpened.value = false;
   document.body.style.overflow = "auto";
 }
