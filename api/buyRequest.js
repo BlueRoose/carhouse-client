@@ -4,7 +4,7 @@ export default {
   async createBuyRequest(carId, phone) {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/buy-request/create-buy-request",
+        "https://carhouse-backend.onrender.com/api/buy-request/create-buy-request",
         {
           carId,
           phone,
@@ -25,7 +25,7 @@ export default {
   async getAllBuyRequests() {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/api/buy-request/get-buy-requests",
+        "https://carhouse-backend.onrender.com/api/buy-request/get-buy-requests",
         {
           headers: {
             Authorization: `Bearer ${useCookie("token").value}`,
@@ -42,7 +42,7 @@ export default {
   async updateBuyRequest(id, status) {
     try {
       const { data } = await axios.patch(
-        "http://localhost:5000/api/buy-request/update-buy-request",
+        `${process.env.BASE_URL}/api/buy-request/update-buy-request`,
         {
           id,
           status,
@@ -83,7 +83,7 @@ export default {
   async getUserBuyRequests() {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/api/buy-request/get-user-buy-requests",
+        `${process.env.BASE_URL}/api/buy-request/get-user-buy-requests`,
         {
           headers: {
             Authorization: `Bearer ${useCookie("token").value}`,
@@ -100,7 +100,7 @@ export default {
   async cancelUserBuyRequest(buyRequestId) {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/buy-request/cancel-user-buy-request",
+        `${process.env.BASE_URL}/api/buy-request/cancel-user-buy-request`,
         {
           buyRequestId,
         },

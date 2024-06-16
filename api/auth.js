@@ -4,7 +4,7 @@ export default {
   async preSignUp({ email }) {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/auth/pre-signup",
+        `${process.env.BASE_URL}/api/auth/pre-signup`,
         {
           email
         }
@@ -19,7 +19,7 @@ export default {
   async signUp({ name, surname, email, activationMessage }) {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/auth/signup",
+        `${process.env.BASE_URL}/api/auth/signup`,
         {
           name,
           surname,
@@ -37,7 +37,7 @@ export default {
   async preSignIn({ email }) {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/auth/pre-signin",
+        `${process.env.BASE_URL}/api/auth/pre-signin`,
         {
           email
         }
@@ -52,7 +52,7 @@ export default {
   async signIn({ email, activationMessage }) {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/auth/signin",
+        `${process.env.BASE_URL}/api/auth/signin`,
         {
           email,
           activationMessage: activationMessage.join("")

@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   async getTypes() {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/type/get-types");
+      const { data } = await axios.get(`${process.env.BASE_URL}/api/type/get-types`);
 
       return data;
     } catch (error) {
@@ -14,7 +14,7 @@ export default {
   async createType(name) {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/type/create-type",
+        `${process.env.BASE_URL}/api/type/create-type`,
         { name },
         {
           headers: {
@@ -32,7 +32,7 @@ export default {
   async deleteType(typeId) {
     try {
       const { data } = await axios.delete(
-        "http://localhost:5000/api/type/delete-type",
+        `${process.env.BASE_URL}/api/type/delete-type`,
         {
           data: {
             typeId,
@@ -52,7 +52,7 @@ export default {
   async updateType(typeId, name) {
     try {
       const { data } = await axios.patch(
-        "http://localhost:5000/api/type/update-type",
+        `${process.env.BASE_URL}/api/type/update-type`,
         {
           typeId,
           name,

@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   async addRequest(body) {
     try {
-      const { data } = await axios.post(`http://localhost:5000/api/request/create-request`, body);
+      const { data } = await axios.post(`${process.env.BASE_URL}/api/request/create-request`, body);
 
       return data;
     } catch (error) {
@@ -14,7 +14,7 @@ export default {
   async getAllRequests() {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/api/request/get-requests",
+        `${process.env.BASE_URL}/api/request/get-requests`,
         {
           headers: {
             Authorization: `Bearer ${useCookie("token").value}`,
@@ -31,7 +31,7 @@ export default {
   async sendAnswear(id, answear) {
     try {
       const { data } = await axios.patch(
-        "http://localhost:5000/api/request/send-answear",
+        `${process.env.BASE_URL}/api/request/send-answear`,
         {
           id,
           answear,
@@ -52,7 +52,7 @@ export default {
   async deleteRequest(id) {
     try {
       const { data } = await axios.delete(
-        "http://localhost:5000/api/request/delete-request",
+        `${process.env.BASE_URL}/api/request/delete-request`,
         {
           data: {
             id,

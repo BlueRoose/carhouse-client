@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   async getSearchTypes(brandId) {
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/search/get-types?brandId=${brandId}`);
+      const { data } = await axios.get(`${process.env.BASE_URL}/api/search/get-types?brandId=${brandId}`);
 
       return data;
     } catch (error) {
@@ -13,7 +13,7 @@ export default {
 
   async getModels(brandId, typeId) {
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/search/get-models?brandId=${brandId}&typeId=${typeId}`);
+      const { data } = await axios.get(`${process.env.BASE_URL}/api/search/get-models?brandId=${brandId}&typeId=${typeId}`);
 
       return data;
     } catch (error) {
@@ -23,7 +23,7 @@ export default {
 
   async getYears(brandId, typeId, model) {
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/search/get-years?brandId=${brandId}&typeId=${typeId}&model=${model}`);
+      const { data } = await axios.get(`${process.env.BASE_URL}/api/search/get-years?brandId=${brandId}&typeId=${typeId}&model=${model}`);
 
       return data;
     } catch (error) {

@@ -4,7 +4,7 @@ export default {
   async getBrands() {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/api/brand/get-brands"
+        `${process.env.BASE_URL}/api/brand/get-brands`
       );
 
       return data;
@@ -16,7 +16,7 @@ export default {
   async createBrand(name) {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/brand/create-brand",
+        `${process.env.BASE_URL}/api/brand/create-brand`,
         { name },
         {
           headers: {
@@ -34,7 +34,7 @@ export default {
   async deleteBrand(brandId) {
     try {
       const { data } = await axios.delete(
-        "http://localhost:5000/api/brand/delete-brand",
+        `${process.env.BASE_URL}/api/brand/delete-brand`,
         {
           data: {
             brandId,
@@ -54,7 +54,7 @@ export default {
   async updateBrand(brandId, name) {
     try {
       const { data } = await axios.patch(
-        "http://localhost:5000/api/brand/update-brand",
+        `${process.env.BASE_URL}/api/brand/update-brand`,
         {
           brandId,
           name,

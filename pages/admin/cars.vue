@@ -461,7 +461,7 @@ async function addCar() {
     });
 
     await axios.post(
-      "http://localhost:5000/api/car/create-car",
+      `${process.env.BASE_URL}/api/car/create-car`,
       formData,
       {
         headers: {
@@ -504,7 +504,7 @@ async function updateCar() {
     });
     formData.append("imgs", JSON.stringify(carImages.value));
     await axios.patch(
-      "http://localhost:5000/api/car/update-car",
+      `${process.env.BASE_URL}/api/car/update-car`,
       formData,
       {
         headers: {
@@ -525,7 +525,7 @@ async function deleteCar() {
   try {
     isLoading.delete = true;
     await axios.delete(
-      "http://localhost:5000/api/car/delete-car",
+      `${process.env.BASE_URL}/api/car/delete-car`,
       {
         data: {
           carId: selectedCar.value.id,

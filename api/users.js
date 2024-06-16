@@ -4,7 +4,7 @@ export default {
   async getUsers() {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/api/user/get-users",
+        `${process.env.BASE_URL}/api/user/get-users`,
         {
           headers: {
             Authorization: `Bearer ${useCookie("token").value}`,
@@ -21,7 +21,7 @@ export default {
   async changeRole(id, role) {
     try {
       const { data } = await axios.patch(
-        "http://localhost:5000/api/user/change-role",
+        `${process.env.BASE_URL}/api/user/change-role`,
         {
           id,
           role,
