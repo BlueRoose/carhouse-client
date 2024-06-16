@@ -1,7 +1,5 @@
 import axios from "axios";
 
-const config = useRuntimeConfig();
-
 export default {
   async createBuyRequest(carId, phone) {
     try {

@@ -1,7 +1,5 @@
 import axios from "axios";
 
-const config = useRuntimeConfig();
-
 export default {
   async getCars(brandId, typeId, model, year, page, pageSize, sort) {
     try {

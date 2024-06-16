@@ -358,8 +358,6 @@ const transmissions = [
   },
 ];
 
-const config = useRuntimeConfig();
-
 const route = useRoute();
 const router = useRouter();
 
