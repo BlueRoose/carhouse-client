@@ -358,6 +358,8 @@ const transmissions = [
   },
 ];
 
+const config = useRuntimeConfig();
+
 const route = useRoute();
 const router = useRouter();
 
@@ -461,7 +463,7 @@ async function addCar() {
     });
 
     await axios.post(
-      `${process.env.BASE_URL}/api/car/create-car`,
+      `https://carhouse-backend.onrender.com/api/car/create-car`,
       formData,
       {
         headers: {
@@ -504,7 +506,7 @@ async function updateCar() {
     });
     formData.append("imgs", JSON.stringify(carImages.value));
     await axios.patch(
-      `${process.env.BASE_URL}/api/car/update-car`,
+      `https://carhouse-backend.onrender.com/api/car/update-car`,
       formData,
       {
         headers: {
@@ -525,7 +527,7 @@ async function deleteCar() {
   try {
     isLoading.delete = true;
     await axios.delete(
-      `${process.env.BASE_URL}/api/car/delete-car`,
+      `https://carhouse-backend.onrender.com/api/car/delete-car`,
       {
         data: {
           carId: selectedCar.value.id,

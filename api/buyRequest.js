@@ -1,10 +1,12 @@
 import axios from "axios";
 
+const config = useRuntimeConfig();
+
 export default {
   async createBuyRequest(carId, phone) {
     try {
       const { data } = await axios.post(
-        "https://carhouse-backend.onrender.com/api/buy-request/create-buy-request",
+        `https://carhouse-backend.onrender.com/api/buy-request/create-buy-request`,
         {
           carId,
           phone,
@@ -25,7 +27,7 @@ export default {
   async getAllBuyRequests() {
     try {
       const { data } = await axios.get(
-        "https://carhouse-backend.onrender.com/api/buy-request/get-buy-requests",
+        `https://carhouse-backend.onrender.com/api/buy-request/get-buy-requests`,
         {
           headers: {
             Authorization: `Bearer ${useCookie("token").value}`,
@@ -42,7 +44,7 @@ export default {
   async updateBuyRequest(id, status) {
     try {
       const { data } = await axios.patch(
-        `${process.env.BASE_URL}/api/buy-request/update-buy-request`,
+        `https://carhouse-backend.onrender.com/api/buy-request/update-buy-request`,
         {
           id,
           status,
@@ -63,7 +65,7 @@ export default {
   async deleteBuyRequest(id) {
     try {
       const { data } = await axios.delete(
-        "http://localhost:5000/api/buy-request/delete-buy-request",
+        `https://carhouse-backend.onrender.com/api/buy-request/delete-buy-request`,
         {
           data: {
             id,
@@ -83,7 +85,7 @@ export default {
   async getUserBuyRequests() {
     try {
       const { data } = await axios.get(
-        `${process.env.BASE_URL}/api/buy-request/get-user-buy-requests`,
+        `https://carhouse-backend.onrender.com/api/buy-request/get-user-buy-requests`,
         {
           headers: {
             Authorization: `Bearer ${useCookie("token").value}`,
@@ -100,7 +102,7 @@ export default {
   async cancelUserBuyRequest(buyRequestId) {
     try {
       const { data } = await axios.post(
-        `${process.env.BASE_URL}/api/buy-request/cancel-user-buy-request`,
+        `https://carhouse-backend.onrender.com/api/buy-request/cancel-user-buy-request`,
         {
           buyRequestId,
         },

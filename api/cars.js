@@ -1,9 +1,11 @@
 import axios from "axios";
 
+const config = useRuntimeConfig();
+
 export default {
   async getCars(brandId, typeId, model, year, page, pageSize, sort) {
     try {
-      let url = `${process.env.BASE_URL}/api/car/get-cars?pageSize=${pageSize}`;
+      let url = `https://carhouse-backend.onrender.com/api/car/get-cars?pageSize=${pageSize}`;
       if (page) {
         url += `&page=${page}`;
       }
@@ -33,7 +35,7 @@ export default {
 
   async getCar(carId) {
     try {
-      const { data } = await axios.get(`${process.env.BASE_URL}/api/car/get-car?id=${carId}`);
+      const { data } = await axios.get(`https://carhouse-backend.onrender.com/api/car/get-car?id=${carId}`);
 
       return data;
     } catch (error) {
@@ -43,7 +45,7 @@ export default {
 
   async checkCar(carId) {
     try {
-      const { data } = await axios.get(`${process.env.BASE_URL}/api/car/check-car?carId=${carId}`,
+      const { data } = await axios.get(`https://carhouse-backend.onrender.com/api/car/check-car?carId=${carId}`,
       {
         headers: {
           Authorization: `Bearer ${useCookie("token").value}`,
@@ -59,7 +61,7 @@ export default {
 
   async getFavouritedCars() {
     try {
-      const { data } = await axios.get(`${process.env.BASE_URL}/api/car/get-favourites`, {
+      const { data } = await axios.get(`https://carhouse-backend.onrender.com/api/car/get-favourites`, {
         headers: {
           Authorization: `Bearer ${useCookie("token").value}`,
         },
@@ -73,7 +75,7 @@ export default {
 
   async addToFavouritedCars(carId) {
     try {
-      const { data } = await axios.post(`${process.env.BASE_URL}/api/car/add-to-favourites`,
+      const { data } = await axios.post(`https://carhouse-backend.onrender.com/api/car/add-to-favourites`,
         {
           carId
         },
@@ -92,7 +94,7 @@ export default {
 
   async removeFromFavouritedCars(carId) {
     try {
-      const { data } = await axios.post(`${process.env.BASE_URL}/api/car/remove-from-favourites`,
+      const { data } = await axios.post(`https://carhouse-backend.onrender.com/api/car/remove-from-favourites`,
         {
           carId
         },

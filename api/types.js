@@ -1,9 +1,11 @@
 import axios from "axios";
 
+const config = useRuntimeConfig();
+
 export default {
   async getTypes() {
     try {
-      const { data } = await axios.get(`${process.env.BASE_URL}/api/type/get-types`);
+      const { data } = await axios.get(`https://carhouse-backend.onrender.com/api/type/get-types`);
 
       return data;
     } catch (error) {
@@ -14,7 +16,7 @@ export default {
   async createType(name) {
     try {
       const { data } = await axios.post(
-        `${process.env.BASE_URL}/api/type/create-type`,
+        `https://carhouse-backend.onrender.com/api/type/create-type`,
         { name },
         {
           headers: {
@@ -32,7 +34,7 @@ export default {
   async deleteType(typeId) {
     try {
       const { data } = await axios.delete(
-        `${process.env.BASE_URL}/api/type/delete-type`,
+        `https://carhouse-backend.onrender.com/api/type/delete-type`,
         {
           data: {
             typeId,
@@ -52,7 +54,7 @@ export default {
   async updateType(typeId, name) {
     try {
       const { data } = await axios.patch(
-        `${process.env.BASE_URL}/api/type/update-type`,
+        `https://carhouse-backend.onrender.com/api/type/update-type`,
         {
           typeId,
           name,

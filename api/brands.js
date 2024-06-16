@@ -1,10 +1,12 @@
 import axios from "axios";
 
+const config = useRuntimeConfig();
+
 export default {
   async getBrands() {
     try {
       const { data } = await axios.get(
-        `${process.env.BASE_URL}/api/brand/get-brands`
+        `https://carhouse-backend.onrender.com/api/brand/get-brands`
       );
 
       return data;
@@ -16,7 +18,7 @@ export default {
   async createBrand(name) {
     try {
       const { data } = await axios.post(
-        `${process.env.BASE_URL}/api/brand/create-brand`,
+        `https://carhouse-backend.onrender.com/api/brand/create-brand`,
         { name },
         {
           headers: {
@@ -34,7 +36,7 @@ export default {
   async deleteBrand(brandId) {
     try {
       const { data } = await axios.delete(
-        `${process.env.BASE_URL}/api/brand/delete-brand`,
+        `https://carhouse-backend.onrender.com/api/brand/delete-brand`,
         {
           data: {
             brandId,
@@ -54,7 +56,7 @@ export default {
   async updateBrand(brandId, name) {
     try {
       const { data } = await axios.patch(
-        `${process.env.BASE_URL}/api/brand/update-brand`,
+        `https://carhouse-backend.onrender.com/api/brand/update-brand`,
         {
           brandId,
           name,

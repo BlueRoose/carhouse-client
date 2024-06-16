@@ -4,6 +4,12 @@ export default defineNuxtConfig({
   
   modules: ["@pinia/nuxt", "@vueuse/nuxt", "@element-plus/nuxt", "@nuxtjs/tailwindcss"],
 
+  runtimeConfig: {
+    public: {
+      apiPath: "https://carhouse-backend.onrender.com",
+    },
+  },
+
   vite: {
     css: {
       preprocessorOptions: {

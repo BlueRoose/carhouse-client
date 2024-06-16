@@ -1,10 +1,12 @@
 import axios from "axios";
 
+const config = useRuntimeConfig();
+
 export default {
   async getUsers() {
     try {
       const { data } = await axios.get(
-        `${process.env.BASE_URL}/api/user/get-users`,
+        `https://carhouse-backend.onrender.com/api/user/get-users`,
         {
           headers: {
             Authorization: `Bearer ${useCookie("token").value}`,
@@ -21,7 +23,7 @@ export default {
   async changeRole(id, role) {
     try {
       const { data } = await axios.patch(
-        `${process.env.BASE_URL}/api/user/change-role`,
+        `https://carhouse-backend.onrender.com/api/user/change-role`,
         {
           id,
           role,
