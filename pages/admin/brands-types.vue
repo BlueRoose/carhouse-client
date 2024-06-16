@@ -1,11 +1,11 @@
 <template>
-  <div class="brands-types container">
+  <div class="brands-types container mx-auto px-4">
     <div class="brands-types__side">
       <p class="brands-types__side-title">Brands</p>
       <div class="brands-types__side__main">
         <div class="brands-types__side__main__list">
           <p
-            v-for="brand, index in brands"
+            v-for="(brand, index) in brands"
             :key="index"
             class="brands-types__side__main__list-item"
           >
@@ -69,7 +69,7 @@
       <div class="brands-types__side__main">
         <div class="brands-types__side__main__list">
           <p
-            v-for="type, index in types"
+            v-for="(type, index) in types"
             :key="index"
             class="brands-types__side__main__list-item"
           >

@@ -1,8 +1,6 @@
 <template>
   <div>
-    <ClientOnly>
-      <Header />
-    </ClientOnly>
+    <Header />
     <slot />
     <QuestionBlock />
     <Footer />

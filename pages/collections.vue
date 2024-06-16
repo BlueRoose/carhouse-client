@@ -1,18 +1,18 @@
 <template>
-  <div class="collections">
+  <div class="bg-white pb-20">
     <PageInfo
       subtitle="C o l l e c t i o n s"
       title="Find your dream car here"
       description="Carhouse is the best place to find your dream car. Choose it!"
     />
-    <div class="collections__content container">
-      <div class="collections__content__search">
-        <div class="collections__content__search__selects">
+    <div class="relative container mx-auto px-4">
+      <div class="max-w-[1200px] h-fit py-4 mx-auto px-16 max-md:px-1 mb-20 shadow-[0_31px_81px_rgba(37,37,37,.3)] flex justify-between items-center max-md:flex-col max-md:gap-6">
+        <div class="flex max-lg:grid grid-cols-2 gap-10 max-md:gap-4">
           <CustomSelect
             v-model="brandChanged"
             label="Brand"
             :options="brands"
-            :disabled="!brands.length || !cars.length"
+            :disabled="!brands.length"
           />
           <CustomSelect
             v-model="typeChanged"
@@ -34,7 +34,7 @@
           />
         </div>
         <Button
-          class="collections__content__search-button"
+          class="w-[145px] h-16 rounded-none"
           :disabled="!brandId"
           :isLoading="isLoading"
           @click="getCars"
@@ -42,34 +42,34 @@
           Find
         </Button>
       </div>
-      <div v-if="!isLoading && cars.length" class="collections__content__info">
-        <p class="collections__content__info-showed">
+      <div v-if="!isLoading && cars.length" class="mb-20 grid grid-cols-2 justify-between">
+        <p class="text-black text-3xl max-md:text-2xl font-semibold self-center">
           Showing {{ cars.length }} from {{ totalCars }} results
         </p>
         <CustomSelect
           v-model="sortValueChanged"
-          class="collections__content__info-sort"
+          class="max-w-[150px] ml-auto sort"
           label="Sort By"
           :options="sortOptions"
         />
       </div>
       <Loader v-if="isLoading" />
       <template v-else>
-        <div v-if="cars.length" class="collections__content__cards">
+        <div v-if="cars.length" class="grid grid-cols-3 max-lg:grid-cols-2 max-md:flex flex-col gap-x-14 gap-y-24 mb-20">
           <CollectionCard
-            v-for="car, index in cars"
+            v-for="(car, index) in cars"
             :key="index"
             :car="car"
           />
         </div>
-        <h1 v-else class="collections__content-no-cars">We are sorry, but we don't have any cars at the moment</h1>
+        <h1 v-else class="text-center mt-52 mb-24">We are sorry, but we don't have any cars at the moment</h1>
       </template>
-      <div v-if="totalPages > 1" class="collections__content__pagination">
+      <div v-if="totalPages > 1" class="w-fit mx-auto flex gap-3.5">
         <Button
-          v-for="_, index in totalPages"
+          v-for="(_, index) in totalPages"
           :key="index"
-          class="collections__content__pagination-button"
-          :class="{ 'active-button': index + 1 === page }"
+          class="bg-[#E1E1E1] transition-all ease-linear"
+          :class="{ 'bg-[#464646] text-white': index + 1 === page }"
           @click="changePage(index + 1)"
         >
           {{ index + 1 }}
@@ -299,84 +299,7 @@ async function getCars() {
 </script>
 
 <style lang="scss" scoped>
-.collections {
-  background-color: $color-white;
-  padding-bottom: 80px;
-
-  &__content {
-    position: relative;
-
-    &__search {
-      max-width: 1200px;
-      height: 140px;
-      margin: 0 auto;
-      padding: 0 64px;
-      margin-bottom: 80px;
-      box-shadow: 0 31px 81px rgba(37, 37, 37, .3);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      
-      &__selects {
-        display: flex;
-        gap: 40px;
-      }
-
-      &-button {
-        width: 145px;
-        height: 64px;
-        border-radius: 0;
-      }
-    }
-
-    &__info {
-      margin-bottom: 80px;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      justify-content: space-between;
-
-      &-showed {
-        font-size: 30px;
-        font-weight: 600;
-        color: $color-black;
-        justify-self: flex-start;
-      }
-
-      &-sort {
-        justify-self: flex-end;
-        grid-column-start: 2;
-      }
-    }
-
-    &__cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-column-gap: 54px;
-      grid-row-gap: 94px;
-      margin-bottom: 90px;
-    }
-
-    &-no-cars {
-      text-align: center;
-      margin: 200px 0 100px;
-    }
-
-    &__pagination {
-      width: fit-content;
-      margin: 0 auto;
-      display: flex;
-      gap: 14px;
-
-      &-button {
-        background-color: #E1E1E1;
-        transition: all 0.2s linear;
-      }
-    }
-  }
-}
-
-.active-button {
-  background-color: #464646;
-  color: $color-white;
+.sort {
+  grid-column-start: 2;
 }
 </style>

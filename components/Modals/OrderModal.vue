@@ -1,28 +1,36 @@
 <template>
-  <div class="order-modal">
-    <div class="order-modal__top-bar">
-      <p class="order-modal__top-bar-title">Order the car</p>
-      <IconsXMarkIcon class="order-modal__top-bar-close" @click="closeModal" />
+  <div class="w-[450px] flex flex-col items-center pt-20 pr-12 pb-6 pl-12 bg-white rounded-3xl relative">
+    <div class="w-full flex justify-between absolute top-2.5 left-0 px-4">
+      <p class="text-lg font-semibold">Order the car</p>
+      <IconsXMarkIcon class="cursor-pointer" @click="closeModal" />
     </div>
-    <div class="order-modal__form">
-      <div class="order-modal__form__block">
+    <div class="grid grid-cols-2 gap-5">
+      <div class="w-full flex flex-col gap-4">
         <p>Name</p>
-        <input v-model="userName" class="order-modal__form__block-input" disabled />
+        <input
+          :value="userName"
+          class="w-full fh-8 text-base pl-2.5 outline-none border border-main-yellow disabled:cursor-not-allowed"
+          disabled
+        />
       </div>
-      <div class="order-modal__form__block">
+      <div class="w-full flex flex-col gap-4">
         <p>Car</p>
-        <input v-model="car" class="order-modal__form__block-input" disabled />
+        <input
+          :value="car"
+          class="w-full fh-8 text-base pl-2.5 outline-none border border-main-yellow disabled:cursor-not-allowed"
+          disabled
+        />
       </div>
-      <div class="order-modal__form__block">
+      <div class="w-1/2 mx-auto flex flex-col gap-4 grid-last">
         <p>Phone number</p>
-        <input v-model="formData.phone" class="order-modal__form__block-input" />
-        <span v-if="v$.phone?.$error" class="input-incorrect">
+        <input v-model="formData.phone" class="w-full fh-8 text-base pl-2.5 outline-none border border-main-yellow" />
+        <span v-if="v$.phone?.$error" class="text-red-500 text-sm">
           {{ v$.phone?.$errors[0]?.$message }}
         </span>
       </div>
     </div>
     <Button
-      class="order-modal-button"
+      class="mt-6"
       :isLoading="isLoading"
       @click="submitForm"
     >
@@ -103,99 +111,7 @@ async function submitForm() {
 </script>
 
 <style lang="scss" scoped>
-.order-modal {
-  width: 450px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 75px 50px 25px 50px;
-  background-color: $color-white;
-  border-radius: 25px;
-  position: relative;
-
-  &__top-bar {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    position: absolute;
-    top: 10px;
-    left: 0;
-    padding: 0 15px;
-    box-sizing: border-box;
-
-    &-title {
-      font-size: 18px;
-      font-weight: 600;
-    }
-
-    &-close {
-      cursor: pointer;
-    }
-  }
-
-  &__form {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-
-    &__block {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-
-      &:last-of-type {
-        width: 50%;
-        margin: 0 auto;
-        grid-column: 1 / span 2;
-      }
-
-      &-input {
-        width: 100%;
-        height: 30px;
-        font-size: 16px;
-        padding-left: 10px;
-        box-sizing: border-box;
-        border: none;
-        outline: none;
-        border-bottom: 1px solid $color-yellow;
-
-        &:disabled {
-          cursor: not-allowed;
-        }
-      }
-    }
-
-    &__inputs {
-      width: 100%;
-      display: flex;
-      gap: 10px;
-
-      input {
-        width: 100%;
-        text-align: center;
-      }
-    }
-  }
-
-  &-button {
-    margin-top: 25px;
-    margin-bottom: 20px;
-  }
-
-  &__message {
-    width: fit-content;
-    margin: 0 auto;
-
-    &-span {
-      font-weight: 600;
-      cursor: pointer;
-    }
-  }
-}
-
-.input-incorrect {
-  font-size: 14px;
-  color: red;
+.grid-last {
+  grid-column: 1 / span 2;
 }
 </style>

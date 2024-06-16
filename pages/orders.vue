@@ -1,26 +1,26 @@
 <template>
-  <div class="orders">
+  <div class="bg-white pb-20">
     <PageInfo
       subtitle="O R D E R S"
       title="All your orders on one page"
       description="Check statuses of your orders and keep abreast of changes"
     />
-    <div class="orders__content container">
-      <div v-if="!isLoading" class="orders__content__info">
-        <p class="orders__content__info-showed">
+    <div class="relative container mx-auto px-4">
+      <div v-if="!isLoading" class="my-20 max-lg:my-10 grid grid-cols-2 justify-between">
+        <p class="text-black text-3xl font-semibold self-start">
           Orders: {{ userBuyRequests.length }}
         </p>
       </div>
       <Loader v-if="isLoading" />
       <template v-else>
-        <div v-if="userBuyRequests.length" class="orders__content__cards">
+        <div v-if="userBuyRequests.length" class="flex flex-col gap-5">
           <OrderCard
-            v-for="userBuyRequest, index in userBuyRequests"
+            v-for="(userBuyRequest, index) in userBuyRequests"
             :key="index"
             :userBuyRequest="userBuyRequest"
           />
         </div>
-        <h1 v-else class="orders__content-no-orders">You don't have any orders, but it you can fix it!</h1>
+        <h1 v-else class="text-4xl font-bold text-center mt-48 mb-24">You don't have any orders, but it you can fix it!</h1>
       </template>
     </div>
   </div>
@@ -65,40 +65,3 @@ definePageMeta({
   middleware: "routes",
 });
 </script>
-
-<style lang="scss" scoped>
-.orders {
-  background-color: $color-white;
-  padding-bottom: 80px;
-
-  &__content {
-    position: relative;
-
-    &__info {
-      margin-top: 80px;
-      margin-bottom: 80px;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      justify-content: space-between;
-
-      &-showed {
-        font-size: 30px;
-        font-weight: 600;
-        color: $color-black;
-        justify-self: flex-start;
-      }
-    }
-
-    &__cards {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    &-no-orders {
-      text-align: center;
-      margin: 200px 0 100px;
-    }
-  }
-}
-</style>

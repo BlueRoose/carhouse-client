@@ -22,7 +22,7 @@ export default {
       if (year) {
         url += `&year=${year}`;
       }
-      
+
       const { data } = await axios.get(url);
 
       return data;

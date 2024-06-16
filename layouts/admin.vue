@@ -1,5 +1,5 @@
 <template>
-  <div class="admin-layout">
+  <div class="h-screen bg-main-dark flex flex-col overflow-hidden">
     <AdminHeader />
     <slot />
   </div>
@@ -7,12 +7,3 @@
 
 <script setup>
 </script>
-
-<style lang="scss" scoped>
-.admin-layout {
-  height: 100vh;
-  background-color: $color-dark;
-  display: flex;
-  flex-direction: column;
-}
-</style>

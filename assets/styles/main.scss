@@ -4,32 +4,6 @@
   font-family: Poppins;
 }
 
-.container {
-  max-width: 1440px;
-  margin: 0 auto;
-
-  @include mq($until: desktop-xl) {
-    max-width: 1320px;
-  }
-
-  @include mq($until: desktop-l) {
-    max-width: 100%;
-    padding: 0 120px;
-  }
-
-  @include mq($until: desktop) {
-    padding: 0 90px;
-  }
-
-  @include mq($until: mobile-xxl) {
-    padding: 0 50px;
-  }
-
-  @include mq($until: mobile-l) {
-    padding: 0 24px;
-  }
-}
-
 a {
   text-decoration: none;
 

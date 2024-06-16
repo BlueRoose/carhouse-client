@@ -1,6 +1,6 @@
 <template>
   <div class="select">
-    <p v-if="label" class="select-label">{{ label }}</p>
+    <p v-if="label" class="text-[#848484] text-sm mb-4 max-md:mb-2">{{ label }}</p>
     <el-select
       v-model="selectValue"
       placeholder="Select"
@@ -8,7 +8,7 @@
       clearable
     >
       <el-option
-        v-for="option, index in options"
+        v-for="(option, index) in options"
         :key="index"
         :label="option.name"
         :value="option.value || option.name"
@@ -39,12 +39,6 @@ const selectValue = computed({
 
 <style lang="scss">
 .select {
-  &-label {
-    font-size: 14px;
-    color: #848484;
-    margin-bottom: 16px;
-  }
-
   .el-select {
     min-width: 150px;
   }
@@ -55,6 +49,6 @@ const selectValue = computed({
 }
 
 .el-select-dropdown__item.is-selected {
-  color: $color-yellow !important;
+  color: #ffd600 !important;
 }
 </style>

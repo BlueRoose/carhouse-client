@@ -1,10 +1,10 @@
 <template>
-  <div v-if="isModal" class="modals">
-    <div class="modals-wrapper">
+  <div v-if="isModal" class="w-full h-full fixed top-0 left-0 z-20">
+    <div class="w-fit h-fit mx-auto relative top-1/2 -translate-y-1/2 z-[3] px-4">
       <ModalsAuthModal v-if="isAuthModal" />
       <ModalsOrderModal v-if="isOrderModal" />
     </div>
-    <div class="modals-dark" @click="closeModal"></div>
+    <div class="w-full h-full bg-black opacity-50 absolute top-0 left-0" @click="closeModal"></div>
   </div>
 </template>
 
@@ -21,34 +21,3 @@ function closeModal() {
   modalsStore.hideOrderModal();
 }
 </script>
-
-<style lang="scss" scoped>
-.modals {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
-
-  &-wrapper {
-    width: fit-content;
-    height: fit-content;
-    margin: 0 auto;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 3;
-  }
-
-  &-dark {
-    width: 100%;
-    height: 100%;
-    background-color: $color-black;
-    opacity: 50%;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-}
-</style>

@@ -1,18 +1,18 @@
 <template>
-  <div v-if="allBuyRequests.length" class="buy-requests">
-    <div class="buy-requests__requests">
+  <div v-if="allBuyRequests.length" class="h-full p-5 bg-main-dark flex overflow-hidden container max-w-[1440px] mx-auto px-4">
+    <div class="w-[60%] pr-5 overflow-auto flex flex-col gap-5">
       <BuyRequestCard
-        v-for="buyRequest, index in allBuyRequests"
+        v-for="(buyRequest, index) in allBuyRequests"
         :key="index"
         :buyRequest="buyRequest"
         :selected="buyRequest.id === selectedBuyRequestId"
         @click="selectBuyRequest(buyRequest.id)"
       />
     </div>
-    <div v-if="selectedBuyRequest" class="buy-requests__actions">
-      <p class="buy-requests__actions-title">Change status</p>
-      <div class="buy-requests__actions__statuses">
-        <div class="buy-requests__actions__statuses__current">
+    <div v-if="selectedBuyRequest" class="w-[40%] flex flex-col items-center">
+      <p class="text-white text-2xl mb-5">Change status</p>
+      <div class="text-white text-lg flex items-end gap-20 mb-5">
+        <div class="h-full flex flex-col justify-between">
           <p>Current status:</p>
           <p>{{ selectedBuyRequest.status }}</p>
         </div>
@@ -29,11 +29,11 @@
       >
         Change
       </Button>
-      <p class="buy-requests__actions-title">Delete request</p>
+      <p class="text-white text-2xl mb-5">Delete request</p>
       <Button :isLoading="isLoading.delete" @click="deleteRequest">Delete</Button>
     </div>
   </div>
-  <div v-else class="no-requests">
+  <div v-else class="w-fit h-fit fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-3xl text-white">
     <h2>No buy requests were found</h2>
   </div>
 </template>
@@ -127,72 +127,3 @@ definePageMeta({
   layout: "admin",
 });
 </script>
-
-<style lang="scss">
-.buy-requests {
-  height: 100%;
-  padding: 20px;
-  background-color: $color-dark;
-  display: flex;
-  overflow: hidden;
-
-  &__requests {
-    width: 60%;
-    padding-right: 20px;
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  &__actions {
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    &-title {
-      font-size: 24px;
-      color: $color-white;
-      margin-bottom: 20px;
-    }
-
-    &__statuses {
-      font-size: 18px;
-      color: $color-white;
-      display: flex;
-      align-items: flex-end;
-      gap: 60px;
-      margin-bottom: 20px;
-
-      &__current {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-
-      .select {
-        .select-label {
-          font-size: 18px;
-          color: $color-white;
-        }
-      }
-    }
-
-    button {
-      margin-bottom: 50px;
-    }
-  }
-}
-
-.no-requests {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 28px;
-  color: $color-white;
-}
-</style>

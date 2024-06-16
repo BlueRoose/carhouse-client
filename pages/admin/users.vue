@@ -1,28 +1,29 @@
 <template>
-  <div class="users">
-    <div class="users__search">
-      <p class="users__search-title">Find the user:</p>
+  <div class="w-1/2 h-full mx-auto p-5 bg-main-dark flex flex-col items-center gap-24 container px-4">
+    <div class="flex items-center gap-4">
+      <p class="text-white text-2xl">Find the user:</p>
       <SearchableSelect
         v-model="selectedUserId"
+        class="w-[300px]"
         :options="users"
         :isSearchable="true"
       />
     </div>
-    <div v-if="selectedUser" class="users__main">
-      <p class="users__main-title">User's information</p>
+    <div v-if="selectedUser" class="flex flex-col gap-8">
+      <p class="text-white text-4xl font-medium">User's information</p>
       <input
         v-model="selectedUser.name"
-        class="users__main-input"
+        class="w-full h-9 py-2.5 px-4 border-[2px] border-main-yellow outline-none rounded :disabled:text-main-yellow"
         disabled
       />
       <input
         v-model="selectedUser.surname"
-        class="users__main-input"
+        class="w-full h-9 py-2.5 px-4 border-[2px] border-main-yellow outline-none rounded :disabled:text-main-yellow"
         disabled
       />
       <input
         v-model="selectedUser.email"
-        class="users__main-input"
+        class="w-full h-9 py-2.5 px-4 border-[2px] border-main-yellow outline-none rounded :disabled:text-main-yellow"
         disabled
       />
       <CustomSelect v-model="selectedUser.role" :options="roles" />
@@ -104,58 +105,3 @@ definePageMeta({
   layout: "admin",
 });
 </script>
-
-<style lang="scss">
-.users {
-  width: 50%;
-  height: 100%;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: $color-dark;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 100px;
-
-  &__search {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-
-    &-title {
-      font-size: 24px;
-      color: $color-white;
-    }
-
-    .select {
-      width: 300px;
-    }
-  }
-
-  &__main {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-
-    &-title {
-      font-size: 36px;
-      font-weight: 500;
-      color: $color-white;
-    }
-
-    &-input {
-      width: 100%;
-      height: 36px;
-      padding: 10px 15px;
-      border: 2px solid $color-yellow;
-      outline: none;
-      border-radius: 5px;
-      box-sizing: border-box;
-
-      &:disabled {
-        color: $color-yellow;
-      }
-    }
-  }
-}
-</style>

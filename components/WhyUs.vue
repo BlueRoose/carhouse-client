@@ -1,38 +1,38 @@
 <template>
-  <div class="why-us container">
-    <p class="why-us-small">C A R H O U S E</p>
-    <h2 class="why-us-title">Why choose us</h2>
-    <div class="why-us__cards">
-      <div class="why-us__cards__card">
+  <div class="py-16 container mx-auto px-4">
+    <p class="text-main-yellow text-xl text-center font-semibold max-md:text-lg">C A R H O U S E</p>
+    <h2 class="text-black text-5xl text-center mb-20 font-semibold max-md:text-4xl max-md:mb-10">Why choose us</h2>
+    <div class="w-full grid grid-cols-3 gap-5 max-md:flex flex-col">
+      <div class="p-14 max-xl:p-7 shadow-[0_4px_39.79999923706055px_0_#00000040] transition-all ease-linear">
         <img
-          class="why-us__cards__card-image"
+          class="max-w-16 mb-7 max-lg:mb-4"
           src="/icons/money.svg"
           alt="price"
         />
-        <p class="why-us__cards__card-title">The best price that you really expect</p>
-        <p class="why-us__cards__card-description">
+        <p class="text-black text-2xl max-lg:text-xl font-bold">The best price that you really expect</p>
+        <p class="text-black opacity-50 mt-7 max-lg:mt-4">
           Our cars are cheaper than in other car dealerships
         </p>
       </div>
-      <div class="why-us__cards__card">
+      <div class="p-14 max-xl:p-7 shadow-[0_4px_39.79999923706055px_0_#00000040] transition-all ease-linear">
         <img
-          class="why-us__cards__card-image"
+          class="max-w-16 mb-7 max-lg:mb-4"
           src="/icons/headphones.svg"
           alt="support"
         />
-        <p class="why-us__cards__card-title">Support is ready 24/7 to serve you</p>
-        <p class="why-us__cards__card-description">
+        <p class="text-black text-2xl max-lg:text-xl font-bold">Support is ready 24/7 to serve you</p>
+        <p class="text-black opacity-50 mt-7 max-lg:mt-4">
           Our managers are ready to answer your questions at any time of the day.
         </p>
       </div>
-      <div class="why-us__cards__card">
+      <div class="p-14 max-xl:p-7 shadow-[0_4px_39.79999923706055px_0_#00000040] transition-all ease-linear">
         <img
-          class="why-us__cards__card-image"
+          class="max-w-16 mb-7 max-lg:mb-4"
           src="/icons/star.svg"
           alt="brand"
         />
-        <p class="why-us__cards__card-title">A brand that is recognized worldwide</p>
-        <p class="why-us__cards__card-description">
+        <p class="text-black text-2xl max-lg:text-xl font-bold">A brand that is recognized worldwide</p>
+        <p class="text-black opacity-50 mt-7 max-lg:mt-4">
           Our reputation based on our customer reviews makes us the most
           popular car dealership
         </p>
@@ -40,98 +40,5 @@
     </div>
   </div>
 </template>
-
-<script setup>
+<script setup lang="ts">
 </script>
-
-<style lang="scss" scoped>
-.why-us {
-  padding-top: 65px;
-  padding-bottom: 65px;
-
-  @include mq($until: mobile-xxl) {
-    padding-top: 45px;
-    padding-bottom: 45px;
-  }
-
-  &-small {
-    text-align: center;
-    color: $color-yellow;
-    font-size: 20px;
-    font-weight: 600;
-
-    @include mq($until: desktop) {
-      font-size: 16px;
-    }
-  }
-
-  &-title {
-    color: black;
-    font-size: 50px;
-    text-align: center;
-    margin-bottom: 56px;
-
-    @include mq($until: desktop) {
-      font-size: 32px;
-      margin-bottom: 28px;
-    }
-  }
-
-  &__cards {
-    max-width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 22px;
-
-    @include mq($until: tablet) {
-      display: flex;
-      flex-direction: column;
-    }
-
-    &__card {
-      padding: 60px;
-      box-shadow: 0px 4px 39.79999923706055px 0px #00000040;
-      transition: all 0.5s;
-      box-sizing: border-box;
-
-      @include mq($until: desktop-xl) {
-        padding: 45px;
-      }
-
-      @include mq($until: desktop-l) {
-        padding: 30px;
-      }
-
-      @include mq($until: desktop) {
-        padding: 20px;
-      }
-
-      @include mq($from: tablet) {
-        &:hover {
-          transform: scale(1.2);
-          z-index: 999;
-        }
-      }
-
-      &-image {
-        max-width: 64px;
-        margin-bottom: 45px;
-      }
-
-      &-title {
-        color: $color-black;
-        font-size: 28px;
-        line-height: 28px;
-        font-weight: 700;
-        margin-bottom: 30px;
-      }
-
-      &-description {
-        color: $color-black;
-        opacity: 50%;
-        line-height: 28px;
-      }
-    }
-  }
-}
-</style>

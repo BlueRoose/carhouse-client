@@ -1,18 +1,18 @@
 <template>
-  <div class="wrapper">
-    <div class="container">
-      <div class="question">
-        <p class="question-title">Have a question?</p>
-        <p class="question-description">Our experts are always happy to help you with any question</p>
-        <div class="question__buttons">
-          <Button class="question__buttons-contact" @click="handleClickContact">Contact us</Button>
-          <div class="question__buttons__phone">
+  <div class="bg-main-yellow mb-[2px]">
+    <div class="container mx-auto px-4">
+      <div class="w-[70%] max-md:w-full h-fit py-14 bg-main-yellow">
+        <p class="text-6xl font-bold mb-4 max-lg:text-4xl max-lg:mb-2">Have a question?</p>
+        <p class="text-lg font-semibold mb-10 max-lg:text-base max-lg:mb-5">Our experts are always happy to help you with any question</p>
+        <div class="flex gap-7 max-sm:flex-col max-sm:gap-2">
+          <Button class="!bg-black text-white shrink-0" @click="handleClickContact">Contact us</Button>
+          <div class="w-fit bg-white text-black flex gap-5 items-center py-2.5 px-5 rounded-lg">
             <img
-              class="question__buttons__phone-image"
+              class="w-[22px]"
               src="/icons/phone.svg"
               alt="phone"
             />
-            <a  class="question__buttons__phone-number" href="tel:+37529777777">+375 (29) 777-77-77</a>
+            <a class="w-fit text-black font-bold shrink-0" href="tel:+37529777777">+375 (29) 777-77-77</a>
           </div>
         </div>
       </div>

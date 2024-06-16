@@ -1,76 +1,76 @@
 <template>
-  <div class="auth-modal">
-    <div class="auth-modal__top-bar">
-      <p class="auth-modal__top-bar-title">{{ modalTitle }}</p>
-      <IconsXMarkIcon class="auth-modal__top-bar-close" @click="closeModal" />
+  <div class="w-full pt-20 px-12 pb-6 max-md:pb-3 max-md:px-6 bg-white rounded-3xl relative">
+    <div class="w-full flex justify-between absolute top-2.5 left-0 px-4">
+      <p class="text-lg font-semibold">{{ modalTitle }}</p>
+      <IconsXMarkIcon class="cursor-pointer" @click="closeModal" />
     </div>
-    <div v-if="isSignIn && !isConfirmationStep" class="auth-modal__form">
-      <div class="auth-modal__form__block">
+    <div v-if="isSignIn && !isConfirmationStep" class="flex flex-col gap-5 max-md:w-full">
+      <div class="flex flex-col gap-1">
         <p>Email</p>
         <input
           v-model="formData.email"
-          class="auth-modal__form__block-input"
+          class="h-8 text-base pl-2.5 outline-none border border-main-yellow"
           type="email"
         />
-        <span v-if="v$.email.$error" class="input-incorrect">
+        <span v-if="v$.email.$error" class="text-red-500 text-sm">
           {{ v$.email.$errors[0]?.$message }}
         </span>
       </div>
       <Button
-        class="auth-modal__form-button"
+        class="mx-auto mt-6 mb-5"
         :isLoading="isLoading"
         @click="submitForm('pre-signin')"
       >
         Continue
       </Button>
-      <p class="auth-modal__message">Don't have an account? 
-        <span class="auth-modal__message-span" @click="toggleIsModalType">Sign up</span>
+      <p class="w-fit mx-auto">Don't have an account?
+        <span class="font-semibold cursor-pointer" @click="toggleIsModalType">Sign up</span>
       </p>
     </div>
 
-    <div v-if="!isSignIn && !isConfirmationStep" class="auth-modal__form">
-      <div class="auth-modal__form__block">
+    <div v-if="!isSignIn && !isConfirmationStep" class="flex flex-col gap-5 max-md:w-full">
+      <div class="flex flex-col gap-1">
         <p>Name</p>
-        <input v-model="formData.name" class="auth-modal__form__block-input" />
-        <span v-if="v$.name?.$error" class="input-incorrect">
+        <input v-model="formData.name" class="h-8 text-base pl-2.5 outline-none border border-main-yellow" />
+        <span v-if="v$.name?.$error" class="text-red-500 text-sm">
           {{ v$.name?.$errors[0]?.$message }}
         </span>
       </div>
-      <div class="auth-modal__form__block">
+      <div class="flex flex-col gap-1">
         <p>Surname</p>
-        <input v-model="formData.surname" class="auth-modal__form__block-input" />
-        <span v-if="v$.surname?.$error" class="input-incorrect">
+        <input v-model="formData.surname" class="h-8 text-base pl-2.5 outline-none border border-main-yellow" />
+        <span v-if="v$.surname?.$error" class="text-red-500 text-sm">
           {{ v$.surname?.$errors[0]?.$message }}
         </span>
       </div>
-      <div class="auth-modal__form__block">
+      <div class="flex flex-col gap-1">
         <p>Email</p>
-        <input v-model="formData.email" class="auth-modal__form__block-input" />
-        <span v-if="v$.email.$error" class="input-incorrect">
+        <input v-model="formData.email" class="h-8 text-base pl-2.5 outline-none border border-main-yellow" />
+        <span v-if="v$.email.$error" class="text-red-500 text-sm">
           {{ v$.email.$errors[0]?.$message }}
         </span>
       </div>
       <Button
-        class="auth-modal__form-button"
+        class="mx-auto mt-6 mb-5"
         :isLoading="isLoading"
         @click="submitForm('pre-signup')"
       >
         Continue
       </Button>
-      <p class="auth-modal__message">Already have an account? 
-        <span class="auth-modal__message-span" @click="toggleIsModalType">Sign in</span>
+      <p class="w-fit mx-auto">Already have an account? 
+        <span class="font-semibold cursor-pointer" @click="toggleIsModalType">Sign in</span>
       </p>
     </div>
 
-    <div v-if="isConfirmationStep" class="auth-modal__form">
+    <div v-if="isConfirmationStep" class="max-w-[400px] max-md:w-full flex flex-col gap-5">
       <p>Для завершения введите код, отправленный на {{ formData.email }}</p>
-      <div class="auth-modal__form__inputs">
+      <div class="w-full flex gap-2.5">
         <input
-          v-for="_, index in 5"
+          v-for="(_, index) in 5"
           :key="index"
           v-model="formData.activationMessage[index]"
           ref="input"
-          class="auth-modal__form__block-input"
+          class="w-1/5 text-center h-8 text-base pl-2.5 outline-none border-b border-main-yellow"
           autocomplete="off"
           type="text"
           maxLength="1"
@@ -228,87 +228,3 @@ async function submitForm(action) {
   isLoading.value = false;
 }
 </script>
-
-<style lang="scss" scoped>
-.auth-modal {
-  width: 350px;
-  padding: 75px 50px 25px 50px;
-  background-color: $color-white;
-  border-radius: 25px;
-  position: relative;
-
-  &__top-bar {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    position: absolute;
-    top: 10px;
-    left: 0;
-    padding: 0 15px;
-    box-sizing: border-box;
-
-    &-title {
-      font-size: 18px;
-      font-weight: 600;
-    }
-
-    &-close {
-      cursor: pointer;
-    }
-  }
-
-  &__form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-
-    &__block {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-
-      &-input {
-        height: 30px;
-        font-size: 16px;
-        padding-left: 10px;
-        box-sizing: border-box;
-        border: none;
-        outline: none;
-        border-bottom: 1px solid $color-yellow;
-      }
-    }
-
-    &-button {
-      margin: 0 auto;
-      margin-top: 25px;
-      margin-bottom: 20px;
-    }
-
-    &__inputs {
-      width: 100%;
-      display: flex;
-      gap: 10px;
-
-      input {
-        width: 20%;
-        text-align: center;
-      }
-    }
-  }
-
-  &__message {
-    width: fit-content;
-    margin: 0 auto;
-
-    &-span {
-      font-weight: 600;
-      cursor: pointer;
-    }
-  }
-}
-
-.input-incorrect {
-  font-size: 14px;
-  color: red;
-}
-</style>

@@ -1,63 +1,69 @@
 <template>
-  <div v-if="requests.length" class="user-requests">
-    <div class="user-requests__requests">
+  <div v-if="requests.length" class="h-full p-5 bg-main-dark flex overflow-hidden container mx-auto px-4">
+    <div class="w-1/2 pr-5 overflow-auto flex flex-col gap-5">
       <RequestCard
-        v-for="request, index in requests"
+        v-for="(request, index) in requests"
         :key="index"
         :request="request"
         :selected="request.id === selectedRequestId"
         @click="selectRequest(request.id)"
       />
     </div>
-    <div v-if="selectedRequest" class="user-requests__actions">
-      <div v-if="!selectedRequest.isResolved" class="user-requests__actions__editor">
-        <p class="user-requests__actions-title">Write an answear</p>
-        <div v-if="editor">
-          <button class="editor-button" @click="editor.chain().focus().toggleBold().run()" :disabled="!editor.can().chain().focus().toggleBold().run()" :class="{ 'is-active': editor.isActive('bold') }">
-            bold
+    <div v-if="selectedRequest" class="w-1/2 flex flex-col items-center">
+      <div v-if="!selectedRequest.isResolved" class="text-white mb-12">
+        <p class="text-white text-2xl mb-5">Write an answear</p>
+        <div v-if="editor" class="mb-4">
+          <button class="py-[3px] px-1.5 bg-main-yellow rounded-2xl border-[2px] border-transparent cursor-pointer" @click="editor.chain().focus().toggleBold().run()" :disabled="!editor.can().chain().focus().toggleBold().run()" :class="{ '!border-white': editor.isActive('bold') }">
+            Bold
           </button>
-          <button class="editor-button" @click="editor.chain().focus().toggleItalic().run()" :disabled="!editor.can().chain().focus().toggleItalic().run()" :class="{ 'is-active': editor.isActive('italic') }">
-            italic
+          <button class="py-[3px] px-1.5 bg-main-yellow rounded-2xl border-[2px] border-transparent cursor-pointer" @click="editor.chain().focus().toggleItalic().run()" :disabled="!editor.can().chain().focus().toggleItalic().run()" :class="{ '!border-white': editor.isActive('italic') }">
+            Italic
           </button>
-          <button class="editor-button" @click="editor.chain().focus().toggleStrike().run()" :disabled="!editor.can().chain().focus().toggleStrike().run()" :class="{ 'is-active': editor.isActive('strike') }">
-            strike
+          <button class="py-[3px] px-1.5 bg-main-yellow rounded-2xl border-[2px] border-transparent cursor-pointer" @click="editor.chain().focus().toggleStrike().run()" :disabled="!editor.can().chain().focus().toggleStrike().run()" :class="{ '!border-white': editor.isActive('strike') }">
+            Strike
           </button>
-          <button class="editor-button" @click="editor.chain().focus().setParagraph().run()" :class="{ 'is-active': editor.isActive('paragraph') }">
-            paragraph
+          <button class="py-[3px] px-1.5 bg-main-yellow rounded-2xl border-[2px] border-transparent cursor-pointer" @click="editor.chain().focus().setParagraph().run()" :class="{ '!border-white': editor.isActive('paragraph') }">
+            Paragraph
           </button>
-          <button class="editor-button" @click="editor.chain().focus().toggleHeading({ level: 1 }).run()" :class="{ 'is-active': editor.isActive('heading', { level: 1 }) }">
+          <button class="py-[3px] px-1.5 bg-main-yellow rounded-2xl border-[2px] border-transparent cursor-pointer" @click="editor.chain().focus().toggleHeading({ level: 1 }).run()" :class="{ '!border-white': editor.isActive('heading', { level: 1 }) }">
             h1
           </button>
-          <button class="editor-button" @click="editor.chain().focus().toggleHeading({ level: 2 }).run()" :class="{ 'is-active': editor.isActive('heading', { level: 2 }) }">
+          <button class="py-[3px] px-1.5 bg-main-yellow rounded-2xl border-[2px] border-transparent cursor-pointer" @click="editor.chain().focus().toggleHeading({ level: 2 }).run()" :class="{ '!border-white': editor.isActive('heading', { level: 2 }) }">
             h2
           </button>
-          <button class="editor-button" @click="editor.chain().focus().toggleHeading({ level: 3 }).run()" :class="{ 'is-active': editor.isActive('heading', { level: 3 }) }">
+          <button class="py-[3px] px-1.5 bg-main-yellow rounded-2xl border-[2px] border-transparent cursor-pointer" @click="editor.chain().focus().toggleHeading({ level: 3 }).run()" :class="{ '!border-white': editor.isActive('heading', { level: 3 }) }">
             h3
           </button>
-          <button class="editor-button" @click="editor.chain().focus().toggleHeading({ level: 4 }).run()" :class="{ 'is-active': editor.isActive('heading', { level: 4 }) }">
+          <button class="py-[3px] px-1.5 bg-main-yellow rounded-2xl border-[2px] border-transparent cursor-pointer" @click="editor.chain().focus().toggleHeading({ level: 4 }).run()" :class="{ '!border-white': editor.isActive('heading', { level: 4 }) }">
             h4
           </button>
-          <button class="editor-button" @click="editor.chain().focus().toggleHeading({ level: 5 }).run()" :class="{ 'is-active': editor.isActive('heading', { level: 5 }) }">
+          <button class="py-[3px] px-1.5 bg-main-yellow rounded-2xl border-[2px] border-transparent cursor-pointer" @click="editor.chain().focus().toggleHeading({ level: 5 }).run()" :class="{ '!border-white': editor.isActive('heading', { level: 5 }) }">
             h5
           </button>
-          <button class="editor-button" @click="editor.chain().focus().toggleHeading({ level: 6 }).run()" :class="{ 'is-active': editor.isActive('heading', { level: 6 }) }">
+          <button class="py-[3px] px-1.5 bg-main-yellow rounded-2xl border-[2px] border-transparent cursor-pointer" @click="editor.chain().focus().toggleHeading({ level: 6 }).run()" :class="{ '!border-white': editor.isActive('heading', { level: 6 }) }">
             h6
           </button>
-          <button class="editor-button" @click="editor.chain().focus().toggleBulletList().run()" :class="{ 'is-active': editor.isActive('bulletList') }">
-            bullet list
+          <button class="py-[3px] px-1.5 bg-main-yellow rounded-2xl border-[2px] border-transparent cursor-pointer" @click="editor.chain().focus().toggleBulletList().run()" :class="{ '!border-white': editor.isActive('bulletList') }">
+            Bullet list
           </button>
-          <button class="editor-button" @click="editor.chain().focus().toggleOrderedList().run()" :class="{ 'is-active': editor.isActive('orderedList') }">
-            ordered list
+          <button class="py-[3px] px-1.5 bg-main-yellow rounded-2xl border-[2px] border-transparent cursor-pointer" @click="editor.chain().focus().toggleOrderedList().run()" :class="{ '!border-white': editor.isActive('orderedList') }">
+            Ordered list
           </button>
         </div>
         <editor-content :editor="editor" />
-        <Button :isLoading="isLoading.send" @click="sendAnswear">Send an answear</Button>
+        <Button
+          class="mt-6"
+          :isLoading="isLoading.send"
+          @click="sendAnswear"
+        >
+          Send an answear
+        </Button>
       </div>
-      <p class="user-requests__actions-title">Delete request</p>
+      <p class="text-white text-2xl mb-5">Delete request</p>
       <Button :isLoading="isLoading.delete" @click="deleteRequest">Delete</Button>
     </div>
   </div>
-  <div v-else class="no-requests">
+  <div v-else class="w-fit h-fit fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-3xl text-white">
     <h2>No user requests were found</h2>
   </div>
 </template>

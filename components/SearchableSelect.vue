@@ -7,7 +7,7 @@
       clearable
     >
       <el-option
-        v-for="option, index in options"
+        v-for="(option, index) in options"
         :key="index"
         :label="`${option.name} ${option.surname}`"
         :value="option.id"

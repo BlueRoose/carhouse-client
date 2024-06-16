@@ -1,73 +1,69 @@
 <template>
-  <div class="contact">
-    <div class="contact__dark container">
-      <h2 class="contact__dark-heading">Contact Us</h2>
-      <p class="contact__dark-description">We're always here to help you find the perfect car! Whether you have questions about our inventory, services, or you'd like to schedule a test drive, feel free to get in touch with us. Our friendly and experienced staff are ready to answer all your inquiries and provide you with the information you need.</p>
-      <form class="contact__dark__form">
-        <div class="contact__dark__form__row">
-          <div class="contact__dark__form__block">
-            <p class="contact__dark__form__block-title">Full name*</p>
-            <input v-model="formData.name" class="contact__dark__form__block-input" />
-            <span v-if="v$.name.$error" class="input-incorrect">
+  <div class="bg-main-dark">
+    <div class="pt-20 pb-28 relative container">
+      <h2 class="text-5xl text-white mb-9 text-center relative z-[1]">Contact Us</h2>
+      <p class="max-w-[35%] mx-auto mb-24 text-lg text-white text-center relative z-[1]">We're always here to help you find the perfect car! Whether you have questions about our inventory, services, or you'd like to schedule a test drive, feel free to get in touch with us. Our friendly and experienced staff are ready to answer all your inquiries and provide you with the information you need.</p>
+      <form class="max-w-[650px] py-16 px-16 mx-auto bg-white flex flex-col gap-6 relative z-[1]">
+        <div class="flex gap-10">
+          <div class="w-full flex flex-col">
+            <p class="text-[#575757] text-lg mb-4">Full name*</p>
+            <input v-model="formData.name" class="w-full h-11 px-5 border-[2px] border-[#5E5E5E] outline-none text-lg" />
+            <span v-if="v$.name.$error" class="text-red-500">
               {{ v$.name.$errors[0]?.$message }}
             </span>
           </div>
-          <div class="contact__dark__form__block">
-            <p class="contact__dark__form__block-title">Email*</p>
-            <input v-model="formData.email" class="contact__dark__form__block-input" />
-            <span v-if="v$.email.$error" class="input-incorrect">
+          <div class="w-full flex flex-col">
+            <p class="text-[#575757] text-lg mb-4">Email*</p>
+            <input v-model="formData.email" class="w-full h-11 px-5 border-[2px] border-[#5E5E5E] outline-none text-lg" />
+            <span v-if="v$.email.$error" class="text-red-500">
               {{ v$.email.$errors[0]?.$message }}
             </span>
           </div>
         </div>
-        <div class="contact__dark__form__block">
-          <p class="contact__dark__form__block-title">Subject*</p>
-          <input v-model="formData.subject" class="contact__dark__form__block-input" />
-          <span v-if="v$.subject.$error" class="input-incorrect">
+        <div class="w-full flex flex-col">
+          <p class="text-[#575757] text-lg mb-4">Subject*</p>
+          <input v-model="formData.subject" class="w-full h-11 px-5 border-[2px] border-[#5E5E5E] outline-none text-lg" />
+          <span v-if="v$.subject.$error" class="text-red-500">
               {{ v$.subject.$errors[0]?.$message }}
           </span>
         </div>
-        <div class="contact__dark__form__block">
-          <p class="contact__dark__form__block-title">Message*</p>
-          <textarea v-model="formData.message" class="contact__dark__form__block-input textarea" />
-          <span v-if="v$.message.$error" class="input-incorrect">
+        <div class="w-full flex flex-col">
+          <p class="text-[#575757] text-lg mb-4">Message*</p>
+          <textarea v-model="formData.message" class="w-full px-5 border-[2px] border-[#5E5E5E] outline-none text-lg h-[150px] resize-none pt-4" />
+          <span v-if="v$.message.$error" class="text-red-500">
               {{ v$.message.$errors[0]?.$message }}
           </span>
         </div>
         <div>
-          <div class="contact__dark__form__rules">
-            <input type="checkbox" v-model="formData.checkbox" />
-            <p class="contact__dark__form__rules-text">Accept <a href="#">terms & conditions</a></p>
+          <div class="flex items-center gap-3">
+            <input v-model="formData.checkbox" type="checkbox" />
+            <p class="text-[#575757] text-lg">Accept <a href="#">terms & conditions</a></p>
           </div>
-          <span v-if="v$.checkbox.$error" class="input-incorrect">
+          <span v-if="v$.checkbox.$error" class="text-red-500">
             {{ v$.checkbox.$errors[0]?.$message }}
           </span>
         </div>
-        <Button
-          class="contact__dark__form-button"
-          :isLoading="isLoading"
-          @click="submitForm"
-        >
+        <Button :isLoading="isLoading" @click="submitForm">
           Send message
         </Button>
       </form>
       <img
-        class="contact__dark-image"
+        class="max-w-full absolute top-[150px] left-0"
         src="/images/map-bg.svg"
         alt="map"
       />
     </div>
-    <div class="wrapper">
-      <div class="contact__white container">
-        <div class="contact__white__info">
-          <h3 class="contact__white__info-title">Our dealer locations</h3>
-          <p class="contact__white__info-description">
+    <div class="bg-white">
+      <div class="py-24 container">
+        <div class="mb-24 flex justify-between">
+          <h3 class="text-5xl">Our dealer locations</h3>
+          <p class="max-w-[663px] text-lg">
             Visit any of our dealer locations nationwide to receive expert assistance with all your automotive needs. Our knowledgeable staff is ready to guide you through our extensive inventory and provide personalized recommendations. Whether you're looking for sales, service, or support, our dealerships are here to ensure your satisfaction.
           </p>
         </div>
-        <div class="contact__white__cards">
+        <div class="grid grid-cols-4 gap-4">
           <DealerCard
-            v-for="location, index in dealerLocations"
+            v-for="(location, index) in dealerLocations"
             :key="index"
             :location="location"
           />
@@ -190,157 +186,3 @@ async function submitForm(event) {
   isLoading.value = false;
 }
 </script>
-
-<style lang="scss" scoped>
-.contact {
-  background-color: $color-dark;
-
-  &__dark {
-    padding-top: 85px;
-    padding-bottom: 120px;
-    position: relative;
-
-    &-heading {
-      font-size: 48px;
-      color: $color-white;
-      margin-bottom: 35px;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    &-description {
-      max-width: 35%;
-      margin: 0 auto;
-      margin-bottom: 100px;
-      font-size: 18px;
-      line-height: 32px;
-      color: $color-white;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    &__form {
-      max-width: 650px;
-      padding: 72px 65px;
-      margin: 0 auto;
-      background-color: $color-white;
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-      position: relative;
-      z-index: 1;
-
-      &__row {
-        display: flex;
-        gap: 40px;
-      }
-
-      &__block {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-
-        &-title {
-          font-size: 18px;
-          line-height: 32px;
-          color: #575757;
-          margin-bottom: 16px;
-        }
-
-        &-input {
-          width: 100%;
-          height: 45px;
-          padding: 0 20px;
-          box-sizing: border-box;
-          border: 2px solid #5e5e5e;
-          outline: none;
-          font-size: 18px;
-        }
-      }
-
-      &__rules {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-
-        input {
-          width: 16px;
-          height: 16px;
-        }
-
-        &-text {
-          font-size: 18px;
-          line-height: 40px;
-          color: #575757;
-
-          a {
-            color: $color-yellow;
-            font-size: 600;
-          }
-        }
-      }
-
-      &-button {
-        padding-top: 15px;
-        padding-bottom: 15px;
-      }
-    }
-
-    &-image {
-      max-width: 100%;
-      box-sizing: border-box;
-      position: absolute;
-      top: 150px;
-      left: 0;
-    }
-  }
-
-  .wrapper {
-    background-color: $color-white;
-  }
-
-  &__white {
-    padding-top: 190px;
-    padding-bottom: 190px;
-
-    &__info {
-      margin-bottom: 100px;
-      display: flex;
-      justify-content: space-between;
-
-      @include mq($until: tablet) {
-        flex-direction: column;
-        gap: 50px;
-      }
-
-      &-title {
-        font-size: 48px;
-      }
-
-      &-description {
-        max-width: 663px;
-        font-size: 18px;
-        line-height: 32px;
-      }
-    }
-
-    &__cards {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-    }
-  }
-}
-
-.input-incorrect {
-  color: red;
-}
-
-.textarea {
-  height: 150px;
-  resize: none;
-  padding-top: 15px;
-}
-</style>

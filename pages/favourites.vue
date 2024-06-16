@@ -1,26 +1,26 @@
 <template>
-  <div class="collections">
+  <div class="bg-white pb-20 max-md:pb-10">
     <PageInfo
       subtitle="F a v o u r i t e s"
       title="Your favourited cars on one page"
       description="Track the price of the cars you like and order when you're ready!"
     />
-    <div class="collections__content container">
-      <div v-if="!isLoading" class="collections__content__info">
-        <p class="collections__content__info-showed">
+    <div class="relative container mx-auto px-4">
+      <div v-if="!isLoading" class="my-20 max-md:my-10">
+        <p class="text-black text-3xl max-md:text-2xl font-semibold self-start">
           Favourited cars: {{ favouritedCars.length }}
         </p>
       </div>
       <Loader v-if="isLoading" />
       <template v-else>
-        <div v-if="favouritedCars.length" class="collections__content__cards">
+        <div v-if="favouritedCars.length" class="grid grid-cols-3 max-lg:grid-cols-2 max-md:flex flex-col gap-x-14 gap-y-24 mb-20 ">
           <CollectionCard
-            v-for="car, index in favouritedCars"
+            v-for="(car, index) in favouritedCars"
             :key="index"
             :car="car"
           />
         </div>
-        <h1 class="collections__content-no-cars" v-else>You don't have any favourited cars</h1>
+        <h1 class="text-4xl font-bold text-center mt-52 mb-24" v-else>You don't have any favourited cars</h1>
       </template>
     </div>
   </div>
@@ -58,41 +58,3 @@ definePageMeta({
   middleware: "routes",
 });
 </script>
-
-<style lang="scss" scoped>
-.collections {
-  background-color: $color-white;
-  padding-bottom: 80px;
-
-  &__content {
-    position: relative;
-
-    &__info {
-      margin-top: 80px;
-      margin-bottom: 80px;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      justify-content: space-between;
-
-      &-showed {
-        font-size: 30px;
-        font-weight: 600;
-        color: $color-black;
-        justify-self: flex-start;
-      }
-    }
-
-    &__cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-column-gap: 54px;
-      grid-row-gap: 94px;
-    }
-
-    &-no-cars {
-      text-align: center;
-      margin: 200px 0 100px;
-    }
-  }
-}
-</style>

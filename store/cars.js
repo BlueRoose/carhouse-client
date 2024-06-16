@@ -2,6 +2,7 @@ import api from "@/api";
 
 export const useCarsStore = defineStore("carsStore", () => {
   const cars = ref([]);
+  const allCars = ref([]);
   const favouritedCars = ref([]);
   const totalCars = ref(0);
   const totalPages = ref(1);

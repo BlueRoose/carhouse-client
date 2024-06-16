@@ -1,48 +1,71 @@
 <template>
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__block">
-        <div class="footer__block__info">
+  <footer class="pt-20 bg-main-dark">
+    <div class="container mx-auto px-4">
+      <div class="pb-24 grid grid-cols-3 max-md:flex flex-col max-md:gap-10">
+        <div class="flex flex-col gap-8 max-md:items-center max-lg:gap-4">
           <Logo />
-          <p class="footer__block__info-text">Carhouse - the best place to buy your new toy</p>
+          <p class="text-white text-lg opacity-60 max-md:text-center max-md:text-base">Carhouse - the best place to buy your new toy</p>
         </div>
-        <div class="footer__block__links">
-          <p class="footer__block__links-title">QUICK LINKS</p>
-          <div class="footer__block__links__list">
-            <NuxtLink class="footer__block__links__list-item" to="/">Home</NuxtLink>
-            <NuxtLink class="footer__block__links__list-item" to="/about">About</NuxtLink>
-            <NuxtLink class="footer__block__links__list-item" to="/services">Services</NuxtLink>
-            <NuxtLink class="footer__block__links__list-item" to="/collections">Collections</NuxtLink>
+        <div class="flex flex-col gap-8 max-md:gap-4 items-center text-center">
+          <p class="text-white text-xl font-extrabold">QUICK LINKS</p>
+          <div class="flex flex-col gap-3 max-md:gap-1 list-none">
+            <NuxtLink
+              v-for="(link, index) in quickLinks"
+              :key="index"
+              class="text-main-gray text-lg transition-colors ease-linear hover:text-white"
+              :to="link.url"
+            >
+              {{ link.label }}
+            </NuxtLink>
             <NuxtLink
               v-if="isAuth"
-              class="footer__block__links__list-item"
+              class="text-main-gray text-lg transition-colors ease-linear hover:text-white"
               to="/favourites"
             >
               Favourites
             </NuxtLink>
           </div>
         </div>
-        <div class="footer__block__subscribtion">
-          <p class="footer__block__subscribtion-title">SUBSCRIBE</p>
-          <p class="footer__block__subscribtion-description">Stay up to date with our news, discounts and other exciting promotions</p>
-          <div class="footer__block__subscribtion__form">
+        <div class="flex flex-col gap-8 max-md:items-center max-md:gap-3">
+          <p class="text-white text-xl font-extrabold max-md:mb-1">SUBSCRIBE</p>
+          <p class="text-white max-md:text-center">Stay up to date with our news, discounts and other exciting promotions</p>
+          <div class="flex">
             <input
               v-model="email"
-              class="footer__block__subscribtion__form-input"
+              class="w-full border border-[#5E5E5E] p-4 text-white outline-none bg-transparent"
               placeholder="Enter your email"
             />
-            <Button class="footer__block__subscribtion__form-button" @click="handleClickSend">Send</Button>
+            <Button class="!rounded-none" @click="handleClickSend">Send</Button>
           </div>
         </div>
       </div>
     </div>
-    <div class="footer__rights">
-      <p class="footer__rights-text">CARHOUSE - © 2024 All Rights Reserved</p>
+    <div class="bg-[#1D1D1D] py-8 max-md:text-sm">
+      <p class="text-white opacity-60 text-center">CARHOUSE - © 2024 All Rights Reserved</p>
     </div>
   </footer>
 </template>
 
 <script setup>
+const quickLinks = [
+  {
+    label: 'Home',
+    url: '/',
+  },
+  {
+    label: 'About',
+    url: '/about',
+  },
+  {
+    label: 'Services',
+    url: '/services',
+  },
+  {
+    label: 'Collections',
+    url: '/collections',
+  },
+];
+
 const isAuth = ref(false);
 const email = ref("");
 
@@ -52,193 +75,7 @@ function handleClickSend() {
 </script>
 
 <style lang="scss" scoped>
-.footer {
-  padding-top: 160px;
-  background-color: $color-dark;
-
-  @include mq($until: desktop-xl) {
-    padding-top: 100px;
-  }
-
-  @include mq($until: desktop-l) {
-    padding-top: 70px;
-  }
-  
-  &__block {
-    padding-bottom: 100px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-
-    @include mq($until: desktop-xl) {
-      padding-bottom: 80px;
-    }
-
-    @include mq($until: desktop-l) {
-      padding-bottom: 60px;
-    }
-
-    @include mq($until: desktop) {
-      padding-bottom: 40px;
-    }
-
-    @include mq($until: mobile-xxl) {
-      padding-bottom: 40px;
-    }
-
-    @include mq($until: mobile-l) {
-      padding-bottom: 40px;
-    }
-
-    @include mq($until: tablet) {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 32px;
-    }
-
-    &__info {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-
-      @include mq($until: desktop-l) {
-        gap: 16px;
-      }
-
-      @include mq($until: desktop) {
-        gap: 12px;
-      }
-
-      @include mq($until: tablet) {
-        align-items: center;
-      }
-
-      &-text {
-        font-size: 18px;
-        color: $color-white;
-        opacity: 60%;
-
-        @include mq($until: tablet) {
-          display: none;
-        }
-      }
-    }
-
-    &__links {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 32px;
-      text-align: center;
-
-      @include mq($until: desktop-l) {
-        gap: 16px;
-      }
-
-      @include mq($until: desktop) {
-        gap: 12px;
-      }
-
-      @include mq($until: tablet) {
-        display: none;
-      }
-
-      &-title {
-        font-size: 20px;
-        font-weight: 800;
-        color: $color-white;
-      }
-
-      &__list {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        list-style-type: none;
-
-        &-item {
-          font-size: 18px;
-          color: $color-gray;
-          transition: 0.2s linear;
-
-          &:hover {
-            color: $color-white;
-          }
-        }
-      }
-    }
-
-    &__subscribtion {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-
-      @include mq($until: desktop-l) {
-        gap: 16px;
-      }
-
-      @include mq($until: desktop) {
-        gap: 12px;
-      }
-
-      @include mq($until: tablet) {
-        align-items: center;
-      }
-
-      &-title {
-        font-size: 20px;
-        font-weight: 800;
-        color: $color-white;
-      }
-
-      &-description {
-        font-size: 16px;
-        color: $color-white;
-
-        @include mq($until: mobile-xxl) {
-          text-align: center;
-        }
-      }
-
-      &__form {
-        display: flex;
-        
-        &-input {
-          width: 100%;
-          border: 1px solid #5E5E5E;
-          padding: 15px;
-          color: $color-white;
-          outline: none;
-          background-color: transparent;
-        }
-
-        &-button {
-          border-radius: 0;
-
-          &:hover {
-            border-radius: 0 !important;
-          }
-        }
-      }
-    }
-  }
-
-  &__rights {
-    background-color: #1d1d1d;
-    padding: 32px 0;
-
-    @include mq($until: desktop) {
-      padding-bottom: 64px;
-    }
-
-    &-text {
-      color: $color-white;
-      opacity: 60%;
-      text-align: center;
-    }
-  }
-}
-
 .router-link-active {
-  color: $color-yellow !important;
+  color: #FFD600 !important;
 }
 </style>

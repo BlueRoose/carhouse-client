@@ -1,7 +1,7 @@
 <template>
-  <div class="info-item">
-    <p class="info-item-title">{{ title }}</p>
-    <p class="info-item-value">{{ value }}</p>
+  <div class="flex flex-col items-start gap-3">
+    <p class="text-black opacity-40">{{ title }}</p>
+    <p class="text-xl font-semibold">{{ value }}</p>
   </div>
 </template>
 
@@ -11,22 +11,3 @@ defineProps({
   value: String | Number,
 });
 </script>
-
-<style lang="scss" scoped>
-.info-item {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-
-  &-title {
-    color: $color-black;
-    opacity: 40%;
-  }
-
-  &-value {
-    font-size: 20px;
-    font-weight: 600;
-  }
-}
-</style>

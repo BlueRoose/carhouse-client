@@ -1,23 +1,16 @@
 <template>
-  <div class="wrapper">
-    <header class="header container">
+  <div class="bg-main-dark border-b border-white">
+    <header class="py-6 flex flex-col justify-center items-center container mx-auto px-4">
       <Logo />
-      <h1 class="header-title">Admin panel</h1>
-      <div class="header__list">
-        <NuxtLink class="header__list-item" to="/admin/brands-types">
-          Brands and Types Management
-        </NuxtLink>
-        <NuxtLink class="header__list-item" to="/admin/cars">
-          Cars Management
-        </NuxtLink>
-        <NuxtLink class="header__list-item" to="/admin/user-requests">
-          User Requests
-        </NuxtLink>
-        <NuxtLink class="header__list-item" to="/admin/buy-requests">
-          Buy Requests
-        </NuxtLink>
-        <NuxtLink class="header__list-item" to="/admin/users">
-          Users Management
+      <h1 class="text-white text-3xl mb-6">Admin panel</h1>
+      <div class="flex gap-12 list-none">
+        <NuxtLink
+          v-for="(link, index) in links"
+          :key="index"
+          class="text-main-gray text-xl transition-colors ease-linear cursor-pointer hover:text-white"
+          :to="link.url"
+        >
+          {{ link.label }}
         </NuxtLink>
       </div>
     </header>
@@ -25,62 +18,32 @@
 </template>
 
 <script setup>
+const links = [
+  {
+    label: "Brands and Types Management",
+    url: "/admin/brands-types",
+  },
+  {
+    label: "Cars Management",
+    url: "/admin/cars",
+  },
+  {
+    label: "User Requests",
+    url: "/admin/user-requests",
+  },
+  {
+    label: "Buy Requests",
+    url: "/admin/buy-requests",
+  },
+  {
+    label: "Users Management",
+    url: "/admin/users",
+  },
+];
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
-  background-color: $color-dark;
-  border-bottom: 1px solid $color-white;
-
-  .header {
-    padding: 25px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    @include mq($until: tablet) {
-      justify-content: center;
-    }
-
-    &-title {
-      font-size: 32px;
-      color: $color-white;
-      margin-bottom: 25px;
-    }
-
-    &__list {
-      display: flex;
-      gap: 50px;
-      list-style-type: none;
-
-      @include mq($until: desktop-xl) {
-        gap: 25px;
-      }
-
-      @include mq($until: desktop-l) {
-        gap: 15px;
-      }
-
-      @include mq($until: tablet) {
-        display: none;
-      }
-
-      &-item {
-        font-size: 20px;
-        color: $color-gray;
-        transition: 0.2s linear;
-        cursor: pointer;
-
-        &:hover {
-          color: $color-white;
-        }
-      }
-    }
-  }
-}
-
 .router-link-active {
-  color: $color-yellow !important;
+  color: #FFD600 !important;
 }
 </style>
