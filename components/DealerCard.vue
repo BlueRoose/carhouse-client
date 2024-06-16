@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-[364px] max-xl:max-w-full py-14 px-10 bg-main-yellow">
+  <div class="max-w-[364px] max-xl:max-w-full py-14 px-10 max-md:py-7 max-md:px-5 bg-main-yellow">
     <div class="grid grid-rows-2 gap-5 mb-4">
       <div>
         <p class="text-4xl font-semibold">{{ location.city }}</p>
