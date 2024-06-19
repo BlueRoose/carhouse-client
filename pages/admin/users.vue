@@ -49,10 +49,6 @@ const roles = [
     value: "USER",
   },
   {
-    name: "Moderator",
-    value: "MODERATOR",
-  },
-  {
     name: "Admin",
     value: "ADMIN",
   },

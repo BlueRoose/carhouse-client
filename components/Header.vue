@@ -151,10 +151,6 @@ const links = [
     url: "/about",
   },
   {
-    label: "Services",
-    url: "/services",
-  },
-  {
     label: "Collections",
     url: "/collections",
   },

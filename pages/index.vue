@@ -3,7 +3,6 @@
     <Slider class="max-sm:!hidden" />
     <div class="py-40 max-lg:py-24 max-md:py-16 grid grid-cols-2 max-md:flex flex-col max-md:gap-8 container mx-auto px-4">
       <div class="flex flex-col gap-8 max-lg:gap-4 max-md:gap-2 pr-12 max-md:pr-0">
-        <p class="text-main-dark-gray text-xl font-bold max-lg:text-lg">About us</p>
         <p class="text-5xl font-semibold max-lg:text-4xl max-md:text-3xl">Carhouse is the best place to get your dream car</p>
         <p class="max-w-[450px] text-lg max-lg:text-base opacity-60">
           Every day our managers and consultants work to provide you with the
@@ -12,7 +11,7 @@
         <Button class="max-w-fit" @click="handleClickView">View more</Button>
       </div>
       <img
-        class="max-w-full shadow-[0_4px_39.79999923706055px_0_#00000040]"
+        class="max-w-full shadow-[0_4px_39.79999923706055px_0_#00000040] rounded-xl"
         src="/images/cars-about.webp"
         alt="office"
       />
@@ -31,7 +30,7 @@
         </ul>
       </div>
     </div>
-    <WhyUs />
+    <WhyUs isTitle />
   </div>
 </template>
 

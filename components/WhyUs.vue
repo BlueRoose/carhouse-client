@@ -1,7 +1,9 @@
 <template>
   <div class="py-16 container mx-auto px-4">
-    <p class="text-main-yellow text-xl text-center font-semibold max-md:text-lg">C A R H O U S E</p>
-    <h2 class="text-black text-5xl text-center mb-20 font-semibold max-md:text-4xl max-md:mb-10">Why choose us</h2>
+    <template v-if="isTitle">
+      <p class="text-main-yellow text-xl text-center font-semibold max-md:text-lg">C A R H O U S E</p>
+      <h2 class="text-black text-5xl text-center mb-20 font-semibold max-md:text-4xl max-md:mb-10">Why choose us</h2>
+    </template>
     <div class="w-full grid grid-cols-3 gap-5 max-md:flex flex-col">
       <div class="p-14 max-xl:p-7 shadow-[0_4px_39.79999923706055px_0_#00000040] transition-all ease-linear">
         <img
@@ -40,5 +42,9 @@
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
+defineProps({
+  isTitle: Boolean,
+});
 </script>
