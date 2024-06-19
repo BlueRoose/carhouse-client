@@ -160,6 +160,7 @@
               class="border-[5px] border-transparent"
               :class="{ '!border-main-yellow': car.id === selectedCar?.id }"
               :car="car"
+              isAdmin
               @click="selectCar(car)"
             />
           </div>

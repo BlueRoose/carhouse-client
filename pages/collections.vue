@@ -55,7 +55,10 @@
       </div>
       <Loader v-if="isLoading" />
       <template v-else>
-        <div v-if="cars.length" class="grid grid-cols-3 max-lg:grid-cols-2 max-md:flex flex-col gap-x-14 gap-y-24 mb-20">
+        <div
+          v-if="cars.length"
+          class="cars-cards grid grid-cols-3 max-lg:grid-cols-2 auto-rows-max max-md:flex flex-col gap-x-14 gap-y-24 mb-20"
+        >
           <CollectionCard
             v-for="(car, index) in cars"
             :key="index"
@@ -64,7 +67,7 @@
         </div>
         <h1 v-else class="text-center mt-52 mb-24">We are sorry, but we don't have any cars at the moment</h1>
       </template>
-      <div v-if="totalPages > 1" class="w-fit mx-auto flex gap-3.5">
+      <div v-if="totalPages > 1 && !isLoading" class="w-fit mx-auto flex gap-3.5">
         <Button
           v-for="(_, index) in totalPages"
           :key="index"
@@ -123,6 +126,7 @@ const { successMessage, errorMessage } = storeToRefs(notificationsStore);
 const page = ref(Number(route.query.page) || 1);
 const sortValue = ref(route.query.sort || null);
 const isLoading = ref(true);
+const carsRef = ref(null);
 
 const brandChanged = computed({
   get() {
@@ -281,7 +285,7 @@ async function changePage(newPage) {
   page.value = newPage;
   router.push({ query: { page: newPage }});
   await getCars();
-  const cardsBlock = document.getElementsByClassName("collections__content__cards")[0];
+  const cardsBlock = document.getElementsByClassName("cars-cards")[0];
   window.scrollTo({ top: cardsBlock.offsetTop, behavior: "smooth" });
 }
 
