@@ -1,5 +1,11 @@
 <template>
-  <NuxtLayout class="layouts">
+  <div v-if="isLoading" class="w-screen h-screen bg-main-dark relative">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <Logo />
+      <span class="main-loader"></span>
+    </div>
+  </div>
+  <NuxtLayout v-else class="layouts">
     <NuxtPage />
   </NuxtLayout>
   <Modals />
@@ -22,6 +28,7 @@
 </template>
 
 <script setup>
+import api from "@/api";
 import { useAuthStore } from "@/store/auth.js";
 import { useModalsStore } from "@/store/modals.js";
 import { useNotificationsStore } from "@/store/notifications.js";
@@ -43,13 +50,21 @@ const notificationsStore = useNotificationsStore();
 
 const { successMessage, errorMessage } = storeToRefs(notificationsStore);
 
-onMounted(async () => {
-  if (process.client) {
-    const userData = JSON.parse(localStorage.getItem("user"));
+const isLoading = ref(true);
 
-    if (userData) {
-      authStore.setIsAuth(userData);
+onMounted(async () => {
+  try {
+    if (process.client) {
+      const data = await api.getUser();
+
+      if (data.user) {
+        authStore.setIsAuth(data.user);
+      }
     }
+  } catch (e) {
+    console.error(e);
+  } finally {
+    isLoading.value = false;
   }
 
   if (route.query.isAborted) {
@@ -88,5 +103,35 @@ onMounted(async () => {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.main-loader {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: block;
+  margin: 15px auto;
+  position: relative;
+  color: #FFF;
+  box-sizing: border-box;
+  animation: animloader 2s linear infinite;
+}
+
+@keyframes animloader {
+  0% {
+    box-shadow: 14px 0 0 -2px,  38px 0 0 -2px,  -14px 0 0 -2px,  -38px 0 0 -2px;
+  }
+  25% {
+    box-shadow: 14px 0 0 -2px,  38px 0 0 -2px,  -14px 0 0 -2px,  -38px 0 0 2px;
+  }
+  50% {
+    box-shadow: 14px 0 0 -2px,  38px 0 0 -2px,  -14px 0 0 2px,  -38px 0 0 -2px;
+  }
+  75% {
+    box-shadow: 14px 0 0 2px,  38px 0 0 -2px,  -14px 0 0 -2px,  -38px 0 0 -2px;
+  }
+  100% {
+    box-shadow: 14px 0 0 -2px,  38px 0 0 2px,  -14px 0 0 -2px,  -38px 0 0 -2px;
+  }
 }
 </style>

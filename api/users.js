@@ -1,6 +1,23 @@
 import axios from "axios";
 
 export default {
+  async getUser() {
+    try {
+      const { data } = await axios.get(
+          `https://carhouse-backend.onrender.com/api/user/get-user`,
+          {
+            headers: {
+              Authorization: `Bearer ${useCookie("token").value}`,
+            },
+          },
+      );
+
+      return data;
+    } catch (error) {
+      throw error.response.data.errors[0];
+    }
+  },
+
   async getUsers() {
     try {
       const { data } = await axios.get(
