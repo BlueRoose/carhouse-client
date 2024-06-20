@@ -115,21 +115,21 @@ const rules = computed(() => {
   if (isSignIn.value) {
     return {
       email: {
-        required: helpers.withMessage('Это поле обязательное', required),
-        email: helpers.withMessage('E-mail введён некорректно', email)
+        required: helpers.withMessage('This field is required', required),
+        email: helpers.withMessage('Email is incorrect', email)
       }
     };
   } else {
     return {
       name: {
-        required: helpers.withMessage('Это поле обязательное', required)
+        required: helpers.withMessage('This field is required', required)
       },
       surname: {
-        required: helpers.withMessage('Это поле обязательное', required)
+        required: helpers.withMessage('This field is required', required)
       },
       email: {
-        required: helpers.withMessage('Это поле обязательное', required),
-        email: helpers.withMessage('E-mail введён некорректно', email)
+        required: helpers.withMessage('This field is required', required),
+        email: helpers.withMessage('Email is incorrect', email)
       }
     };
   }

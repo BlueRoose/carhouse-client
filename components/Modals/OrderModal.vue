@@ -74,12 +74,12 @@ const car = computed(() => `${selectedCar.value.brand} ${selectedCar.value.name}
 const rules = computed(() => {
   return {
     phone: {
-      required: helpers.withMessage('Это поле обязательное', required),
+      required: helpers.withMessage('This field is required', required),
       minLength: helpers.withMessage(
-        "Номер телефона введён некорректно",
+        "Phone number is incorrect",
         minLength(7)
       ),
-      numeric: helpers.withMessage('Номер телефона введён некорректно', numeric)
+      numeric: helpers.withMessage('Phone number is incorrect', numeric)
     }
   };
 });
