@@ -9,12 +9,13 @@
       <div class="flex gap-24 max-lg:flex-col-reverse max-lg:gap-5">
         <div class="w-3/5 max-lg:w-full images-swiper">
           <Swiper
-            :slidesPerView="11"
-            :space-between="20"
+            :slidesPerView="1"
+            :space-between="0"
             :modules="[Navigation]"
             :breakpoints="{
               768: {
-                slidesPerView: 1.55,
+                slidesPerView: 1.4,
+                spaceBetween: 20,
               },
             }"
             centeredSlides
