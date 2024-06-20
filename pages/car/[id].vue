@@ -73,7 +73,6 @@
           <p>Top speed</p>
           <p>Horse power</p>
           <p>Time to 100 km/h</p>
-          <p>Rating</p>
         </div>
         <div class="h-full flex flex-col justify-between max-md:gap-10 max-md:[&>p]:h-[56px] [&>p]:flex [&>p]:justify-center [&>p]:items-center [&>p]:text-3xl max-lg:[&>p]:text-2xl max-sm:[&>p]:text-xl [&>p]:text-center">
           <p>{{ selectedCar.year }}</p>
@@ -83,12 +82,11 @@
           <p>{{ selectedCar.topSpeed }}</p>
           <p>{{ selectedCar.horsePower }}</p>
           <p>{{ selectedCar.time }}</p>
-          <p>{{ selectedCar.rating }}</p>
         </div>
       </div>
       <div v-if="anotherCars.length">
-        <p class="text-4xl font-medium mb-12">You may also like:</p>
-        <div class="grid grid-cols-4 gap-4">
+        <p class="text-4xl font-medium mb-12 mt-8">You may also like:</p>
+        <div class="grid grid-cols-4 max-xl:flex flex-col gap-4">
           <div
             v-for="(car, index) in anotherCars"
             :key="index"
@@ -100,8 +98,8 @@
                 :src="car.imgs[0]"
                 :alt="car.name"
               />
-              <p class="text-sm opacity-80 pl-5e">{{ car.type }}</p>
-              <p class="text-xl font-medium pb-5 pl-5">{{ car.brand }}  {{ car.name }}</p>
+              <p class="text-sm opacity-80 px-2">{{ car.type }}</p>
+              <p class="text-xl font-medium pb-5 px-2">{{ car.brand }}  {{ car.name }}</p>
             </NuxtLink>
           </div>
         </div>
